@@ -21,10 +21,15 @@ export default class CalendarHelper {
     }
   }
 
+  static numberOfDaysWeek() {
+    return Object.keys(DAYS_WEEK).length;
+  }
+
   static dayObjectsForMonth(month, daysAtEnd = null, daysAtStart = null) {
     const numberOfDays = moment().month(month).daysInMonth();
     let days = [...Array(numberOfDays).keys()].map(i => {
       return {
+        index: null,
         day: i,
         month,
         state: 'active',
@@ -51,15 +56,15 @@ export default class CalendarHelper {
   }
 
   static numberOfRowsForMonthTable(month) {
-    const weekLength = Object.keys(DAYS_WEEK).length;
+    const weekLength = CalendarHelper.numberOfDaysWeek();
     const numberOfWeekFirstDayMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
-    const totalNumberOfDays = numberOfWeekFirstDayMonth + moment.month(month).daysInMonth();
-    const numberOfRows = Math(totalNumberOfDays / weekLength).ceil();
+    const totalNumberOfDays = numberOfWeekFirstDayMonth + moment().month(month).daysInMonth();
+    const numberOfRows = Math.ceil(totalNumberOfDays / weekLength);
     return numberOfRows;
   }
 
   static dayObjectsForMonthTable(month) {
-    const weekLength = Object.keys(DAYS_WEEK).length;
+    const weekLength = CalendarHelper.numberOfDaysWeek();
     const daysMonth = CalendarHelper.dayObjectsForMonth(month);
     let daysPreviousMonth = [], daysNextMonth = [];
     const dayOfWeekFirstDayOfMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
@@ -73,6 +78,13 @@ export default class CalendarHelper {
       daysNextMonth = CalendarHelper.dayObjectsForMonth(nextMonth, null, (weekLength - 1 - dayOfWeekLastDayOfMonth));
     }
 
-    return [...daysPreviousMonth, ...daysMonth, ...daysNextMonth];
+    return CalendarHelper.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);
+  }
+
+  static setIndexDayObjectsForTable(dayObjects) {
+    return dayObjects.map((dayObj, i) => {
+      dayObj.index = i;
+      return dayObj;
+    })
   }
 }
