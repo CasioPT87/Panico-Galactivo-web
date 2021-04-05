@@ -4,7 +4,7 @@ import { WidthContext } from '../Calendar';
 
 import styles from './CalendarFrame.module.css'
 
-export default function({children, month, numRows, tableDays, weekLength}) {
+export default function({children, helper, numRows, tableDays, weekLength}) {
 
   const width = useContext(WidthContext);
 
@@ -16,9 +16,9 @@ export default function({children, month, numRows, tableDays, weekLength}) {
     return daysOrderedByRow;
   }
 
-  const row = (rowData, rowIndex) => {
+  const row = (rowData) => {
     return rowData.map(day => {
-      const key = `${month}, ${rowIndex}, ${day.index}`
+      const key = day.date.format('dddd, MMMM Do YYYY');
       return children(key, day);
     })
   }
@@ -30,7 +30,7 @@ export default function({children, month, numRows, tableDays, weekLength}) {
   }
 
   const rowMonthName = () => { 
-    return <div className={styles.c_boxes__month_name}>{`${H.getMonthDisplay(month)}, ${H.getYearDisplay(month)}`}</div>
+    return <div className={styles.c_boxes__month_name}>{`${helper.getMonthDisplay()}, ${helper.getYearDisplay()}`}</div>
   }
 
   return (
@@ -44,7 +44,7 @@ export default function({children, month, numRows, tableDays, weekLength}) {
       {daysOrderedByRow().map((rowData, i) => {
         return (
           <div key={i} className={styles.c_boxes__row}>
-            {row(rowData, i)}
+            {row(rowData)}
           </div>
         )
       })}

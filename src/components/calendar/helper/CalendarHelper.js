@@ -12,26 +12,21 @@ const DAYS_WEEK = {
 
 export default class CalendarHelper {
 
-  static currentDate() {
-    return {
-      day: moment().date(),
-      month: moment().month(),
-      year: moment().year(),
-      dayOfWeek: moment().day()
-    }
+  constructor(dateTable) {
+    this.dateTable = dateTable;
   }
 
   static numberOfDaysWeek() {
     return Object.keys(DAYS_WEEK).length;
   }
 
-  static dayObjectsForMonth(month, daysAtEnd = null, daysAtStart = null) {
-    const numberOfDays = moment().month(month).daysInMonth();
+  dayObjectsForMonth(date = this.dateTable, daysAtEnd = null, daysAtStart = null) {
+    const numberOfDays = date.daysInMonth();
     let days = [...Array(numberOfDays).keys()].map(i => {
       return {
         index: null,
         day: i,
-        month,
+        date: moment(date).date(i + 1),
         state: 'active',
         info: {
           dayDisplay: i + 1,
@@ -47,61 +42,60 @@ export default class CalendarHelper {
     return days;
   }
 
-  static dayOfWeekFirstDayOfMonth(month) {
-    return moment().month(month).startOf('month').day();
+  dayOfWeekFirstDayOfMonth() {
+    return this.dateTable.startOf('month').day();
   }
 
-  static dayOfWeekLastOfMonth(month) {
-    return moment().month(month).endOf('month').day();
+  dayOfWeekLastOfMonth() {
+    return this.dateTable.endOf('month').day();
   }
 
-  static numberOfRowsForMonthTable(month) {
+  numberOfRowsForMonthTable() {
     const weekLength = CalendarHelper.numberOfDaysWeek();
-    const numberOfWeekFirstDayMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
-    const totalNumberOfDays = numberOfWeekFirstDayMonth + moment().month(month).daysInMonth();
+    const numberOfWeekFirstDayMonth = this.dayOfWeekFirstDayOfMonth();
+    const totalNumberOfDays = numberOfWeekFirstDayMonth + this.dateTable.daysInMonth();
     return Math.ceil(totalNumberOfDays / weekLength);
   }
 
-  static dayObjectsForMonthTable(month) {
+  dayObjectsForMonthTable() {
     const weekLength = CalendarHelper.numberOfDaysWeek();
-    const daysMonth = CalendarHelper.dayObjectsForMonth(month);
+    const daysMonth = this.dayObjectsForMonth();
     let daysPreviousMonth = [], daysNextMonth = [];
-    const dayOfWeekFirstDayOfMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
-    const dayOfWeekLastDayOfMonth = CalendarHelper.dayOfWeekLastOfMonth(month);
+    const dayOfWeekFirstDayOfMonth = this.dayOfWeekFirstDayOfMonth();
+    const dayOfWeekLastDayOfMonth = this.dayOfWeekLastOfMonth();
     if (dayOfWeekFirstDayOfMonth > 0) {
-      const previousMonth = moment().month(month).subtract(1, 'months').month();
-      daysPreviousMonth = CalendarHelper.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth);
+      const previousMonth = this.dateTable.subtract(1, 'months');
+      daysPreviousMonth = this.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth);
     }
     if (dayOfWeekLastDayOfMonth < weekLength - 1) {
-      const nextMonth = moment().month(month).add(1, 'months').month();
-      daysNextMonth = CalendarHelper.dayObjectsForMonth(nextMonth, null, (weekLength - 1 - dayOfWeekLastDayOfMonth));
+      const nextMonth = this.dateTable.add(1, 'months');
+      daysNextMonth = this.dayObjectsForMonth(nextMonth, null, (weekLength - 1 - dayOfWeekLastDayOfMonth));
     }
 
-    return CalendarHelper.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);
+    return this.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);
   }
 
-  static setIndexDayObjectsForTable(dayObjects) {
+  setIndexDayObjectsForTable(dayObjects) {
     return dayObjects.map((dayObj, i) => {
       dayObj.index = i;
       return dayObj;
     })
   }
 
-  static getPreviousMonth(month) {
-    return moment().month(month).subtract(1, 'months').month();
+  getPreviousMonth() {
+    return this.dateTable.subtract(1, 'months');
   }
 
-  static getNextMonth(month, x) {
-    console.log(moment().month(month).add(1, 'months').year(), x)
-    return moment().month(month).add(1, 'months').month();
+  getNextMonth() {
+    return this.dateTable.add(1, 'months');
   }
 
-  static getMonthDisplay(month) {
-    return moment().month(month).format('MMMM');
+  getMonthDisplay() {
+    return this.dateTable.format('MMMM');
   }
 
-  static getYearDisplay(month) {
-    return moment().month(month).format('YYYY');
+  getYearDisplay() {
+    return this.dateTable.format('YYYY');
   }
 }
 

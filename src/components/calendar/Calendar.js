@@ -12,15 +12,14 @@ export const WidthContext = React.createContext(500);
 export default function({ height, transitionTime, width }) {
 
   const [selectedDate, setSelectedDate] = useState({
-    day: moment().date(),
-    month: moment().month(),
-    year: moment().year(),
-    dayOfWeek: moment().day()
+    selectedDate: moment()
   });
 
   const [position, setPosition] = useState('center');
   const [transition, setTransition] = useState(false);
-  const [monthTable, setMonthTable] = useState(moment().month());
+  const [dateTable, setDateTable] = useState(moment());
+
+  const helper = new H(dateTable);
 
   const selectDate = () => {
     console.log('we are selecting a date')
@@ -37,8 +36,8 @@ export default function({ height, transitionTime, width }) {
       setTimeout(() => {
         setTransition(false);
         setPosition('center');
-        if (direction === 'left') setMonthTable(H.getPreviousMonth(monthTable));
-        if (direction === 'right') setMonthTable(H.getNextMonth(monthTable, 'a'));
+        if (direction === 'left') setDateTable(helper.getPreviousMonth(dateTable));
+        if (direction === 'right') setDateTable(helper.getNextMonth(dateTable));
       }, transitionTime*1000);
     }
   }
@@ -61,9 +60,9 @@ export default function({ height, transitionTime, width }) {
           <Button display=">>" goTo={(e) => goTo(e, 'right')}/>
         </div>
         <div style={calendarStyle} className={`${styles.c_calendar} ${styles.transition}`}>
-          <CalendarMonth monthTable={H.getPreviousMonth(monthTable)} selectedDate={selectedDate} selectDate={selectDate} />
-          <CalendarMonth monthTable={monthTable} selectedDate={selectedDate} selectDate={selectDate} />
-          <CalendarMonth monthTable={H.getNextMonth(monthTable, 'b')} selectedDate={selectedDate} selectDate={selectDate} />
+          <CalendarMonth dateTable={helper.getPreviousMonth()} selectedDate={selectedDate} selectDate={selectDate} />
+          <CalendarMonth dateTable={dateTable} selectedDate={selectedDate} selectDate={selectDate} />
+          <CalendarMonth dateTable={helper.getNextMonth()} selectedDate={selectedDate} selectDate={selectDate} />
         </div>
       </div>
     </ WidthContext.Provider>
