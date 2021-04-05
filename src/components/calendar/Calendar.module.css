@@ -1,6 +1,27 @@
 
-.c_calendar {
+.c_calendar__wrapper {
   display: inline-flex;
   width: 225px;
   background-color: red;
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.c_calendar--center {
+  display: inline-flex;
+  position: absolute;
+  left: -224px;
+}
+
+.c_calendar--left {
+  display: inline-flex;
+  position: absolute;
+  left: 0px;
+}
+
+.c_calendar--rigth {
+  display: inline-flex;
+  position: absolute;
+  left: -448px;
 }

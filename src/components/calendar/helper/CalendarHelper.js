@@ -68,7 +68,6 @@ export default class CalendarHelper {
     let daysPreviousMonth = [], daysNextMonth = [];
     const dayOfWeekFirstDayOfMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
     const dayOfWeekLastDayOfMonth = CalendarHelper.dayOfWeekLastOfMonth(month);
-    console.log(dayOfWeekLastDayOfMonth)
     if (dayOfWeekFirstDayOfMonth > 0) {
       const previousMonth = moment().month(month).subtract(1, 'months').month();
       daysPreviousMonth = CalendarHelper.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth);
