@@ -48,7 +48,7 @@ export default class CalendarHelper {
   }
 
   static dayOfWeekFirstDayOfMonth(month) {
-    return moment().month(month).date(0).day();
+    return moment().month(month).startOf('month').day();
   }
 
   static dayOfWeekLastOfMonth(month) {
@@ -59,8 +59,7 @@ export default class CalendarHelper {
     const weekLength = CalendarHelper.numberOfDaysWeek();
     const numberOfWeekFirstDayMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
     const totalNumberOfDays = numberOfWeekFirstDayMonth + moment().month(month).daysInMonth();
-    const numberOfRows = Math.ceil(totalNumberOfDays / weekLength);
-    return numberOfRows;
+    return Math.ceil(totalNumberOfDays / weekLength);
   }
 
   static dayObjectsForMonthTable(month) {
@@ -69,6 +68,7 @@ export default class CalendarHelper {
     let daysPreviousMonth = [], daysNextMonth = [];
     const dayOfWeekFirstDayOfMonth = CalendarHelper.dayOfWeekFirstDayOfMonth(month);
     const dayOfWeekLastDayOfMonth = CalendarHelper.dayOfWeekLastOfMonth(month);
+    console.log(dayOfWeekLastDayOfMonth)
     if (dayOfWeekFirstDayOfMonth > 0) {
       const previousMonth = moment().month(month).subtract(1, 'months').month();
       daysPreviousMonth = CalendarHelper.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth);
@@ -86,5 +86,13 @@ export default class CalendarHelper {
       dayObj.index = i;
       return dayObj;
     })
+  }
+
+  static getPreviousMonth(month) {
+    return moment().month(month).subtract(1, 'months').month();
+  }
+
+  static getNextMonth(month) {
+    return moment().month(month).add(1, 'months').month();
   }
 }

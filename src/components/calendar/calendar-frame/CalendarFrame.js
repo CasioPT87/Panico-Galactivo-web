@@ -9,7 +9,6 @@ export default function({children, month, numRows, tableDays, weekLength}) {
     for (let i = 0; i < numRows; i++) {
       daysOrderedByRow[i] = tableDays.slice(i * weekLength, (i + 1) * weekLength);
     }
-    console.log(daysOrderedByRow)
     return daysOrderedByRow;
   }
 
