@@ -1,45 +1,14 @@
 import React from 'react';
-import H from './CalendarHelper'
-import Box from './box/Box';
-import CalendarFrame from './calendar-frame/CalendarFrame'
-import moment from 'moment';
+import CalendarMonth from './calendar-month/CalendarMonth';
+import styles from './Calendar.module.css'
 
-
-export default class Calendar extends React.Component {
-
-  state = {
-    selectedDate: {
-      day: moment().date(),
-      month: moment().month(),
-      year: moment().year(),
-      dayOfWeek: moment().day()
-    }
-  }
-
-  componentDidMount() {
-    window.time = H;
-  }
-
-  selectDate = (date) => {
-    console.log('here we are going to selec the date')
-  }
-
-  setCurrentDate = () => {
-    this.setState({ date: H.currentDate() });
-  }
-
+export default class Calendar extends React.PureComponent {
   render() {
-    const { selectedDate, selectedDate: { month } } = this.state;
     return (
-      <div>
-        <CalendarFrame
-          month={month}
-          numRows={H.numberOfRowsForMonthTable(month)}
-          tableDays={H.dayObjectsForMonthTable(month)}
-          weekLength={H.numberOfDaysWeek()}
-        >
-          {(index, dayData) => <Box index={index} dayData={dayData} selectedDate={selectedDate} selectDate={this.selectDate} />}
-        </CalendarFrame>
+      <div className={styles.c_calendar}>
+        <CalendarMonth />
+        <CalendarMonth />
+        <CalendarMonth />
       </div>
     );
   }

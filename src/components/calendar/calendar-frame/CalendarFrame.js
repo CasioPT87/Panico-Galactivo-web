@@ -1,12 +1,15 @@
 import React from 'react'
 
+import styles from './CalendarFrame.module.css'
+
 export default function({children, month, numRows, tableDays, weekLength}) {
 
   const daysOrderedByRow = () => {
     const daysOrderedByRow = [];
     for (let i = 0; i < numRows; i++) {
-      daysOrderedByRow[i] = tableDays.slice(i * weekLength, (i + 1) * (weekLength - 1));
+      daysOrderedByRow[i] = tableDays.slice(i * weekLength, (i + 1) * weekLength);
     }
+    console.log(daysOrderedByRow)
     return daysOrderedByRow;
   }
 
@@ -19,10 +22,10 @@ export default function({children, month, numRows, tableDays, weekLength}) {
 
  
   return (
-    <div>
+    <div className={styles.c_boxes}>
       {daysOrderedByRow().map((rowData, i) => {
         return (
-          <div>
+          <div className={styles.c_boxes__row}>
             {row(rowData, i)}
           </div>
         )

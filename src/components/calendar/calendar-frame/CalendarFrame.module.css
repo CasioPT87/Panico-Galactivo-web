@@ -1,0 +1,8 @@
+
+.c_boxes {
+  display: inline-block;
+}
+
+.c_boxes__row {
+  display: flex;
+}
