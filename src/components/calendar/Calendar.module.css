@@ -8,6 +8,11 @@
   overflow: hidden;
 }
 
+.c_calendar__wrapper > div {
+  transition-property: left;
+  transition-duration: 0.5s;
+}
+
 .c_calendar--center {
   display: inline-flex;
   position: absolute;
