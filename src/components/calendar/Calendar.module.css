@@ -11,6 +11,7 @@
 .c_calendar {
   display: inline-flex;
   position: absolute;
+  width: 675px;
 }
 
 .c_calendar--transition {
