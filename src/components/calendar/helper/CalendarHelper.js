@@ -1,13 +1,13 @@
 import moment from 'moment'
 
 const DAYS_WEEK = {
-  0: ["Sunday", "S"],
-  1: ["Monday", "M"],
-  2: ["Tuesday", "T"],
-  3: ["Wednesday", "w"],
-  4: ["Thursday", "T"],
-  5: ["Friday", "F"],
-  6: ["Saturday", "S"]
+  0: ["Sunday", "Su"],
+  1: ["Monday", "Mo"],
+  2: ["Tuesday", "Tu"],
+  3: ["Wednesday", "We"],
+  4: ["Thursday", "Th"],
+  5: ["Friday", "Fr"],
+  6: ["Saturday", "Sa"]
 }
 
 export default class CalendarHelper {
@@ -96,3 +96,5 @@ export default class CalendarHelper {
     return moment().month(month).add(1, 'months').month();
   }
 }
+
+export { DAYS_WEEK };

@@ -6,3 +6,11 @@
 .c_boxes__row {
   display: flex;
 }
+
+.c_boxes__dayname {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
