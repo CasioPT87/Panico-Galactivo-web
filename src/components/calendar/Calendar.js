@@ -18,8 +18,7 @@ export default function({ height, transitionTime, width }) {
   const [position, setPosition] = useState('center');
   const [transition, setTransition] = useState(false);
   const [dateTable, setDateTable] = useState(moment());
-
-  const helper = new H(dateTable);
+  const [helper, setHelper] = useState(new H(dateTable));
 
   const selectDate = () => {
     console.log('we are selecting a date')
@@ -36,8 +35,9 @@ export default function({ height, transitionTime, width }) {
       setTimeout(() => {
         setTransition(false);
         setPosition('center');
-        if (direction === 'left') setDateTable(helper.getPreviousMonth(dateTable));
-        if (direction === 'right') setDateTable(helper.getNextMonth(dateTable));
+        if (direction === 'left') setDateTable(helper.getPreviousMonth());
+        if (direction === 'right') setDateTable(helper.getNextMonth());
+        setHelper(new H(dateTable));
       }, transitionTime*1000);
     }
   }
@@ -48,13 +48,13 @@ export default function({ height, transitionTime, width }) {
 
   const calendarStyle = {
     width: (width*3) + 'px',
-    left: -(positionIndex()*width) + 'px',
-    'transition-duration': transition ? `${transitionTime}s` : '0s'
+    left: 0 + 'px',
+    transitionDuration: transition ? `${transitionTime}s` : '0s'
   }
 
   return (
     <WidthContext.Provider value={width}>
-      <div style={{ height: height, width: width + 'px'}} className={styles.c_calendar__wrapper}>
+      <div style={{ height: height, width: (width*3) + 'px'}} className={styles.c_calendar__wrapper}>
         <div className={styles.c_boxes__buttons}>
           <Button display="<<" goTo={(e) => goTo(e, 'left')}/>
           <Button display=">>" goTo={(e) => goTo(e, 'right')}/>

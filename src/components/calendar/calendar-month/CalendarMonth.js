@@ -5,6 +5,7 @@ import CalendarFrame from '../calendar-frame/CalendarFrame'
 
 export default function({ dateTable, selectDate, selectedDate }) {
   const helper = new H(dateTable);
+  console.log(dateTable)
   return ( 
     <CalendarFrame
       helper={helper}

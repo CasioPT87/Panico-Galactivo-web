@@ -43,11 +43,11 @@ export default class CalendarHelper {
   }
 
   dayOfWeekFirstDayOfMonth() {
-    return this.dateTable.startOf('month').day();
+    return moment(this.dateTable).startOf('month').day();
   }
 
   dayOfWeekLastOfMonth() {
-    return this.dateTable.endOf('month').day();
+    return moment(this.dateTable).endOf('month').day();
   }
 
   numberOfRowsForMonthTable() {
@@ -83,11 +83,11 @@ export default class CalendarHelper {
   }
 
   getPreviousMonth() {
-    return this.dateTable.subtract(1, 'months');
+    return moment(this.dateTable).subtract(1, 'months');
   }
 
   getNextMonth() {
-    return this.dateTable.add(1, 'months');
+    return moment(this.dateTable).add(1, 'months');
   }
 
   getMonthDisplay() {
