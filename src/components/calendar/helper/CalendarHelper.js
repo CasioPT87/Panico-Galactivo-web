@@ -91,12 +91,17 @@ export default class CalendarHelper {
     return moment().month(month).subtract(1, 'months').month();
   }
 
-  static getNextMonth(month) {
+  static getNextMonth(month, x) {
+    console.log(moment().month(month).add(1, 'months').year(), x)
     return moment().month(month).add(1, 'months').month();
   }
 
-  static getMonthName(month) {
+  static getMonthDisplay(month) {
     return moment().month(month).format('MMMM');
+  }
+
+  static getYearDisplay(month) {
+    return moment().month(month).format('YYYY');
   }
 }
 

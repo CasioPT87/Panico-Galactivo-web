@@ -30,7 +30,7 @@ export default function({children, month, numRows, tableDays, weekLength}) {
   }
 
   const rowMonthName = () => { 
-    return <div className={styles.c_boxes__month_name}>{H.getMonthName(month)}</div>
+    return <div className={styles.c_boxes__month_name}>{`${H.getMonthDisplay(month)}, ${H.getYearDisplay(month)}`}</div>
   }
 
   return (

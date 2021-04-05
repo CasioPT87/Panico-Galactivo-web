@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div>
-     <Calendar width={300} transitionTime={2}/>
+     <Calendar height={400} width={600} transitionTime={0.5}/>
     </div>
   );
 }

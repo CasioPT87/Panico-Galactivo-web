@@ -9,7 +9,7 @@ const POSITIONS = ['left', 'center', 'right'];
 
 export const WidthContext = React.createContext(500);
 
-export default function({ transitionTime, width }) {
+export default function({ height, transitionTime, width }) {
 
   const [selectedDate, setSelectedDate] = useState({
     day: moment().date(),
@@ -38,7 +38,7 @@ export default function({ transitionTime, width }) {
         setTransition(false);
         setPosition('center');
         if (direction === 'left') setMonthTable(H.getPreviousMonth(monthTable));
-        if (direction === 'right') setMonthTable(H.getNextMonth(monthTable));
+        if (direction === 'right') setMonthTable(H.getNextMonth(monthTable, 'a'));
       }, transitionTime*1000);
     }
   }
@@ -55,7 +55,7 @@ export default function({ transitionTime, width }) {
 
   return (
     <WidthContext.Provider value={width}>
-      <div style={{ width: width + 'px'}} className={styles.c_calendar__wrapper}>
+      <div style={{ height: height, width: width + 'px'}} className={styles.c_calendar__wrapper}>
         <div className={styles.c_boxes__buttons}>
           <Button display="<<" goTo={(e) => goTo(e, 'left')}/>
           <Button display=">>" goTo={(e) => goTo(e, 'right')}/>
@@ -63,7 +63,7 @@ export default function({ transitionTime, width }) {
         <div style={calendarStyle} className={`${styles.c_calendar} ${styles.transition}`}>
           <CalendarMonth monthTable={H.getPreviousMonth(monthTable)} selectedDate={selectedDate} selectDate={selectDate} />
           <CalendarMonth monthTable={monthTable} selectedDate={selectedDate} selectDate={selectDate} />
-          <CalendarMonth monthTable={H.getNextMonth(monthTable)} selectedDate={selectedDate} selectDate={selectDate} />
+          <CalendarMonth monthTable={H.getNextMonth(monthTable, 'b')} selectedDate={selectedDate} selectDate={selectDate} />
         </div>
       </div>
     </ WidthContext.Provider>
