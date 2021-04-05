@@ -16,6 +16,10 @@ export default class CalendarHelper {
     this.dateTable = dateTable;
   }
 
+  setDateTable = (dateTable) => {
+    this.dateTable = dateTable;
+  }
+
   static numberOfDaysWeek() {
     return Object.keys(DAYS_WEEK).length;
   }
@@ -83,11 +87,13 @@ export default class CalendarHelper {
   }
 
   getPreviousMonth() {
-    return moment(this.dateTable).subtract(1, 'months');
+    return moment(this.dateTable).subtract(1, 'month');
   }
 
   getNextMonth() {
-    return moment(this.dateTable).add(1, 'months');
+    console.log(this.dateTable)
+    console.log(moment(this.dateTable).add(1, 'month'))
+    return moment(this.dateTable).add(1, 'month');
   }
 
   getMonthDisplay() {

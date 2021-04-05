@@ -18,7 +18,8 @@ export default function({ height, transitionTime, width }) {
   const [position, setPosition] = useState('center');
   const [transition, setTransition] = useState(false);
   const [dateTable, setDateTable] = useState(moment());
-  const [helper, setHelper] = useState(new H(dateTable));
+
+  const helper = new H(dateTable);
 
   const selectDate = () => {
     console.log('we are selecting a date')
@@ -26,6 +27,7 @@ export default function({ height, transitionTime, width }) {
 
   const goTo = (e, direction) => {
     e.preventDefault();
+    let dateTableToBe = null;
     let index = positionIndex();
     if (direction === 'left') index--;
     if (direction === 'right') index++;
@@ -35,9 +37,11 @@ export default function({ height, transitionTime, width }) {
       setTimeout(() => {
         setTransition(false);
         setPosition('center');
-        if (direction === 'left') setDateTable(helper.getPreviousMonth());
-        if (direction === 'right') setDateTable(helper.getNextMonth());
-        setHelper(new H(dateTable));
+        if (direction === 'left') dateTableToBe = helper.getPreviousMonth();
+        if (direction === 'right') dateTableToBe = helper.getNextMonth();
+        console.log(dateTableToBe)
+        helper.setDateTable(dateTableToBe);
+        setDateTable(dateTableToBe);
       }, transitionTime*1000);
     }
   }
@@ -60,9 +64,9 @@ export default function({ height, transitionTime, width }) {
           <Button display=">>" goTo={(e) => goTo(e, 'right')}/>
         </div>
         <div style={calendarStyle} className={`${styles.c_calendar} ${styles.transition}`}>
-          <CalendarMonth dateTable={helper.getPreviousMonth()} selectedDate={selectedDate} selectDate={selectDate} />
+         
           <CalendarMonth dateTable={dateTable} selectedDate={selectedDate} selectDate={selectDate} />
-          <CalendarMonth dateTable={helper.getNextMonth()} selectedDate={selectedDate} selectDate={selectDate} />
+        
         </div>
       </div>
     </ WidthContext.Provider>
