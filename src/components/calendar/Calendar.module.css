@@ -8,25 +8,28 @@
   overflow: hidden;
 }
 
-.c_calendar__wrapper > div {
+.c_calendar {
+  display: inline-flex;
+  position: absolute;
+}
+
+.c_calendar--transition {
   transition-property: left;
   transition-duration: 0.5s;
 }
 
 .c_calendar--center {
-  display: inline-flex;
-  position: absolute;
   left: -224px;
 }
 
 .c_calendar--left {
-  display: inline-flex;
-  position: absolute;
   left: 0px;
 }
 
 .c_calendar--right {
-  display: inline-flex;
-  position: absolute;
   left: -448px;
+}
+
+.c_boxes__buttons {
+  z-index: 1;
 }
