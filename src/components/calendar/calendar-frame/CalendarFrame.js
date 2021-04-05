@@ -1,9 +1,12 @@
-import React from 'react';
-import H, { DAYS_WEEK } from '../helper/CalendarHelper'
+import React, { useContext } from 'react';
+import H, { DAYS_WEEK } from '../helper/CalendarHelper';
+import { WidthContext } from '../Calendar';
 
 import styles from './CalendarFrame.module.css'
 
 export default function({children, month, numRows, tableDays, weekLength}) {
+
+  const width = useContext(WidthContext);
 
   const daysOrderedByRow = () => {
     const daysOrderedByRow = [];
@@ -30,9 +33,8 @@ export default function({children, month, numRows, tableDays, weekLength}) {
     return <div className={styles.c_boxes__month_name}>{H.getMonthName(month)}</div>
   }
 
- 
   return (
-    <div className={styles.c_boxes}>
+    <div style={{ width: width }} className={styles.c_boxes}>
       <div className={styles.c_boxes__row}>
         {rowMonthName()}
       </div>

@@ -1,34 +1,19 @@
 
 .c_calendar__wrapper {
   display: inline-flex;
-  width: 225px;
-  background-color: red;
   position: relative;
   height: 400px;
   overflow: hidden;
+  background-color: red;
 }
 
 .c_calendar {
   display: inline-flex;
   position: absolute;
-  width: 675px;
 }
 
 .c_calendar--transition {
   transition-property: left;
-  transition-duration: 0.5s;
-}
-
-.c_calendar--center {
-  left: -224px;
-}
-
-.c_calendar--left {
-  left: 0px;
-}
-
-.c_calendar--right {
-  left: -448px;
 }
 
 .c_boxes__buttons {
