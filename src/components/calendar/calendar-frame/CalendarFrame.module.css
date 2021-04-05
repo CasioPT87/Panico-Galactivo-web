@@ -5,9 +5,10 @@
 
 .c_boxes__row {
   display: flex;
+  justify-content: center;
 }
 
-.c_boxes__dayname {
+.c_boxes__day_name {
   width: 100%;
   display: flex;
   justify-content: center;

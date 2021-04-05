@@ -1,5 +1,5 @@
 import React from 'react';
-import { DAYS_WEEK } from '../helper/CalendarHelper'
+import H, { DAYS_WEEK } from '../helper/CalendarHelper'
 
 import styles from './CalendarFrame.module.css'
 
@@ -22,13 +22,20 @@ export default function({children, month, numRows, tableDays, weekLength}) {
 
   const rowDayNames = () => {
     return Object.values(DAYS_WEEK).map(day => {
-      return <div key={day[1]} className={styles.c_boxes__dayname}>{day[1]}</div>
+      return <div key={day[1]} className={styles.c_boxes__day_name}>{day[1]}</div>
     });
+  }
+
+  const rowMonthName = () => { 
+    return <div className={styles.c_boxes__month_name}>{H.getMonthName(month)}</div>
   }
 
  
   return (
     <div className={styles.c_boxes}>
+      <div className={styles.c_boxes__row}>
+        {rowMonthName()}
+      </div>
       <div className={styles.c_boxes__row}>
         {rowDayNames()}
       </div>

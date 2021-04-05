@@ -95,6 +95,10 @@ export default class CalendarHelper {
   static getNextMonth(month) {
     return moment().month(month).add(1, 'months').month();
   }
+
+  static getMonthName(month) {
+    return moment().month(month).format('MMMM');
+  }
 }
 
 export { DAYS_WEEK };
