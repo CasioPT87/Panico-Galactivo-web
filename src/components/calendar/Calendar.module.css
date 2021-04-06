@@ -9,9 +9,10 @@
 .c_calendar {
   display: inline-flex;
   position: absolute;
+  transition-duration: 2s;
 }
 
-.c_calendar--transition {
+.transition {
   transition-property: left;
 }
 
