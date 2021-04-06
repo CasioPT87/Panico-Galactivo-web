@@ -5,7 +5,6 @@ import { WidthContext } from '../Calendar';
 import styles from './CalendarFrame.module.css'
 
 export default function({children, helper, numRows, tableDays, weekLength}) {
-
   const width = useContext(WidthContext);
 
   const daysOrderedByRow = () => {
@@ -29,7 +28,7 @@ export default function({children, helper, numRows, tableDays, weekLength}) {
     });
   }
 
-  const rowMonthName = () => { 
+  const rowMonthName = () => {     
     return <div className={styles.c_boxes__month_name}>{`${helper.getMonthDisplay()}, ${helper.getYearDisplay()}`}</div>
   }
 

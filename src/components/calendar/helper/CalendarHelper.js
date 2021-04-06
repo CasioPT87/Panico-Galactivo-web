@@ -68,11 +68,11 @@ export default class CalendarHelper {
     const dayOfWeekFirstDayOfMonth = this.dayOfWeekFirstDayOfMonth();
     const dayOfWeekLastDayOfMonth = this.dayOfWeekLastOfMonth();
     if (dayOfWeekFirstDayOfMonth > 0) {
-      const previousMonth = this.dateTable.subtract(1, 'months');
+      const previousMonth = this.getPreviousMonth();
       daysPreviousMonth = this.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth);
     }
     if (dayOfWeekLastDayOfMonth < weekLength - 1) {
-      const nextMonth = this.dateTable.add(1, 'months');
+      const nextMonth = this.getNextMonth();
       daysNextMonth = this.dayObjectsForMonth(nextMonth, null, (weekLength - 1 - dayOfWeekLastDayOfMonth));
     }
 
@@ -91,8 +91,6 @@ export default class CalendarHelper {
   }
 
   getNextMonth() {
-    console.log(this.dateTable)
-    console.log(moment(this.dateTable).add(1, 'month'))
     return moment(this.dateTable).add(1, 'month');
   }
 
