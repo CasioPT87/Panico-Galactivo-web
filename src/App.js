@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className='o-container font-face-joystix u--red'>
-     <Calendar size={size} transitionTime={1} selectDate={selectDate}/>
+     <Calendar size={size} transitionTime={0.7} selectDate={selectDate}/>
      <Display width={size} selectedDate={selectedDate} />
     </div>
   );
