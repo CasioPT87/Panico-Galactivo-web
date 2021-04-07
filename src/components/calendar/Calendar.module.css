@@ -1,8 +1,9 @@
 
 .c_calendar__wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   height: 400px;
+  margin-top: 5px;
   overflow: hidden;
 }
 
@@ -17,5 +18,9 @@
 }
 
 .c_boxes__buttons {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+  width: 100%;
   z-index: 1;
 }

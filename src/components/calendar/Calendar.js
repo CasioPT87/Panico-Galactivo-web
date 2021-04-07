@@ -7,7 +7,7 @@ import styles from './Calendar.module.css';
 
 const POSITIONS = ['left', 'center', 'right'];
 
-export const WidthContext = React.createContext(500);
+export const SizeContext = React.createContext(500);
 
 export default class Calendar extends React.PureComponent {
 
@@ -62,22 +62,22 @@ export default class Calendar extends React.PureComponent {
   }
 
   getStyles = () => {
-    const { width, transitionTime } = this.props;
+    const { size, transitionTime } = this.props;
     const { transition } = this.state;
     return {
-      width: (width*3) + 'px',
-      left: -(this.positionIndex()*width) + 'px',
+      width: (size*3) + 'px',
+      left: -(this.positionIndex()*size) + 'px',
       transitionDuration: transition ? `${transitionTime}s` : '0s'
     }
   }
 
   render() {
-    const { width, height } = this.props;
+    const { size, height } = this.props;
     const { dateTable, helper, selectedDate } = this.state;
     if (helper === null) return null;
     return (
-      <WidthContext.Provider value={width}>
-        <div style={{ height: height, width: width + 'px'}} className={styles.c_calendar__wrapper}>
+      <SizeContext.Provider value={size}>
+        <div style={{ height: size, width: size + 'px'}} className={styles.c_calendar__wrapper}>
           <div className={styles.c_boxes__buttons}>
             <Button display="<<" goTo={(e) => this.goTo(e, 'left')}/>
             <Button display=">>" goTo={(e) => this.goTo(e, 'right')}/>
@@ -88,7 +88,7 @@ export default class Calendar extends React.PureComponent {
             <CalendarMonth dateTable={helper.getNextMonth()} selectedDate={selectedDate} selectDate={this.selectDate} />
           </div>
         </div>
-      </ WidthContext.Provider>
+      </ SizeContext.Provider>
     );
   }
 }
