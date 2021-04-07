@@ -26,8 +26,8 @@ class Day {
     this.state = state;
   }
 
-  get inactive() {
-    return this.state === 'inactive';
+  get active() {
+    return this.state === 'active';
   }
 }
 

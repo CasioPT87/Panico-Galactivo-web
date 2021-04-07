@@ -19,3 +19,8 @@
 .c_boxes__item--sunday {
   color: red;
 }
+
+.c_boxes__item--selected {
+  background-color: blue;
+  color: white;
+}
