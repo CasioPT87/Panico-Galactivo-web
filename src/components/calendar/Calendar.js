@@ -20,11 +20,16 @@ export default class Calendar extends React.PureComponent {
   };
 
   componentDidMount() {
-    this.setState({ helper: new H(moment(this.state.dateTable)) });
+    this.setState({ helper: new H(moment(this.state.dateTable)) }, () => {
+      this.selectDate();
+    });
   }
 
-  selectDate = (date) => {
-    this.setState({ selectedDate: date });
+  selectDate = (date = this.state.selectedDate) => {
+    const { selectDate } = this.props;
+    this.setState({ selectedDate: date }, () => {
+      selectDate(date);
+    });
   }
 
   goTo = (e, direction) => {

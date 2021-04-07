@@ -1,0 +1,7 @@
+.c_display {
+  font-size: 0.9em;
+  padding: 10px;
+  border: 5px solid black;
+  background-color: white;
+  text-align: center;
+}
