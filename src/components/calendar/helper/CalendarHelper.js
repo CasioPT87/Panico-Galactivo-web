@@ -35,7 +35,6 @@ export default class CalendarHelper {
 
   constructor(dateTable) {
     this.dateTable = dateTable;
-    this.today = moment();
   }
 
   setDateTable = (dateTable) => {
@@ -78,25 +77,31 @@ export default class CalendarHelper {
     const weekLength = CalendarHelper.numberOfDaysWeek();
     const numberOfWeekFirstDayMonth = this.dayOfWeekFirstDayOfMonth();
     const totalNumberOfDays = numberOfWeekFirstDayMonth + this.dateTable.daysInMonth();
+
     return Math.ceil(totalNumberOfDays / weekLength);
   }
 
   dayObjectsForMonthTable() {
-    const weekLength = CalendarHelper.numberOfDaysWeek();
     const daysMonth = this.dayObjectsForMonth();
-    let daysPreviousMonth = [], daysNextMonth = [];
     const dayOfWeekFirstDayOfMonth = this.dayOfWeekFirstDayOfMonth();
     const dayOfWeekLastDayOfMonth = this.dayOfWeekLastOfMonth();
-    if (dayOfWeekFirstDayOfMonth > 0) {
-      const previousMonth = this.getPreviousMonth();
-      daysPreviousMonth = this.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth, null, true);
-    }
-    if (dayOfWeekLastDayOfMonth < weekLength - 1) {
-      const nextMonth = this.getNextMonth();
-      daysNextMonth = this.dayObjectsForMonth(nextMonth, null, weekLength - 1 - dayOfWeekLastDayOfMonth, true);
-    }
+    const [daysPreviousMonth, daysNextMonth] = this.getDisabledDaysForTable(dayOfWeekFirstDayOfMonth, dayOfWeekLastDayOfMonth);
 
     return this.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);
+  }
+
+  getDisabledDaysForTable(numDaysPreviousMonth, numDaysNextMonth) {
+    const weekLength = CalendarHelper.numberOfDaysWeek();
+    let daysPreviousMonth = [], daysNextMonth = [];
+    if (numDaysPreviousMonth > 0) {
+      const previousMonth = this.getPreviousMonth();
+      daysPreviousMonth = this.dayObjectsForMonth(previousMonth, numDaysPreviousMonth, null, true);
+    }
+    if (numDaysNextMonth < weekLength - 1) {
+      const nextMonth = this.getNextMonth();
+      daysNextMonth = this.dayObjectsForMonth(nextMonth, null, weekLength - 1 - numDaysNextMonth, true);
+    }
+    return [daysPreviousMonth, daysNextMonth];
   }
 
   setIndexDayObjectsForTable(dayObjects) {
