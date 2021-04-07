@@ -7,9 +7,11 @@
   border: 1px solid black;
   padding: 10px 0 10px 0;
   text-align: center;
+  cursor: pointer;
 }
 
 .c_boxes__item--inactive {
+  cursor: default;
   opacity: 0.5;
 }
 
