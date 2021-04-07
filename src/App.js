@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className='o-container font-face-joystix'>
+    <div className='o-container font-face-joystix u--red'>
      <Calendar size={300} transitionTime={1}/>
     </div>
   );

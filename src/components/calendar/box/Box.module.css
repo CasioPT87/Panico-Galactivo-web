@@ -8,6 +8,7 @@
   padding: 10px 0 10px 0;
   text-align: center;
   cursor: pointer;
+  background-color: white;
 }
 
 .c_boxes__item--inactive {
