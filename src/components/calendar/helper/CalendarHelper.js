@@ -61,10 +61,6 @@ export default class CalendarHelper {
     return days;
   }
 
-  setInactive = (date) => {
-
-  }
-
   dayOfWeekFirstDayOfMonth() {
     return moment(this.dateTable).startOf('month').day();
   }
@@ -86,8 +82,16 @@ export default class CalendarHelper {
     const dayOfWeekFirstDayOfMonth = this.dayOfWeekFirstDayOfMonth();
     const dayOfWeekLastDayOfMonth = this.dayOfWeekLastOfMonth();
     const [daysPreviousMonth, daysNextMonth] = this.getDisabledDaysForTable(dayOfWeekFirstDayOfMonth, dayOfWeekLastDayOfMonth);
+    const indexedDays = this.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);
+    return this.disablePastDays(indexedDays);
+  }
 
-    return this.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);
+  disablePastDays(days) {
+    days.forEach(day => {
+      if (day.date.isBefore(moment(), 'day')) day.setState('inactive');
+      return day;
+    });
+    return days;
   }
 
   getDisabledDaysForTable(numDaysPreviousMonth, numDaysNextMonth) {
