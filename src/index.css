@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "joystix-monospace";
+  src: local("joystix-monospace"),
+   url("./assets/fonts/joystix-monospace.ttf") format("truetype");
+  font-weight: bold;
+ }

@@ -10,10 +10,32 @@ const DAYS_WEEK = {
   6: ["Saturday", "Sa"]
 }
 
+class Day {
+  constructor(i, date) {
+    this.index = null;
+    this.day = i;
+    this.date = moment(date).date(i + 1);
+    this.state = 'active';
+    this.info = {
+      dayDisplay: i + 1,
+      available: true
+    };
+  }
+
+  setState = (state) => {
+    this.state = state;
+  }
+
+  get inactive() {
+    return this.state === 'inactive';
+  }
+}
+
 export default class CalendarHelper {
 
   constructor(dateTable) {
     this.dateTable = dateTable;
+    this.today = moment();
   }
 
   setDateTable = (dateTable) => {
@@ -24,26 +46,24 @@ export default class CalendarHelper {
     return Object.keys(DAYS_WEEK).length;
   }
 
-  dayObjectsForMonth(date = this.dateTable, daysAtEnd = null, daysAtStart = null) {
+  dayObjectsForMonth(date = this.dateTable, daysAtEnd = null, daysAtStart = null, disable = false, x) {
     const numberOfDays = date.daysInMonth();
     let days = [...Array(numberOfDays).keys()].map(i => {
-      return {
-        index: null,
-        day: i,
-        date: moment(date).date(i + 1),
-        state: 'active',
-        info: {
-          dayDisplay: i + 1,
-          available: true
-        }
-      }
+      return new Day(i, date);
     });
     if (daysAtEnd) {
       days = days.slice(days.length - daysAtEnd, days.length);
     } else if (daysAtStart) {
       days = days.slice(0, daysAtStart);
     }
+    if (disable) {
+      days.forEach(day => day.setState('inactive'));
+    }
     return days;
+  }
+
+  setInactive = (date) => {
+
   }
 
   dayOfWeekFirstDayOfMonth() {
@@ -69,11 +89,11 @@ export default class CalendarHelper {
     const dayOfWeekLastDayOfMonth = this.dayOfWeekLastOfMonth();
     if (dayOfWeekFirstDayOfMonth > 0) {
       const previousMonth = this.getPreviousMonth();
-      daysPreviousMonth = this.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth);
+      daysPreviousMonth = this.dayObjectsForMonth(previousMonth, dayOfWeekFirstDayOfMonth, null, true);
     }
     if (dayOfWeekLastDayOfMonth < weekLength - 1) {
       const nextMonth = this.getNextMonth();
-      daysNextMonth = this.dayObjectsForMonth(nextMonth, null, (weekLength - 1 - dayOfWeekLastDayOfMonth));
+      daysNextMonth = this.dayObjectsForMonth(nextMonth, null, weekLength - 1 - dayOfWeekLastDayOfMonth, true);
     }
 
     return this.setIndexDayObjectsForTable([...daysPreviousMonth, ...daysMonth, ...daysNextMonth]);

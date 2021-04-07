@@ -8,3 +8,7 @@
   padding: 10px 0 10px 0;
   text-align: center;
 }
+
+.c_boxes__item--inactive {
+  color: grey;
+}
