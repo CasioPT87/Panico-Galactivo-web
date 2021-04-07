@@ -10,5 +10,9 @@
 }
 
 .c_boxes__item--inactive {
-  color: grey;
+  opacity: 0.5;
+}
+
+.c_boxes__item--sunday {
+  color: red;
 }
