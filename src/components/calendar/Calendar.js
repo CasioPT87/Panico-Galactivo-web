@@ -48,17 +48,21 @@ export default class Calendar extends React.PureComponent {
         let dateTableToBe;
         if (direction === 'left') dateTableToBe = helper.getPreviousMonth();
         if (direction === 'right') dateTableToBe = helper.getNextMonth();
-
-        setTimeout(() => {
-          this.setState({
-            transition: false,
-            position: 'center',
-            dateTable: dateTableToBe,
-            helper: new H(dateTableToBe)
-          });
-        }, transitionTime*1000)
+        this.reset(dateTableToBe, transitionTime);
       });
     }
+  }
+
+  reset = (dateTableToBe, delay) => {
+    if (!dateTableToBe) return;
+    setTimeout(() => {
+      this.setState({
+        transition: false,
+        position: 'center',
+        dateTable: dateTableToBe,
+        helper: new H(dateTableToBe)
+      });
+    }, delay*1000);
   }
 
   positionIndex = () => {
