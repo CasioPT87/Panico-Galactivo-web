@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import Calendar from './components/calendar/Calendar';
-import Display from './components/display/Display';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Navigation from './components/navigation/Navigation';
+import Header from './components/header/Header';
+import Home from './pages/home/Home';
 import './App.css';
 
 function App() {
@@ -15,8 +22,21 @@ function App() {
 
   return (
     <div className='o-container font-face-joystix u--red'>
-     <Calendar size={size} transitionTime={0.7} selectDate={selectDate}/>
-     <Display width={size} selectedDate={selectedDate} />
+    <Router>
+      <Header />
+      <Navigation />
+        <Switch>
+          <Route path="/home">
+            eooo
+          </Route>
+          <Route path="/users">
+            que
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+    </Router>
     </div>
   );
 }
