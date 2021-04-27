@@ -7,7 +7,7 @@ export default ({ cursor, staticText, speed, eraseSpeed, eraseDelay, text, typin
       text={text}
       staticText={staticText}
       cursor={cursor || '>'}
-      cursorRenderer={cursor => <h1>{cursor}</h1>}
+      cursorRenderer={cursor => cursor}
       speed={speed || 10}
       eraseSpeed={eraseSpeed || 0}
       eraseDelay={eraseDelay || 5000}

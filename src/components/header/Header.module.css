@@ -6,3 +6,11 @@
   width: 100%;
   color: green;
 }
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}

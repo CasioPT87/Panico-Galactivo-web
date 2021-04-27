@@ -12,16 +12,8 @@ import './App.css';
 
 function App() {
 
-  const size = 400;
-
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const selectDate = (date) => {
-    setSelectedDate(date);
-  }
-
   return (
-    <div className='o-container font-face-joystix u--red'>
+    <div className='container font-face-joystix u--red'>
     <Router>
       <Header />
       <Navigation />
