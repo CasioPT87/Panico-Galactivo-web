@@ -5,7 +5,6 @@ import styles from './Home.module.css';
 export default () => {
   return (
     <div>
-      <img className={styles.container} src={background}/>
       <Space />
     </div>  
   )

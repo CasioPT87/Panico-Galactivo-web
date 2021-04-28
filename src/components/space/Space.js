@@ -3,9 +3,14 @@ import cloudImage from '../../assets/images/cloud.png';
 import spaceshipImage from '../../assets/images/spaceship.png';
 import styles from './Space.module.css';
 
+const WINDOW = {
+  heigth: window.innerHeight,
+  width: window.innerWidth
+}
+
 const CANVAS_SIZE = {
-  height: 300,
-  width: 1000
+  height: WINDOW.heigth,
+  width: WINDOW.width
 }
 
 const STAR_SIZE = {
@@ -20,21 +25,29 @@ class Star {
 }
 
 const CLOUD_SIZE = {
-  height: 30,
-  width: 60
+  height: 50,
+  width: 150
 }
 class Cloud {
   constructor() {
     this.speedX = 3;
     this.speedY = 10;
     this.active = false;
+    this.iterations = 0;
   }
 
   updatePosition() {
     if (!this.active) return;
+    this.iterations++
+    // this.updateSpeed(this.iterations)
     this.x -= this.speedX;
     this.y -= this.speedY;
+
     if (this.x < 0 || this.y < 0) this.initialize();
+  }
+
+  updateSpeed(steps) {
+    this.speedY -= steps * 0.001
   }
 
   initialize() {
@@ -52,8 +65,8 @@ class Cloud {
 }
 
 const SHIP_SIZE = {
-  height: 30,
-  width: 70
+  height: 60,
+  width: 140
 }
 
 class Spaceship {
@@ -91,7 +104,7 @@ const Space = props => {
   spaceship.image.height = SHIP_SIZE.height;
   spaceship.image.width = SHIP_SIZE.width;
   
-  let clouds = Array(6).fill(null).map(x => {
+  let clouds = Array(10).fill(null).map(x => {
     const cloud = new Cloud();
     cloud.image = new Image();
 
@@ -151,7 +164,7 @@ const Space = props => {
       ctx.fillRect(0, 0, STAR_SIZE.width, STAR_SIZE.height);
       ctx.restore();
     })
-    setTimeout(draw, 50);
+    setTimeout(draw, 20);
   }
 
   return (<canvas className={styles.canvas} ref={canvasRef} width={CANVAS_SIZE.width} height={CANVAS_SIZE.height}/>)
