@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { spaceship, clouds, stars, CANVAS_SIZE } from './classes/classes';
 import styles from './Space.module.css';
 
+
 const Space = props => {
 
   const canvasRef = useRef(null)

@@ -20,10 +20,24 @@ export class Star {
   }
 }
 
-export class Cloud {
-  constructor() {
-    this.speedX = 3;
+class PhaseClass {
+  phase = null;
+
+  setPhase(phase) {
+    this.phase = phase;
+  }
+
+  isPhase(phase) {
+    return this.phase === phase;
+  }
+}
+
+export class Cloud extends PhaseClass {
+  constructor(id) {
+    super();
+    this.id = id;
     this.speedY = 10;
+    this.speedX = this.speedY / 3;
     this.active = false;
     this.iterations = 0;
     this.height = 50;
@@ -31,28 +45,37 @@ export class Cloud {
   }
 
   updatePosition() {
+    this.updateSpeed();
     if (!this.active) return;
-    this.iterations++
-    // this.updateSpeed(this.iterations)
     this.x -= this.speedX;
     this.y -= this.speedY;
 
-    if (this.x < 0 || this.y < 0) this.initialize();
+    if (this.isPhase(1) || this.x < 0 || this.y < 0) this.initialize();
   }
 
-  updateSpeed(steps) {
-    this.speedY -= steps * 0.001
+  updateSpeed() {
+    if (this.isPhase(1)) {
+      this.iterations++
+      this.speedY -= this.iterations * 0.0001;
+      if (this.speedY < 2) {
+        this.speedY = 2;
+        this.setPhase(2);
+      } 
+      this.speedX = this.speedY / 3;
+    }   
   }
 
   initialize() {
     this.x = Math.random() * (CANVAS_SIZE.width);
     this.y = CANVAS_SIZE.height + this.height;
+    if (this.id == 1)console.log(this.y)
     this.getDelay();
   }
 
   getDelay() {
     const delay = Math.random() * (6000);
     setTimeout(() => {
+      this.setPhase(1);
       this.active = true;
     }, delay);
   }
@@ -67,8 +90,9 @@ export class Cloud {
   }
 }
 
-class Spaceship {
+class Spaceship extends PhaseClass {
   constructor() {
+    super();
     this.x = CANVAS_SIZE.width / 2;
     this.y = CANVAS_SIZE.height / 2;
     this.speedX = 0;
@@ -87,9 +111,10 @@ class Spaceship {
     this.y += this.speedY;
   }
 
-  getNewSpeed() {
-    this.speedX = Math.random() * (2 - (-2)) + (-2);
-    this.speedY = Math.random() * (2 - (-2)) + (-2);
+  getNewSpeed(range = 8) {
+    const min = -range / 2
+    this.speedX = Math.random() * range + min;
+    this.speedY = Math.random() * range + min;
   }
 
   loadImage = () => {
@@ -103,5 +128,5 @@ class Spaceship {
 }
 
 export const spaceship = new Spaceship().loadImage();
-export const clouds = Array(10).fill(null).map(x => new Cloud().loadImage());
+export const clouds = Array(10).fill(null).map((x, i) => new Cloud(i).loadImage());
 export const stars = Array(15).fill(null).map(x => new Star());
