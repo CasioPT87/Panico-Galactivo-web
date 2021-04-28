@@ -8,6 +8,17 @@ const CANVAS_SIZE = {
   width: 1000
 }
 
+const STAR_SIZE = {
+  height: 5,
+  width: 5
+}
+class Star {
+  constructor() {
+    this.x = Math.random() * (CANVAS_SIZE.width);
+    this.y = Math.random() * (CANVAS_SIZE.height);
+  }
+}
+
 const CLOUD_SIZE = {
   height: 30,
   width: 60
@@ -84,14 +95,18 @@ const Space = props => {
     const cloud = new Cloud();
     cloud.image = new Image();
 
-      cloud.image.onload = function() {
-        cloud.initialize()
-      };
-      cloud.image.src = cloudImage;
-      cloud.image.height = CLOUD_SIZE.height;
-      cloud.image.width = CLOUD_SIZE.width;
+    cloud.image.onload = function() {
+      cloud.initialize()
+    };
+    cloud.image.src = cloudImage;
+    cloud.image.height = CLOUD_SIZE.height;
+    cloud.image.width = CLOUD_SIZE.width;
     
     return cloud;
+  });
+
+  let stars = Array(15).fill(null).map(x => {
+    return new Star();
   });
 
   const canvasRef = useRef(null)
@@ -127,6 +142,13 @@ const Space = props => {
       ctx.save();
       ctx.translate(cloud.x, cloud.y);
       ctx.drawImage(cloud.image, 0, 0, CLOUD_SIZE.width, CLOUD_SIZE.height);
+      ctx.restore();
+    })
+    stars.forEach((star, i) => {
+      ctx.save();
+      ctx.translate(star.x, star.y);
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, STAR_SIZE.width, STAR_SIZE.height);
       ctx.restore();
     })
     setTimeout(draw, 50);
