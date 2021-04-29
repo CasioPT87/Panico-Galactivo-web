@@ -141,8 +141,8 @@ class Spaceship extends PhaseClass {
   }
 
   setLandingSpeed() {
-    this.speedX = 2;
-    this.speedY = 5;
+    this.speedX = 0;
+    this.speedY = 2;
   }
 
   updatePosition() {

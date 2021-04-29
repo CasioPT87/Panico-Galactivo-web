@@ -15,7 +15,7 @@ const Space = props => {
 
     setTimeout(() => {
       spaceship.setPhase(2);
-    }, 1000);
+    }, 10000);
   });
 
   const draw = () => {
