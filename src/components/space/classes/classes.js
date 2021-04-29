@@ -25,10 +25,11 @@ class PhaseClass {
 
   setPhase(phase) {
     this.phase = phase;
+    return this;
   }
 
   isPhase(phase) {
-    return this.phase === phase;
+    return phase === this.phase;
   }
 }
 
@@ -36,47 +37,43 @@ export class Cloud extends PhaseClass {
   constructor(id) {
     super();
     this.id = id;
+    this.speedRatio = 3;
     this.speedY = 10;
-    this.speedX = this.speedY / 3;
-    this.active = false;
+    this.speedX = this.speedY / this.speedRatio;
     this.iterations = 0;
     this.height = 50;
     this.width = 150;
+    this.phase = null;
   }
 
   updatePosition() {
-    this.updateSpeed();
-    if (!this.active) return;
+    if(this.isPhase(0) || this.isPhase(3)) return;
     this.x -= this.speedX;
     this.y -= this.speedY;
 
-    if (this.isPhase(1) || this.x < 0 || this.y < 0) this.initialize();
+    if (this.x < 0 || this.y < 0){
+      if(this.isPhase(1)) this.initialize();
+      if(this.isPhase(2)) {
+        this.setPhase(3);
+        clearTimeout(this.delayTimeout)
+      } 
+    } 
   }
 
-  updateSpeed() {
-    if (this.isPhase(1)) {
-      this.iterations++
-      this.speedY -= this.iterations * 0.0001;
-      if (this.speedY < 2) {
-        this.speedY = 2;
-        this.setPhase(2);
-      } 
-      this.speedX = this.speedY / 3;
-    }   
+  resetPosition() {
+    this.x = Math.random() * (CANVAS_SIZE.width);
+    this.y = CANVAS_SIZE.height + this.height;
   }
 
   initialize() {
-    this.x = Math.random() * (CANVAS_SIZE.width);
-    this.y = CANVAS_SIZE.height + this.height;
-    if (this.id == 1)console.log(this.y)
-    this.getDelay();
+    this.resetPosition();
+    if (this.isPhase(0)) this.getDelay();
   }
 
   getDelay() {
-    const delay = Math.random() * (6000);
-    setTimeout(() => {
+    const delay = Math.random() * (3000);
+    this.delayTimeout = setTimeout(() => {
       this.setPhase(1);
-      this.active = true;
     }, delay);
   }
 
@@ -87,6 +84,14 @@ export class Cloud extends PhaseClass {
     };
     this.image.src = cloudImage;
     return this;
+  }
+
+  destroy() {
+    this.active = false;
+  }
+
+  isActive() {
+    return this.active;
   }
 }
 
@@ -128,5 +133,6 @@ class Spaceship extends PhaseClass {
 }
 
 export const spaceship = new Spaceship().loadImage();
-export const clouds = Array(10).fill(null).map((x, i) => new Cloud(i).loadImage());
+export let clouds = Array(10).fill(null)
+  .map((x, i) => new Cloud(i).loadImage().setPhase(0));
 export const stars = Array(15).fill(null).map(x => new Star());

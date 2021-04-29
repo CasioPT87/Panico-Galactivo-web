@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Navigation from './components/navigation/Navigation';
 import Header from './components/header/Header';

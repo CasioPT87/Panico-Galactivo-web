@@ -8,7 +8,11 @@ const Space = props => {
   const canvasRef = useRef(null)
 
   useEffect(() => {
-    draw()
+    draw();
+    setTimeout(() => {
+      console.log('hola')
+      clouds.forEach(cloud => cloud.setPhase(2));
+    }, 6000);
   });
 
   const draw = () => {
@@ -30,11 +34,14 @@ const Space = props => {
       ctx.drawImage(spaceship.image, 0, 0, spaceship.width, spaceship.height);
     }
     ctx.restore();
-    clouds.forEach((cloud, i) => {
+    clouds.forEach((cloud) => {
       cloud.updatePosition();
       ctx.save();
       ctx.translate(cloud.x, cloud.y);
-      ctx.drawImage(cloud.image, 0, 0, cloud.width, cloud.height);
+      if (cloud.isPhase(1) || cloud.isPhase(2)) {
+        console.log(cloud.phase)
+        ctx.drawImage(cloud.image, 0, 0, cloud.width, cloud.height);
+      }
       ctx.restore();
     })
     setTimeout(draw, 20);
