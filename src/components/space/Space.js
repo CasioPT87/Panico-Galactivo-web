@@ -10,9 +10,12 @@ const Space = props => {
   useEffect(() => {
     draw();
     setTimeout(() => {
-      console.log('hola')
       clouds.forEach(cloud => cloud.setPhase(2));
     }, 6000);
+
+    setTimeout(() => {
+      spaceship.setPhase(2);
+    }, 1000);
   });
 
   const draw = () => {
@@ -27,8 +30,7 @@ const Space = props => {
       ctx.restore();
     })
     ctx.save();
-    if (spaceship.active) {
-      spaceship.getNewSpeed();
+    if (spaceship.isPhase(1) || spaceship.isPhase(2) || spaceship.isPhase(3)) {
       spaceship.updatePosition();
       ctx.translate(spaceship.x, spaceship.y);
       ctx.drawImage(spaceship.image, 0, 0, spaceship.width, spaceship.height);
@@ -39,7 +41,6 @@ const Space = props => {
       ctx.save();
       ctx.translate(cloud.x, cloud.y);
       if (cloud.isPhase(1) || cloud.isPhase(2)) {
-        console.log(cloud.phase)
         ctx.drawImage(cloud.image, 0, 0, cloud.width, cloud.height);
       }
       ctx.restore();

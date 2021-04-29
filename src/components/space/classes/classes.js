@@ -98,22 +98,57 @@ export class Cloud extends PhaseClass {
 class Spaceship extends PhaseClass {
   constructor() {
     super();
-    this.x = CANVAS_SIZE.width / 2;
-    this.y = CANVAS_SIZE.height / 2;
+    this.height = 60;
+    this.width = 140;
+    this._x = CANVAS_SIZE.width / 2 - this.width / 2;
+    this._y = CANVAS_SIZE.height / 2 - this.height / 2;
+    this.x = this._x;
+    this.y = this._y;
     this.speedX = 0;
     this.speedY = 0;
     this.active = false;
-    this.height = 60;
-    this.width = 140;
+    
   }
 
   initialize() {
-    this.active = true;
+    this.setPhase(1);
+  }
+
+  vibrate() {
+    this.getNewSpeed();
+    this.x = this._x + this.speedX;
+    this.y = this._y + this.speedY;
+  }
+
+  land() {
+    this.setLandingSpeed();
+    this.setLandingImage()
+    this._x += this.speedX;
+    this._y += this.speedY;
+    this.x = this._x;
+    this.y = this._y;
+    if (this.hasLanded()) {
+      this.setPhase(3);
+    }
+  }
+
+  setLandingImage() {
+    // TODO
+  }
+
+  hasLanded() {
+    return this.y + this.height >= CANVAS_SIZE.height;
+  }
+
+  setLandingSpeed() {
+    this.speedX = 2;
+    this.speedY = 5;
   }
 
   updatePosition() {
-    this.x += this.speedX;
-    this.y += this.speedY;
+    console.log(this.phase)
+    if (this.isPhase(1)) this.vibrate();
+    if (this.isPhase(2)) this.land();
   }
 
   getNewSpeed(range = 8) {
@@ -132,7 +167,7 @@ class Spaceship extends PhaseClass {
   }
 }
 
-export const spaceship = new Spaceship().loadImage();
+export const spaceship = new Spaceship().loadImage().setPhase(0);
 export let clouds = Array(10).fill(null)
   .map((x, i) => new Cloud(i).loadImage().setPhase(0));
 export const stars = Array(15).fill(null).map(x => new Star());
