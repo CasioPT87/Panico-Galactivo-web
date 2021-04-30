@@ -3,9 +3,9 @@ import { spaceship, clouds, stars, CANVAS_SIZE } from './classes/classes';
 import styles from './Space.module.css';
 
 
-const Space = props => {
+const Space = (props: any): JSX.Element => {
 
-  const canvasRef = useRef(null)
+   const canvasRef: any = useRef(null);
 
   useEffect(() => {
     draw();
@@ -18,7 +18,7 @@ const Space = props => {
     }, 10000);
   });
 
-  const draw = () => {
+  const draw: () => void = () => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height)
