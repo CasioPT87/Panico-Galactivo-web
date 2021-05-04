@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react';
-import { spaceship, clouds, stars, CANVAS_SIZE } from './classes/classes';
+import { useRef, useEffect } from 'react';
+import { clouds, stars, CANVAS_SIZE } from './classes/classes';
+import spaceship from './classes/spaceship/Spaceship';
 import styles from './Space.module.css';
-
 
 const Space = (props: any): JSX.Element => {
 
-   const canvasRef: any = useRef(null);
+  const canvas = useRef<HTMLCanvasElement>(null!);
 
   useEffect(() => {
     draw();
@@ -19,8 +19,8 @@ const Space = (props: any): JSX.Element => {
   });
 
   const draw: () => void = () => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.current.getContext('2d');
+    if (!ctx) return;
     ctx.clearRect(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height)
     stars.forEach((star) => {
       ctx.save();
