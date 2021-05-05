@@ -1,11 +1,12 @@
 import { useRef, useEffect } from 'react';
-import { clouds, stars, CANVAS_SIZE } from './classes/classes';
+import { stars, CANVAS_SIZE } from './classes/classes';
 import spaceship from './classes/spaceship/Spaceship';
+import clouds from './classes/cloud/Cloud';
 import styles from './Space.module.css';
 
 const Space = (props: any): JSX.Element => {
 
-  const canvas = useRef<HTMLCanvasElement>(null!);
+  const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   useEffect(() => {
     draw();
@@ -19,7 +20,7 @@ const Space = (props: any): JSX.Element => {
   });
 
   const draw: () => void = () => {
-    const ctx = canvas.current.getContext('2d');
+    const ctx = canvasRef.current.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height)
     stars.forEach((star) => {
@@ -30,7 +31,7 @@ const Space = (props: any): JSX.Element => {
       ctx.restore();
     })
     ctx.save();
-    if (spaceship.isPhase(1) || spaceship.isPhase(2) || spaceship.isPhase(3)) {
+    if ((spaceship.isPhase(1) || spaceship.isPhase(2) || spaceship.isPhase(3)) && !!spaceship.image) {
       spaceship.updatePosition();
       ctx.translate(spaceship.x, spaceship.y);
       ctx.drawImage(spaceship.image, 0, 0, spaceship.width, spaceship.height);
@@ -40,7 +41,7 @@ const Space = (props: any): JSX.Element => {
       cloud.updatePosition();
       ctx.save();
       ctx.translate(cloud.x, cloud.y);
-      if (cloud.isPhase(1) || cloud.isPhase(2)) {
+      if ((cloud.isPhase(1) || cloud.isPhase(2)) && !!cloud.image) {
         ctx.drawImage(cloud.image, 0, 0, cloud.width, cloud.height);
       }
       ctx.restore();

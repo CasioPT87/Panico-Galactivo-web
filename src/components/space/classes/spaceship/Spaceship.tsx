@@ -84,5 +84,5 @@ class Spaceship extends PhaseClass {
   }
 }
 
-const spaceship = new Spaceship().loadImage().setPhase(0);
+const spaceship: Spaceship = new Spaceship().loadImage().setPhase(0);
 export default spaceship;
