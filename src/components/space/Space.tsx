@@ -1,7 +1,8 @@
 import { useRef, useEffect } from 'react';
-import { stars, CANVAS_SIZE } from './classes/classes';
+import { CANVAS_SIZE } from './classes/classes';
 import spaceship from './classes/spaceship/Spaceship';
 import clouds from './classes/cloud/Cloud';
+import stars from './classes/star/Star';
 import styles from './Space.module.css';
 
 const Space = (props: any): JSX.Element => {
