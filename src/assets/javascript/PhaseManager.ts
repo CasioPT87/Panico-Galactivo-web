@@ -31,7 +31,9 @@ class PhaseManager {
     }
   }
 
-  
+  isPhase(phase: string): boolean {
+    return phase === this.state.phase;
+  }
 }
 
 export type { Phase, PhaseManager };

@@ -9,28 +9,27 @@ import stars from './classes/star/Star';
 import drawStars from './classes/star/draw';
 import styles from './Space.module.css';
 
-const Space = (props: any): JSX.Element => {
+const Space = (): JSX.Element => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   const cloudItems = clouds.items;
-  const spaceshipItem = spaceship.item;
 
   useEffect(() => {
     attachPhaseManager()
     phaseManager.action();
     draw();
-    setTimeout(() => {
-      cloudItems.forEach(cloud => cloud.setPhase(2));
-    }, 6000);
+    // setTimeout(() => {
+    //   cloudItems.forEach(cloud => cloud.setPhase(2));
+    // }, 6000);
 
-    setTimeout(() => {
-      spaceshipItem.setPhase(2);
-    }, 10000);
+    // setTimeout(() => {
+    //   spaceship.setPhase(2);
+    // }, 10000);
 
-    setInterval(() => {
-      console.log(phaseManager.state)
-    }, 1000)
+    // setInterval(() => {
+    //   console.log(phaseManager.state)
+    // }, 1000)
   });
 
   const attachPhaseManager = () => {
