@@ -1,52 +1,52 @@
 import { useRef, useEffect } from 'react';
 import { CANVAS_SIZE } from './classes/classes';
+import phaseManager from '../../assets/javascript/PhaseManager';
 import spaceship from './classes/spaceship/Spaceship';
+import drawSpaceShip from './classes/spaceship/draw';
+import drawClouds from './classes/cloud/draw';
 import clouds from './classes/cloud/Cloud';
 import stars from './classes/star/Star';
+import drawStars from './classes/star/draw';
 import styles from './Space.module.css';
 
 const Space = (props: any): JSX.Element => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
+  const cloudItems = clouds.items;
+  const spaceshipItem = spaceship.item;
+
   useEffect(() => {
+    attachPhaseManager()
+    phaseManager.action();
     draw();
     setTimeout(() => {
-      clouds.forEach(cloud => cloud.setPhase(2));
+      cloudItems.forEach(cloud => cloud.setPhase(2));
     }, 6000);
 
     setTimeout(() => {
-      spaceship.setPhase(2);
+      spaceshipItem.setPhase(2);
     }, 10000);
+
+    setInterval(() => {
+      console.log(phaseManager.state)
+    }, 1000)
   });
+
+  const attachPhaseManager = () => {
+    clouds.phases = phaseManager;
+    spaceship.phases = phaseManager;
+  }
 
   const draw: () => void = () => {
     const ctx = canvasRef.current.getContext('2d');
     if (!ctx) return;
-    ctx.clearRect(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height)
-    stars.forEach((star) => {
-      ctx.save();
-      ctx.translate(star.x, star.y);
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, star.width, star.height);
-      ctx.restore();
-    })
+    ctx.clearRect(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height);
     ctx.save();
-    if ((spaceship.isPhase(1) || spaceship.isPhase(2) || spaceship.isPhase(3)) && !!spaceship.image) {
-      spaceship.updatePosition();
-      ctx.translate(spaceship.x, spaceship.y);
-      ctx.drawImage(spaceship.image, 0, 0, spaceship.width, spaceship.height);
-    }
+    drawStars(ctx, stars);
+    drawSpaceShip(ctx, spaceship);
+    drawClouds(ctx, clouds);
     ctx.restore();
-    clouds.forEach((cloud) => {
-      cloud.updatePosition();
-      ctx.save();
-      ctx.translate(cloud.x, cloud.y);
-      if ((cloud.isPhase(1) || cloud.isPhase(2)) && !!cloud.image) {
-        ctx.drawImage(cloud.image, 0, 0, cloud.width, cloud.height);
-      }
-      ctx.restore();
-    })
     setTimeout(draw, 20);
   }
 

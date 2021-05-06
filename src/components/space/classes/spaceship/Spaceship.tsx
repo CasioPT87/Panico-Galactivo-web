@@ -1,5 +1,6 @@
 import { CANVAS_SIZE, PhaseClass } from '../classes';
 import spaceshipImage from '../../../../assets/images/spaceship.png';
+import type { PhaseManager } from '../../../../assets/javascript/PhaseManager';
 
 class Spaceship extends PhaseClass {
 
@@ -84,5 +85,16 @@ class Spaceship extends PhaseClass {
   }
 }
 
-const spaceship: Spaceship = new Spaceship().loadImage().setPhase(0);
+const spaceshipItem: Spaceship = new Spaceship().loadImage().setPhase(0);
+
+export type SpaceshipType = {
+  phases: null | PhaseManager,
+  item: Spaceship
+}
+
+const spaceship: SpaceshipType = {
+  phases: null,
+  item: spaceshipItem
+};
+
 export default spaceship;

@@ -1,5 +1,6 @@
 import { CANVAS_SIZE, PhaseClass } from '../classes';
 import cloudImage from '../../../../assets/images/cloud.png';
+import type { PhaseManager } from '../../../../assets/javascript/PhaseManager';
 
 export class Cloud extends PhaseClass {
 
@@ -81,7 +82,17 @@ export class Cloud extends PhaseClass {
   }
 }
 
-let clouds = Array(10).fill(null)
+let cloudItems = Array(10).fill(null)
   .map((x, i) => new Cloud(i).loadImage().setPhase(0));
+
+export type Clouds = {
+  phases: null | PhaseManager,
+  items: Array<Cloud>
+}
+
+const clouds: Clouds = {
+  phases: null,
+  items: cloudItems
+};
 
 export default clouds;

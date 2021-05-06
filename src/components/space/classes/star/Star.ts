@@ -15,6 +15,8 @@ export class Star {
   }
 }
 
-const stars = Array(15).fill(null).map(x => new Star());
+export type Stars = Array<Star>;
+
+const stars: Stars = Array(15).fill(null).map(x => new Star());
 
 export default stars;
