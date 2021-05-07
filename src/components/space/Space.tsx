@@ -11,7 +11,7 @@ import type { Stars } from './classes/star/Star';
 import styles from './Space.module.css';
 
 
-const Space = ({ frameSize }: any): JSX.Element => {
+const Space = ( { frameSize }: any): JSX.Element => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
@@ -21,17 +21,22 @@ const Space = ({ frameSize }: any): JSX.Element => {
  
 
   useEffect(() => {
-    if (frameSize) {
-      createItems();
-      phaseManager.action();
-      draw();
-    }
-  });
+    console.log(frameSize)
+    createItems();
+    phaseManager.action();
+    setCanvasSize();
+    draw();
+  }, [frameSize]);
 
   const createItems = (): void => {
     spaceship = spaceshipFactory(phaseManager, frameSize);
     clouds = cloudsFactory(1, phaseManager, frameSize);
     stars = starsFactory(1, frameSize);
+  }
+
+  const setCanvasSize = () => {
+    canvasRef.current.height = frameSize.height;
+    canvasRef.current.width = frameSize.width;
   }
 
   const draw: () => void = () => {
