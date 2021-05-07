@@ -1,46 +1,43 @@
 import { useRef, useEffect } from 'react';
-import { CANVAS_SIZE } from './classes/classes';
 import phaseManager from '../../assets/javascript/PhaseManager';
-import spaceship from './classes/spaceship/Spaceship';
+import spaceshipFactory, { Spaceship } from './classes/spaceship/Spaceship';
 import drawSpaceShip from './classes/spaceship/draw';
 import drawClouds from './classes/cloud/draw';
-import clouds from './classes/cloud/Cloud';
-import stars from './classes/star/Star';
+import cloudsFactory from './classes/cloud/Cloud';
+import starsFactory from './classes/star/Star';
 import drawStars from './classes/star/draw';
+import type { Clouds } from './classes/cloud/Cloud';
+import type { Stars } from './classes/star/Star';
 import styles from './Space.module.css';
 
-const Space = (): JSX.Element => {
+
+const Space = ({ frameSize }: any): JSX.Element => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
-  const cloudItems = clouds.items;
+  let spaceship: Spaceship | null = null;
+  let clouds: Clouds = [];
+  let stars: Stars = [];
+ 
 
   useEffect(() => {
-    attachPhaseManager()
-    phaseManager.action();
-    draw();
-    // setTimeout(() => {
-    //   cloudItems.forEach(cloud => cloud.setPhase(2));
-    // }, 6000);
-
-    // setTimeout(() => {
-    //   spaceship.setPhase(2);
-    // }, 10000);
-
-    // setInterval(() => {
-    //   console.log(phaseManager.state)
-    // }, 1000)
+    if (frameSize) {
+      createItems();
+      phaseManager.action();
+      draw();
+    }
   });
 
-  const attachPhaseManager = () => {
-    clouds.phases = phaseManager;
-    spaceship.phases = phaseManager;
+  const createItems = (): void => {
+    spaceship = spaceshipFactory(phaseManager, frameSize);
+    clouds = cloudsFactory(1, phaseManager, frameSize);
+    stars = starsFactory(1, frameSize);
   }
 
   const draw: () => void = () => {
     const ctx = canvasRef.current.getContext('2d');
     if (!ctx) return;
-    ctx.clearRect(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height);
+    ctx.clearRect(0, 0, frameSize.width, frameSize.height);
     ctx.save();
     drawStars(ctx, stars);
     drawSpaceShip(ctx, spaceship);
@@ -49,7 +46,7 @@ const Space = (): JSX.Element => {
     setTimeout(draw, 20);
   }
 
-  return (<canvas className={styles.canvas} ref={canvasRef} width={CANVAS_SIZE.width} height={CANVAS_SIZE.height}/>)
+  return (<canvas id="initial-canvas" className={styles.canvas} ref={canvasRef} width={1000} height={1000}/>)
 }
 
 export default Space;

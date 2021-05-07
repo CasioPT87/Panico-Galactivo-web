@@ -1,7 +1,6 @@
 
 .container {
-  height: auto;
+  height: calc(100vh - 100px - 40px);
   width: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-color: blue;
 }

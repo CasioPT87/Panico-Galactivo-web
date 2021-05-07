@@ -1,7 +1,7 @@
 import { Spaceship } from './Spaceship';
 
-export default function(ctx: any, spaceship: Spaceship) {
-  if (!!spaceship.image) {
+export default function(ctx: any, spaceship: Spaceship | null) {
+  if (spaceship && !!spaceship.image) {
     spaceship.updatePosition();
     ctx.save();
     ctx.translate(spaceship.x, spaceship.y);

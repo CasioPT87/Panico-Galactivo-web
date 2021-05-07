@@ -1,5 +1,3 @@
-import { CANVAS_SIZE } from '../classes';
-
 export class Star {
 
   x: number;
@@ -7,7 +5,7 @@ export class Star {
   height: number;
   width: number;
 
-  constructor() {
+  constructor(CANVAS_SIZE: any) {
     this.x = Math.random() * (CANVAS_SIZE.width);
     this.y = Math.random() * (CANVAS_SIZE.height);
     this.height = 5;
@@ -15,8 +13,11 @@ export class Star {
   }
 }
 
+const starFactory: (qtty: number, CANVAS_SIZE: any) => Stars = (qtty, CANVAS_SIZE) => {
+  return Array(qtty).fill(null).map(x => {
+    return new Star(CANVAS_SIZE);  
+  });
+}
+
 export type Stars = Array<Star>;
-
-const stars: Stars = Array(15).fill(null).map(x => new Star());
-
-export default stars;
+export default starFactory;
