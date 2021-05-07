@@ -46,9 +46,6 @@ export class Spaceship extends PhaseClass {
     this._y += this.speedY;
     this.x = this._x;
     this.y = this._y;
-    if (this.hasLanded()) {
-      this.setPhase(3);
-    }
   }
 
   setLandingImage() {
@@ -56,6 +53,7 @@ export class Spaceship extends PhaseClass {
   }
 
   hasLanded() {
+    if (this.canvasSize.height <= 0) return false;
     return this.y + this.height >= this.canvasSize.height;
   }
 
@@ -66,9 +64,13 @@ export class Spaceship extends PhaseClass {
 
   updatePosition(): void {
     const { phases } = this;
+    console.log(phases?.state.phase)
     if (phases) {
       if (phases.isPhase('approaching')) this.vibrate();
       if (phases.isPhase('landing')) this.land();
+      if (this.hasLanded()) {
+        phases.setPhase('landed');
+      }
     }
   }
 

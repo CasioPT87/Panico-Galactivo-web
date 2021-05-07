@@ -21,7 +21,6 @@ const Space = ( { frameSize }: any): JSX.Element => {
  
 
   useEffect(() => {
-    console.log(frameSize)
     createItems();
     phaseManager.action();
     setCanvasSize();
@@ -30,8 +29,8 @@ const Space = ( { frameSize }: any): JSX.Element => {
 
   const createItems = (): void => {
     spaceship = spaceshipFactory(phaseManager, frameSize);
-    clouds = cloudsFactory(1, phaseManager, frameSize);
-    stars = starsFactory(1, frameSize);
+    clouds = cloudsFactory(6, phaseManager, frameSize);
+    stars = starsFactory(15, frameSize);
   }
 
   const setCanvasSize = () => {
