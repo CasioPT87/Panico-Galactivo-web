@@ -2,8 +2,6 @@ import type { Clouds } from './Cloud';
 
 export default function(ctx: any, clouds: Clouds) {
   clouds.forEach((cloud) => {
-    const { phases } = cloud;
-    if (!phases?.isPhase('approaching')) return;
     cloud.updatePosition();
     ctx.save();
     ctx.translate(cloud.x, cloud.y);

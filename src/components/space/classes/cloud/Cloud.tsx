@@ -1,7 +1,5 @@
 import { PhaseClass } from '../classes';
 import cloudImage from '../../../../assets/images/cloud.png';
-import type { PhaseManager } from '../../../../assets/javascript/PhaseManager';
-
 export class Cloud extends PhaseClass {
 
   speedRatio: number;
@@ -15,10 +13,9 @@ export class Cloud extends PhaseClass {
   active: boolean;
   image: HTMLImageElement | null;
   delayTimeout: ReturnType<typeof setTimeout> | null;
-  phases: PhaseManager;
   canvasSize: any;
 
-  constructor(phases: PhaseManager, CANVAS_SIZE: any) {
+  constructor(CANVAS_SIZE: any) {
     super();
     this.speedRatio = 3;
     this.speedY = 10;
@@ -31,12 +28,10 @@ export class Cloud extends PhaseClass {
     this.active = false;
     this.image = null;
     this.delayTimeout = null;
-    this.phases = phases;
     this.canvasSize = CANVAS_SIZE;
   }
 
   updatePosition() {
-    const { phases } = this;
     if (!this.active) return;
     
     this.x -= this.speedX;
@@ -79,9 +74,9 @@ export class Cloud extends PhaseClass {
 
 export type Clouds = Array<Cloud>;
 
-const cloudFactory: (qtty: number, phases: PhaseManager, CANVAS_SIZE: any) => Clouds = (qtty, phases, CANVAS_SIZE) => {
+const cloudFactory: (qtty: number, CANVAS_SIZE: any) => Clouds = (qtty, CANVAS_SIZE) => {
   return Array(qtty).fill(null).map(x => {
-    return new Cloud(phases, CANVAS_SIZE).loadImage();
+    return new Cloud(CANVAS_SIZE).loadImage();
   });
 }
 

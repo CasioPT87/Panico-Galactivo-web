@@ -28,8 +28,8 @@ const Space = ( { frameSize }: any): JSX.Element => {
   }, [frameSize]);
 
   const createItems = (): void => {
-    spaceship = spaceshipFactory(phaseManager, frameSize);
-    clouds = cloudsFactory(6, phaseManager, frameSize);
+    spaceship = spaceshipFactory(frameSize);
+    clouds = cloudsFactory(6, frameSize);
     stars = starsFactory(15, frameSize);
   }
 
@@ -53,4 +53,5 @@ const Space = ( { frameSize }: any): JSX.Element => {
   return (<canvas id="initial-canvas" className={styles.canvas} ref={canvasRef} width={1000} height={1000}/>)
 }
 
+export { phaseManager };
 export default Space;

@@ -1,6 +1,6 @@
 import { PhaseClass } from '../classes';
+import { phaseManager } from './../../Space';
 import spaceshipImage from '../../../../assets/images/spaceship.png';
-import type { PhaseManager } from '../../../../assets/javascript/PhaseManager';
 
 export class Spaceship extends PhaseClass {
 
@@ -14,10 +14,9 @@ export class Spaceship extends PhaseClass {
   speedY:number;
   active: boolean;
   image: HTMLImageElement | null;
-  phases: PhaseManager | null;
   canvasSize: any;
 
-  constructor(phases: PhaseManager, CANVAS_SIZE: any) {
+  constructor(CANVAS_SIZE: any) {
     super();
     this.height = 60;
     this.width = 140;
@@ -29,7 +28,6 @@ export class Spaceship extends PhaseClass {
     this.speedY = 0;
     this.active = false;
     this.image = null; 
-    this.phases = phases;
     this.canvasSize = CANVAS_SIZE;
   }
 
@@ -63,13 +61,11 @@ export class Spaceship extends PhaseClass {
   }
 
   updatePosition(): void {
-    const { phases } = this;
-    console.log(phases?.state.phase)
-    if (phases) {
-      if (phases.isPhase('approaching')) this.vibrate();
-      if (phases.isPhase('landing')) this.land();
+    if (phaseManager) {
+      if (phaseManager.isPhase('approaching')) this.vibrate();
+      if (phaseManager.isPhase('landing')) this.land();
       if (this.hasLanded()) {
-        phases.setPhase('landed');
+        phaseManager.setPhase('landed');
       }
     }
   }
@@ -90,8 +86,8 @@ export class Spaceship extends PhaseClass {
   }
 }
 
-const spaceshipFactory: (phases: PhaseManager, CANVAS_SIZE: any) => Spaceship = (phases, CANVAS_SIZE) => {
-  return new Spaceship(phases, CANVAS_SIZE).loadImage();
+const spaceshipFactory: (CANVAS_SIZE: any) => Spaceship = (CANVAS_SIZE) => {
+  return new Spaceship(CANVAS_SIZE).loadImage();
 }
 
 export default spaceshipFactory;
