@@ -3,7 +3,7 @@ import phaseManager from '../../assets/javascript/PhaseManager';
 import spaceshipFactory, { Spaceship } from './classes/spaceship/Spaceship';
 import drawSpaceShip from './classes/spaceship/draw';
 import drawClouds from './classes/cloud/draw';
-import cloudsFactory from './classes/cloud/Cloud';
+import Cloud from './classes/cloud/Cloud';
 import starsFactory from './classes/star/Star';
 import drawStars from './classes/star/draw';
 import type { Clouds } from './classes/cloud/Cloud';
@@ -27,7 +27,7 @@ const Space = ( { frameSize }: any): JSX.Element => {
 
   const createItems = (): void => {
     spaceship = spaceshipFactory(frameSize);
-    clouds = cloudsFactory(6, frameSize);
+    clouds = Cloud.createAllClouds(6, frameSize);
     stars = starsFactory(15, frameSize);
   }
 

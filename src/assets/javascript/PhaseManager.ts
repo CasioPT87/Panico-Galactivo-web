@@ -3,17 +3,21 @@ type Phase = { index: number, phase: string, delay: number | null };
 
 const STATES: Array<Phase> = [
   { index: 0, phase: 'initial', delay: 1000 },
-  { index: 1, phase: 'approaching', delay: 6000 },
+  { index: 1, phase: 'approaching', delay: null },
   { index: 2, phase: 'landing', delay: null },
-  { index: 3, phase: 'landed', delay: 6000 }
+  { index: 3, phase: 'landed', delay: null }
 ];
 
 class PhaseManager {
 
   state: Phase;
+  cloudsDestroyed: number;
+  numberOfClouds: number | null;
 
   constructor() {
     this.state = STATES[0];
+    this.cloudsDestroyed = 0;
+    this.numberOfClouds = null;
   }
 
   action(): void {
@@ -21,7 +25,6 @@ class PhaseManager {
     if (!delay) return
     setTimeout(() => {
       const nextPhaseIndex = index + 1;
-      console.log(nextPhaseIndex)
       this.nextPhase(nextPhaseIndex);
     }, delay);
   }
@@ -37,9 +40,24 @@ class PhaseManager {
     return phase === this.state.phase;
   }
 
-  setPhase(phaseName: string): void {
+  setPhase(phaseName: string, delay: number | null = null): void {
     const phase = STATES.find(state => state.phase === phaseName);
-    if (phase) this.state = phase;
+    if (!phase) return;
+    if (delay !== null) {
+      setTimeout(() => {
+        this.state = phase;
+      }, delay);
+    } else {
+      this.state = phase;
+    }  
+  }
+
+  cloudDestroyed(): void {
+    if (this.numberOfClouds === null) return;
+    this.cloudsDestroyed++;
+    if (this.cloudsDestroyed >= this.numberOfClouds) {
+      this.setPhase('landing', 1000);
+    }
   }
 }
 

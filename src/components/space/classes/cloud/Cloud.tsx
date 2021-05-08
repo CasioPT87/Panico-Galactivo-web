@@ -1,7 +1,7 @@
 import { PhaseClass } from '../classes';
-import { clouds } from './../../Space';
+import { clouds, phaseManager } from './../../Space';
 import cloudImage from '../../../../assets/images/cloud.png';
-export class Cloud extends PhaseClass {
+export default class Cloud extends PhaseClass {
 
   id: number;
   speedRatio: number;
@@ -79,6 +79,7 @@ export class Cloud extends PhaseClass {
   destroy() {
     const index = clouds.findIndex(cloud => cloud.id === this.id);
     clouds.splice(index, 1);
+    phaseManager.cloudDestroyed();
   }
 
   loadImage = () => {
@@ -89,6 +90,11 @@ export class Cloud extends PhaseClass {
     this.image.src = cloudImage;
     return this;
   }
+
+  static createAllClouds(numberOfClouds: number, CANVAS_SIZE: any): Clouds {
+    phaseManager.numberOfClouds = numberOfClouds;
+    return cloudFactory(numberOfClouds, CANVAS_SIZE);
+  }
 }
 
 export type Clouds = Array<Cloud>;
@@ -97,6 +103,4 @@ const cloudFactory: (qtty: number, CANVAS_SIZE: any) => Clouds = (qtty, CANVAS_S
   return Array(qtty).fill(null).map((x, i) => {
     return new Cloud(i, CANVAS_SIZE).loadImage();
   });
-}
-
-export default cloudFactory;
+};
