@@ -3,5 +3,10 @@
   display: flex;
   justify-content: space-around;
   padding: 10px 0px;
-  background-color: rgb(239, 68, 36);
+  background-color: #fffc36;
+  color: #002bfb;
+}
+
+.container a {
+  text-decoration: none;
 }

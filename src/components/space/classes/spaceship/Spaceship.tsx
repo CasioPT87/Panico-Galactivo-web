@@ -18,8 +18,8 @@ export class Spaceship extends PhaseClass {
 
   constructor(frameSize: any) {
     super();
-    this.width = Math.min(frameSize.width / 5, 140);
-    this.height = this.width / 2;
+    this.width = Math.min(frameSize.width / 5, 150);
+    this.height = this.width * 0.8;
     this._x = frameSize.width / 2 - this.width / 2;
     this._y = frameSize.height / 2 - this.height / 2;
     this.x = this._x;
@@ -57,12 +57,12 @@ export class Spaceship extends PhaseClass {
 
   setLandingSpeed() {
     this.speedX = 0;
-    this.speedY = 2;
+    this.speedY = 1;
   }
 
   updatePosition(): void {
     if (phaseManager) {
-      if (phaseManager.isPhase('approaching')) this.vibrate();
+      if (phaseManager.isPhase('approaching') || phaseManager.isPhase('initial')) this.vibrate();
       if (phaseManager.isPhase('landing')) {
         this.land();
         if (this.hasLanded()) {
@@ -72,7 +72,7 @@ export class Spaceship extends PhaseClass {
     }
   }
 
-  getNewSpeed(range: number = 8): void {
+  getNewSpeed(range: number = 4): void {
     const min = -range / 2
     this.speedX = Math.random() * range + min;
     this.speedY = Math.random() * range + min;

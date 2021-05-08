@@ -14,8 +14,8 @@ export class Town {
   constructor(frameSize: any) {
     this.x = 0;
     this.y = frameSize.height;
-    this.height = frameSize.height / 4;
-    this.width = this.height * 8;
+    this.height = Math.min(frameSize.height, frameSize.width) * 0.7;
+    this.width = Math.max(frameSize.height * 3, frameSize.width);
     this.speedY = 0;
     this.image = null;
     this.frameHeight = frameSize.height;
@@ -40,7 +40,7 @@ export class Town {
   }
 
   setLandingSpeed() {
-    this.speedY = -2;
+    this.speedY = -3;
   }
 
   loadImage = (): Town => {

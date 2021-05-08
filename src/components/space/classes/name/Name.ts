@@ -39,7 +39,7 @@ export class Name {
   }
 
   show(index = 0) {
-    if (index > this.imageCollection.length) {
+    if (index >= this.imageCollection.length) {
       index = 0;
     }
     this.image = this.imageCollection[index];
