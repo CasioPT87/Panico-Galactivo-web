@@ -2,7 +2,6 @@
 .container {
   display: flex;
   background-color: black;
-  height: 100px;
   width: 100%;
   color: green;
 }
@@ -12,5 +11,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 2.5em;
   margin-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .title {
+    font-size: 1.8em;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .title {
+    font-size: 1.2em;
+  }
 }

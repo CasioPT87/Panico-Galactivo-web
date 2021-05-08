@@ -16,19 +16,19 @@ export class Spaceship extends PhaseClass {
   image: HTMLImageElement | null;
   canvasSize: any;
 
-  constructor(CANVAS_SIZE: any) {
+  constructor(frameSize: any) {
     super();
-    this.height = 60;
-    this.width = 140;
-    this._x = CANVAS_SIZE.width / 2 - this.width / 2;
-    this._y = CANVAS_SIZE.height / 2 - this.height / 2;
+    this.width = Math.min(frameSize.width / 5, 140);
+    this.height = this.width / 2;
+    this._x = frameSize.width / 2 - this.width / 2;
+    this._y = frameSize.height / 2 - this.height / 2;
     this.x = this._x;
     this.y = this._y;
     this.speedX = 0;
     this.speedY = 0;
     this.active = false;
     this.image = null; 
-    this.canvasSize = CANVAS_SIZE;
+    this.canvasSize = frameSize;
   }
 
   vibrate() {

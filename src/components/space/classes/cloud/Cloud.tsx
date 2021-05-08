@@ -18,22 +18,23 @@ export default class Cloud extends PhaseClass {
   delayTimeout: ReturnType<typeof setTimeout> | null;
   canvasSize: any;
 
-  constructor(id: number, CANVAS_SIZE: any) {
+  constructor(id: number, frameSize: any) {
     super();
     this.id = id;
     this.speedRatio = 3;
-    this.speedY = 10;
+    this.speedY = 5;
     this.speedX = this.speedY / this.speedRatio;
     this.iterations = 0;
     this.iterationsToDie = 5;
-    this.height = 50;
-    this.width = 150;
-    this.x = Math.random() * (CANVAS_SIZE.width);
-    this.y = CANVAS_SIZE.height + this.height;
+    this.width = Math.min(frameSize.width / 7, 100);
+    this.height = this.width / 3;
+    
+    this.x = Math.random() * (frameSize.width);
+    this.y = frameSize.height + this.height;
     this.active = false;
     this.image = null;
     this.delayTimeout = null;
-    this.canvasSize = CANVAS_SIZE;
+    this.canvasSize = frameSize;
   }
 
   updatePosition() {

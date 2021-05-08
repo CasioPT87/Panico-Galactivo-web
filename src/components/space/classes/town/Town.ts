@@ -15,7 +15,7 @@ export class Town {
     this.x = 0;
     this.y = frameSize.height;
     this.height = frameSize.height / 4;
-    this.width = frameSize.width;
+    this.width = this.height * 8;
     this.speedY = 0;
     this.image = null;
     this.frameHeight = frameSize.height;
