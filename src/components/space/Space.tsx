@@ -52,6 +52,7 @@ const Space = ( { frameSize }: any): JSX.Element => {
     drawStars(ctx, stars);
     drawTown(ctx, town);
     drawSpaceShip(ctx, spaceship);
+    console.log(clouds.length)
     if (clouds.length) drawClouds(ctx, clouds);
     drawName(ctx, name);
     ctx.restore();
