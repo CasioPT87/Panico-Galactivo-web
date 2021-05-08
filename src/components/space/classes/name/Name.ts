@@ -17,10 +17,11 @@ export class Name {
   addEventListener: any;
 
   constructor(frameSize: any) {
-    this.x = frameSize.height / 4;
-    this.y = frameSize.width / 4;
-    this.width = frameSize.width / 2;
-    this.height = this.width / 10;
+    const margin = frameSize.width * 0.05;
+    this.x = margin;
+    this.y = margin;
+    this.width = frameSize.width - (2 * margin);
+    this.height = this.width / 8;
     this.imageCollection = [];
     this.image = null;
     window.addEventListener('landed', () => this.show())
@@ -45,7 +46,7 @@ export class Name {
     setTimeout(() => {
       index++;
       this.show(index)
-    }, 1000);
+    }, 100);
   }
 }
 
