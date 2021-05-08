@@ -63,9 +63,11 @@ export class Spaceship extends PhaseClass {
   updatePosition(): void {
     if (phaseManager) {
       if (phaseManager.isPhase('approaching')) this.vibrate();
-      if (phaseManager.isPhase('landing')) this.land();
-      if (this.hasLanded()) {
-        phaseManager.setPhase('landed');
+      if (phaseManager.isPhase('landing')) {
+        this.land();
+        if (this.hasLanded()) {
+          phaseManager.setPhase('landed');
+        }
       }
     }
   }

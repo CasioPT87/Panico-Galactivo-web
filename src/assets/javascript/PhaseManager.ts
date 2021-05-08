@@ -1,11 +1,11 @@
 
-type Phase = { index: number, phase: string, delay: number | null };
+type Phase = { index: number, phase: string, delay: number | null, event: Event };
 
 const STATES: Array<Phase> = [
-  { index: 0, phase: 'initial', delay: 1000 },
-  { index: 1, phase: 'approaching', delay: null },
-  { index: 2, phase: 'landing', delay: null },
-  { index: 3, phase: 'landed', delay: null }
+  { index: 0, phase: 'initial', delay: 1000, event: new Event('initial') },
+  { index: 1, phase: 'approaching', delay: null, event: new Event('approaching') },
+  { index: 2, phase: 'landing', delay: null, event: new Event('landing') },
+  { index: 3, phase: 'landed', delay: null, event: new Event('landed') }
 ];
 
 class PhaseManager {
@@ -49,6 +49,7 @@ class PhaseManager {
       }, delay);
     } else {
       this.state = phase;
+      dispatchEvent(phase.event);
     }  
   }
 

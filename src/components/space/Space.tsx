@@ -8,6 +8,8 @@ import starsFactory from './classes/star/Star';
 import drawStars from './classes/star/draw';
 import townFactory, { Town } from './classes/town/Town';
 import drawTown from './classes/town/draw';
+import nameFactory, { Name } from './classes/name/Name';
+import drawName from './classes/name/draw';
 import type { Clouds } from './classes/cloud/Cloud';
 import type { Stars } from './classes/star/Star';
 import styles from './Space.module.css';
@@ -16,6 +18,7 @@ let spaceship: Spaceship | null = null;
 let clouds: Clouds = [];
 let stars: Stars = [];
 let town: Town | null = null;
+let name: Name | null = null;
 
 const Space = ( { frameSize }: any): JSX.Element => {
 
@@ -33,6 +36,7 @@ const Space = ( { frameSize }: any): JSX.Element => {
     clouds = Cloud.createAllClouds(6, frameSize);
     stars = starsFactory(15, frameSize);
     town = townFactory(frameSize);
+    name = nameFactory(frameSize);
   }
 
   const setCanvasSize = () => {
@@ -49,6 +53,7 @@ const Space = ( { frameSize }: any): JSX.Element => {
     drawTown(ctx, town);
     drawSpaceShip(ctx, spaceship);
     if (clouds.length) drawClouds(ctx, clouds);
+    drawName(ctx, name);
     ctx.restore();
     setTimeout(draw, 20);
   }
