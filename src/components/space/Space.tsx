@@ -10,15 +10,13 @@ import type { Clouds } from './classes/cloud/Cloud';
 import type { Stars } from './classes/star/Star';
 import styles from './Space.module.css';
 
+let spaceship: Spaceship | null = null;
+let clouds: Clouds = [];
+let stars: Stars = [];
 
 const Space = ( { frameSize }: any): JSX.Element => {
 
-  const canvasRef = useRef<HTMLCanvasElement>(null!);
-
-  let spaceship: Spaceship | null = null;
-  let clouds: Clouds = [];
-  let stars: Stars = [];
- 
+  const canvasRef = useRef<HTMLCanvasElement>(null!); 
 
   useEffect(() => {
     createItems();
@@ -45,7 +43,7 @@ const Space = ( { frameSize }: any): JSX.Element => {
     ctx.save();
     drawStars(ctx, stars);
     drawSpaceShip(ctx, spaceship);
-    drawClouds(ctx, clouds);
+    if (clouds.length) drawClouds(ctx, clouds);
     ctx.restore();
     setTimeout(draw, 20);
   }
@@ -53,5 +51,5 @@ const Space = ( { frameSize }: any): JSX.Element => {
   return (<canvas id="initial-canvas" className={styles.canvas} ref={canvasRef} width={1000} height={1000}/>)
 }
 
-export { phaseManager };
+export { phaseManager, clouds };
 export default Space;

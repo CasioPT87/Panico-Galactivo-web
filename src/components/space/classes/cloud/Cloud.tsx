@@ -1,11 +1,14 @@
 import { PhaseClass } from '../classes';
+import { clouds } from './../../Space';
 import cloudImage from '../../../../assets/images/cloud.png';
 export class Cloud extends PhaseClass {
 
+  id: number;
   speedRatio: number;
   speedY: number;
   speedX: number;
   iterations: number;
+  iterationsToDie: number;
   height: number;
   width: number;
   x: number;
@@ -15,12 +18,14 @@ export class Cloud extends PhaseClass {
   delayTimeout: ReturnType<typeof setTimeout> | null;
   canvasSize: any;
 
-  constructor(CANVAS_SIZE: any) {
+  constructor(id: number, CANVAS_SIZE: any) {
     super();
+    this.id = id;
     this.speedRatio = 3;
     this.speedY = 10;
     this.speedX = this.speedY / this.speedRatio;
     this.iterations = 0;
+    this.iterationsToDie = 5;
     this.height = 50;
     this.width = 150;
     this.x = Math.random() * (CANVAS_SIZE.width);
@@ -38,11 +43,16 @@ export class Cloud extends PhaseClass {
     this.y -= this.speedY;
 
     if (this.x < 0 || this.y < 0){
-      this.resetPosition();
+      if (this.shouldDestroy()) {
+        this.destroy();
+      } else {
+        this.resetPosition();
+      }   
     }
   }
 
   resetPosition() {
+    this.iterations++;
     this.x = Math.random() * (this.canvasSize.width);
     this.y = this.canvasSize.height + this.height;
   }
@@ -62,6 +72,15 @@ export class Cloud extends PhaseClass {
     this.active = true;
   }
 
+  shouldDestroy() {
+    return this.iterations >= this.iterationsToDie;
+  }
+
+  destroy() {
+    const index = clouds.findIndex(cloud => cloud.id === this.id);
+    clouds.splice(index, 1);
+  }
+
   loadImage = () => {
     this.image = new Image();
     this.image.onload = () => {
@@ -75,8 +94,8 @@ export class Cloud extends PhaseClass {
 export type Clouds = Array<Cloud>;
 
 const cloudFactory: (qtty: number, CANVAS_SIZE: any) => Clouds = (qtty, CANVAS_SIZE) => {
-  return Array(qtty).fill(null).map(x => {
-    return new Cloud(CANVAS_SIZE).loadImage();
+  return Array(qtty).fill(null).map((x, i) => {
+    return new Cloud(i, CANVAS_SIZE).loadImage();
   });
 }
 
