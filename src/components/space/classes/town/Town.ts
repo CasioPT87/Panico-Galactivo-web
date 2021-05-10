@@ -14,8 +14,8 @@ export class Town {
   constructor(frameSize: any) {
     this.x = 0;
     this.y = frameSize.height;
-    this.height = Math.min(frameSize.height, frameSize.width) * 0.3;
-    this.width = Math.max(frameSize.height * 3, frameSize.width);
+    this.height = Math.min(frameSize.height, frameSize.width) * 0.5;
+    this.width = Math.max(frameSize.height * 2, frameSize.width);
     this.speedY = 0;
     this.image = null;
     this.frameHeight = frameSize.height;

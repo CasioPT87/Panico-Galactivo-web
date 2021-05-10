@@ -25,7 +25,7 @@ export default class Cloud extends PhaseClass {
     this.speedY = 5;
     this.speedX = this.speedY / this.speedRatio;
     this.iterations = 0;
-    this.iterationsToDie = 5;
+    this.iterationsToDie = 2;
     this.width = Math.min(frameSize.width / 7, 100);
     this.height = this.width / 3;
     

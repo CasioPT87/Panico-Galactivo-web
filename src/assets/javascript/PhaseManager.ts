@@ -30,6 +30,7 @@ class PhaseManager {
   }
 
   nextPhase(index: number): void {
+    console.log('next phase')
     this.state = STATES[index];
     if (index < STATES.length - 1) {
       this.action();
@@ -41,6 +42,7 @@ class PhaseManager {
   }
 
   setPhase(phaseName: string, delay: number | null = null): void {
+    console.log('setPhase')
     const phase = STATES.find(state => state.phase === phaseName);
     if (!phase) return;
     if (delay !== null) {
