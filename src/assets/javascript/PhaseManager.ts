@@ -42,7 +42,6 @@ class PhaseManager {
   }
 
   setPhase(phaseName: string, delay: number | null = null): void {
-    console.log('setPhase')
     const phase = STATES.find(state => state.phase === phaseName);
     if (!phase) return;
     if (delay !== null) {

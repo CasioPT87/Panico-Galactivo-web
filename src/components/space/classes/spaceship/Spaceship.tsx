@@ -61,7 +61,7 @@ export class Spaceship extends PhaseClass {
 
   hasPositioned() {
     if (this.canvasSize.height <= 0) return false;
-    return this.y + this.height >= this.canvasSize.height / 2;
+    return this.y + (this.height / 2) >= this.canvasSize.height / 2;
   }
 
   hasLanded() {
