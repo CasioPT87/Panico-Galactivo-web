@@ -2,7 +2,7 @@
 type Phase = { index: number, phase: string, delay: number | null, event: Event };
 
 const STATES: Array<Phase> = [
-  { index: 0, phase: 'initial', delay: 1000, event: new Event('initial') },
+  { index: 0, phase: 'initial', delay: null, event: new Event('initial') },
   { index: 1, phase: 'approaching', delay: null, event: new Event('approaching') },
   { index: 2, phase: 'landing', delay: null, event: new Event('landing') },
   { index: 3, phase: 'landed', delay: null, event: new Event('landed') }
