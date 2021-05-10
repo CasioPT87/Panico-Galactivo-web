@@ -1,0 +1,12 @@
+.parallax {
+  perspective: 1px;
+  height: calc(100vh - 100px - 40px);
+  overflow-x: hidden;
+  overflow-y: auto;
+   /* The image used */
+  background-image: url('./../../assets/images/background-1.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

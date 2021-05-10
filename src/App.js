@@ -6,6 +6,7 @@ import {
 import Navigation from './components/navigation/Navigation';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
+import Listen from './pages/listen/Listen';
 import Aliens from './pages/aliens/Aliens';
 import './App.css';
 
@@ -21,7 +22,7 @@ function App() {
             <Aliens />
           </Route>
           <Route path="/music">
-            que
+            <Listen />
           </Route>
           <Route path="/">
             <Home />
