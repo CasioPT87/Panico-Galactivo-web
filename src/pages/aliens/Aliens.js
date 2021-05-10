@@ -1,13 +1,50 @@
-import { Parallax, Background } from 'react-parallax';
 import background from './../../assets/images/background-1.png';
+import styles from './Aliens.module.css';
 
 const Aliens = () => {
   return (
-    <Parallax strength={200}>  
-        <Background className="custom-bg">
-            <img src={background} alt="fill murray" />
-        </Background>
-    </Parallax>
+    <div className={styles.parallax}>
+      <div className={styles.video}>
+        <iframe
+         src="https://www.youtube.com/embed/udQpHFuUqus"
+         frameborder="0"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+        </iframe>
+      </div>
+      <div className={styles.video}>
+        <iframe
+         width="560"
+         height="315"
+         src="https://www.youtube.com/embed/udQpHFuUqus"
+         title="YouTube video player" frameborder="0"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+        </iframe>
+      </div>
+      <div className={styles.video}>
+        <iframe
+         width="560"
+         height="315"
+         src="https://www.youtube.com/embed/udQpHFuUqus"
+         title="YouTube video player" frameborder="0"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+        </iframe>
+      </div>
+      <div className={styles.video}>
+        <iframe
+         width="560"
+         height="315"
+         src="https://www.youtube.com/embed/udQpHFuUqus"
+         title="YouTube video player" frameborder="0"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    
   )
 };
 
