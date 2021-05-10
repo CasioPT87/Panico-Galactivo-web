@@ -31,6 +31,10 @@ const Space = ( { frameSize }: any): JSX.Element => {
     draw();
   }, [frameSize]);
 
+  useEffect(() => {
+    return () => phaseManager.reset();
+  }, []);
+
   const createItems = (): void => {
     spaceship = spaceshipFactory(frameSize);
     clouds = Cloud.createAllClouds(6, frameSize);
@@ -45,7 +49,7 @@ const Space = ( { frameSize }: any): JSX.Element => {
   }
 
   const draw: () => void = () => {
-    const ctx = canvasRef.current.getContext('2d');
+    const ctx = canvasRef?.current?.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, frameSize.width, frameSize.height);
     ctx.save();

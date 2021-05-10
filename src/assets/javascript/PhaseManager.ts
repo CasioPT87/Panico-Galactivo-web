@@ -20,6 +20,12 @@ class PhaseManager {
     this.numberOfClouds = null;
   }
 
+  reset() {
+    this.state = STATES[0];
+    this.cloudsDestroyed = 0;
+    this.numberOfClouds = null;
+  }
+
   action(): void {
     const { delay, index } = this.state;
     if (!delay) return
