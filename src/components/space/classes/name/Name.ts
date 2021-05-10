@@ -17,10 +17,11 @@ export class Name {
   addEventListener: any;
 
   constructor(frameSize: any) {
-    const margin = frameSize.width * 0.05;
-    this.x = margin;
-    this.y = margin;
-    this.width = frameSize.width - (2 * margin);
+    const marginTop = frameSize.width * 0.05;
+    const marginSide = frameSize.width * 0.1;
+    this.x = marginSide;
+    this.y = marginTop;
+    this.width = frameSize.width - (2 * marginSide);
     this.height = this.width / 8;
     this.imageCollection = [];
     this.image = null;
