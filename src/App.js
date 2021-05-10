@@ -6,6 +6,7 @@ import {
 import Navigation from './components/navigation/Navigation';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
+import Aliens from './pages/aliens/Aliens';
 import './App.css';
 
 function App() {
@@ -16,10 +17,10 @@ function App() {
       <Header />
       <Navigation />
         <Switch>
-          <Route path="/home">
-            eooo
+          <Route path="/aliens">
+            <Aliens />
           </Route>
-          <Route path="/users">
+          <Route path="/music">
             que
           </Route>
           <Route path="/">
