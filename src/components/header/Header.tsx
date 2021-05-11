@@ -5,7 +5,7 @@ export default () => {
   return (
     <header className={styles.container}>
       <h1 className={styles.title}>
-        <Typing text={["panico galactico"]} />
+        <Typing text={"panico galactico"} />
       </h1>
     </header>
   )

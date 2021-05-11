@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from 'react';
 import Video from './../../components/video/Video';
 import styles from './Listen.module.css';
 
@@ -15,9 +16,16 @@ const SRCs: Array<[string, string]> = [
 ];
 
 const Listen = () => {
+  const elem = useRef<HTMLDivElement>(null!);
+  const [dimensions, setDimensions] = useState({ height: 0, width: 0});
+
+  useLayoutEffect(() => {
+    setDimensions(elem.current.getBoundingClientRect())
+  }, []);
+
   return (
-    <div className={styles.parallax}>
-      {SRCs.map(src => <Video key={src[0]} src={src} />)}
+    <div className={styles.parallax} ref={elem}>
+      {SRCs.map(src => <Video key={src[0]} src={src} dimensions={dimensions} />)}
     </div>  
   )
 };
