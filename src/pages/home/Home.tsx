@@ -3,8 +3,7 @@ import Space from './../../components/space/Space'
 import styles from './Home.module.css';
 
 export default () => {
-
-  const elem = useRef(null);
+  const elem = useRef<HTMLDivElement>(null!);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0});
 
   useLayoutEffect(() => {

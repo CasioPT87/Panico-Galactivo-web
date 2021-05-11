@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Loader from "react-loader-spinner";
 import styles from './Video.module.css';
 
-const Video = ({ src }) => {
+const Video = ({ src }: { src: [string, string ] }) => {
 
   const [active, setActive] = useState(false);
 

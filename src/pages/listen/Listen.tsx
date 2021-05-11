@@ -1,7 +1,7 @@
 import Video from './../../components/video/Video';
 import styles from './Listen.module.css';
 
-const SRCs = [
+const SRCs: Array<[string, string]> = [
   ['under my bed', 'https://www.youtube.com/embed/hyebzZDkft4'],
   ['bulletproof', 'https://www.youtube.com/embed/lc3zcEykhgs'],
   ['mono', 'https://www.youtube.com/embed/s0eBpKdiVDQ'],
