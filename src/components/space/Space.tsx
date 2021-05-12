@@ -24,44 +24,40 @@ const Space = ({ frameSize }: any): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   useEffect(() => {
-    createItems();
-    phaseManager.action();
-    setCanvasSize();
-    draw();
-  }, [frameSize]);
+    const setCanvasSize = () => {
+      canvasRef.current.height = frameSize.height;
+      canvasRef.current.width = frameSize.width;
+    };
+    const draw: () => void = () => {
+      const ctx = canvasRef?.current?.getContext("2d");
+      if (!ctx) return;
+      ctx.clearRect(0, 0, frameSize.width, frameSize.height);
+      ctx.save();
+      drawStars(ctx, stars);
+      drawTown(ctx, town);
+      drawSpaceShip(ctx, spaceship);
+      if (clouds.length) {
+        drawClouds(ctx, clouds);
+      }
+      drawName(ctx, name);
+      ctx.restore();
+      setTimeout(draw, 20);
+    };
 
-  useEffect(() => {
-    return () => phaseManager.reset();
-  }, []);
-
-  const createItems = (): void => {
     spaceship = spaceshipFactory(frameSize);
     clouds = Cloud.createAllClouds(6, frameSize);
     stars = starsFactory(15, frameSize);
     town = townFactory(frameSize);
     name = nameFactory(frameSize);
-  };
+    phaseManager.action();
+    setCanvasSize();
+    draw();
+    
+  }, [frameSize]);
 
-  const setCanvasSize = () => {
-    canvasRef.current.height = frameSize.height;
-    canvasRef.current.width = frameSize.width;
-  };
-
-  const draw: () => void = () => {
-    const ctx = canvasRef?.current?.getContext("2d");
-    if (!ctx) return;
-    ctx.clearRect(0, 0, frameSize.width, frameSize.height);
-    ctx.save();
-    drawStars(ctx, stars);
-    drawTown(ctx, town);
-    drawSpaceShip(ctx, spaceship);
-    if (clouds.length) {
-      drawClouds(ctx, clouds);
-    }
-    drawName(ctx, name);
-    ctx.restore();
-    setTimeout(draw, 20);
-  };
+  useEffect(() => {
+    return () => phaseManager.reset();
+  }, []);
 
   return (
     <canvas
