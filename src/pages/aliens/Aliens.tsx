@@ -35,10 +35,10 @@ const ALIENS: Array<{
     role: "bass player",
   },
   {
-    name: "SERGIOTRON",
+    name: "SERGIOTRON-3000",
     photo: sergioPic,
     description:
-      "Half a high-tech robot, half not such a high-tech one. His voice is out of hearing for much dog species",
+      "From Planet-4. Half a high-tech robot, half not such a high-tech one. His voice is out of hearing range for many creature, including himself",
     role: "singer",
   },
 ];
