@@ -10,3 +10,7 @@
 .container a {
   text-decoration: none;
 }
+
+.active {
+  color: red;
+}

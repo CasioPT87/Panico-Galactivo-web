@@ -13,22 +13,22 @@ import './App.css';
 function App() {
 
   return (
-    <div className='container font-face-joystix u--red'>
-    <Router>
-      <Header />
-      <Navigation />
-        <Switch>
-          <Route path="/aliens">
-            <Aliens />
-          </Route>
-          <Route path="/music">
-            <Listen />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-    </Router>
+    <div className='app-container font-face-joystix'>
+      <Router>
+        <Header />
+        <Navigation />
+          <Switch>
+            <Route path="/aliens" strict>
+              <Aliens />
+            </Route>
+            <Route path="/music" strict>
+              <Listen />
+            </Route>
+            <Route path="/" strict>
+              <Home />
+            </Route>
+          </Switch>
+      </Router>
     </div>
   );
 }

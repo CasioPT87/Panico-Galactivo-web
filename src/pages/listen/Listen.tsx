@@ -6,7 +6,7 @@ const SRCs: Array<[string, string]> = [
   ['under my bed', 'https://www.youtube.com/embed/hyebzZDkft4'],
   ['bulletproof', 'https://www.youtube.com/embed/lc3zcEykhgs'],
   ['mono', 'https://www.youtube.com/embed/s0eBpKdiVDQ'],
-  ['pg', 'https://www.youtube.com/embed/zQrU5gK8YRI'],
+  ['panico galactico', 'https://www.youtube.com/embed/zQrU5gK8YRI'],
   ['get out', 'https://www.youtube.com/embed/Hc03jQnFRis'],
   ['castigado', 'https://www.youtube.com/embed/zhCLCD3PBU0'],
   ['cup of tea', 'https://www.youtube.com/embed/Qt8JMx6Ng_Y'],
