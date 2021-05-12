@@ -22,9 +22,26 @@
   overflow: hidden;
   left: 0;
   background-color: violet;
+  transition: left 2s;
 }
 
 .forward {
   position: fixed;
   top: 50%;
+}
+
+.position--0 {
+  left: 0;
+}
+
+.position--1 {
+  left: -100vw;
+}
+
+.position--2 {
+  left: -200vw;
+}
+
+.position--3 {
+  left: -300vw;
 }
