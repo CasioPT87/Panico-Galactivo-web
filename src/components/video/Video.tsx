@@ -20,7 +20,8 @@ const Video = ({ src, dimensions }: { src: [string, string ], dimensions: { heig
   let { height, width } = getVideoDimensions(dimensions); 
 
   return (
-    <>
+    <div className={styles.container}>
+      <h3>{src[0]}</h3>
       <div key={src[1]} className={!active ? styles.hidden : styles.video}>  
         <iframe
 
@@ -40,7 +41,7 @@ const Video = ({ src, dimensions }: { src: [string, string ], dimensions: { heig
           width={100}
         />
       </div>
-    </>
+    </div>
   )
 }
 

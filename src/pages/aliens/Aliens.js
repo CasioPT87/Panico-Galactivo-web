@@ -1,50 +1,30 @@
-import background from './../../assets/images/background-1.png';
+import React from 'react';
+import wayne from '../../assets/images/wayne rainey.jpeg';
 import styles from './Aliens.module.css';
 
 const Aliens = () => {
   return (
-    <div className={styles.parallax}>
-      <div className={styles.video}>
-        <iframe
-         src="https://www.youtube.com/embed/udQpHFuUqus"
-         frameborder="0"
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-         allowfullscreen>
-        </iframe>
+    <div className={styles.wrapper}>
+      <div className={styles.sergio}>
+        <div className={styles.container}>
+          <img src={wayne} />
+          <p>this is the description of mark</p>
+        </div>
+        <div className={styles.container}>
+          <img src={wayne} />
+          <p>this is the description of ernie</p>
+        </div>
+        <div className={styles.container}>
+          <img src={wayne} />
+          <p>this is the description of dani</p>
+        </div>
+        <div className={styles.container}>
+          <img src={wayne} />
+          <p>this is the description of pepe</p>
+        </div>
       </div>
-      <div className={styles.video}>
-        <iframe
-         width="560"
-         height="315"
-         src="https://www.youtube.com/embed/udQpHFuUqus"
-         title="YouTube video player" frameborder="0"
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-         allowfullscreen>
-        </iframe>
-      </div>
-      <div className={styles.video}>
-        <iframe
-         width="560"
-         height="315"
-         src="https://www.youtube.com/embed/udQpHFuUqus"
-         title="YouTube video player" frameborder="0"
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-         allowfullscreen>
-        </iframe>
-      </div>
-      <div className={styles.video}>
-        <iframe
-         width="560"
-         height="315"
-         src="https://www.youtube.com/embed/udQpHFuUqus"
-         title="YouTube video player" frameborder="0"
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-         allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-
-    
+      <div className={styles.forward} onClick={() => alert('eooo')}>forward</div>
+    </div>  
   )
 };
 

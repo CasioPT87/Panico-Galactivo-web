@@ -1,18 +1,30 @@
-
-.parallax {
-  perspective: 1px;
+.wrapper {
+  top: 0;
+  left: 0;
   height: calc(100vh - 100px - 40px);
-  overflow-x: hidden;
-  overflow-y: auto;
-   /* The image used */
-  background-image: url('./../../assets/images/background-1.png');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  width: 100vw;
+  background-color: orange;
 }
 
-.video {
-  display: block;
-  padding: 20vh 0;
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  width: 100vw;
+  background-color: rebeccapurple;
+}
+
+.sergio {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 400vw;
+  overflow: hidden;
+  left: 0;
+  background-color: violet;
+}
+
+.forward {
+  position: fixed;
+  top: 50%;
 }
