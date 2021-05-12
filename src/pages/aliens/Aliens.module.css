@@ -3,31 +3,40 @@
   left: 0;
   height: calc(100vh - 100px - 40px);
   width: 100vw;
-  background-color: orange;
+  background-image: url('./../../assets/images/background-2.png');
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  padding-top: 40px;
-  width: 100vw;
-  background-color: rebeccapurple;
-}
-
-.sergio {
   display: flex;
   position: relative;
   height: 100%;
   width: 400vw;
   overflow: hidden;
   left: 0;
-  background-color: violet;
   transition: left 2s;
 }
 
-.forward {
+.arrow {
   position: fixed;
   top: 50%;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  background: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .arrow {
+    font-size: 20px;
+  }
+}
+
+.backward {
+  left: 0;
+}
+
+.forward {
+ right: 0;
 }
 
 .position--0 {
