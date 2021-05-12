@@ -21,7 +21,7 @@ export default class Cloud extends PhaseClass {
   constructor(id: number, frameSize: any) {
     super();
     this.id = id;
-    this.speedRatio = 3;
+    this.speedRatio = 4;
     this.speedY = 5;
     this.speedX = this.speedY / this.speedRatio;
     this.iterations = 0;
@@ -92,16 +92,16 @@ export default class Cloud extends PhaseClass {
     return this;
   }
 
-  static createAllClouds(numberOfClouds: number, CANVAS_SIZE: any): Clouds {
+  static createAllClouds(numberOfClouds: number, frameSize: any): Clouds {
     phaseManager.numberOfClouds = numberOfClouds;
-    return cloudFactory(numberOfClouds, CANVAS_SIZE);
+    return cloudFactory(numberOfClouds, frameSize);
   }
 }
 
 export type Clouds = Array<Cloud>;
 
-const cloudFactory: (qtty: number, CANVAS_SIZE: any) => Clouds = (qtty, CANVAS_SIZE) => {
+const cloudFactory: (qtty: number, frameSize: any) => Clouds = (qtty, frameSize) => {
   return Array(qtty).fill(null).map((x, i) => {
-    return new Cloud(i, CANVAS_SIZE).loadImage();
+    return new Cloud(i, frameSize).loadImage();
   });
 };

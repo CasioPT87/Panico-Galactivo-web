@@ -1,4 +1,3 @@
-import { phaseManager } from './../../Space';
 import panico_1 from '../../../../assets/images/panico_1.png';
 import panico_2 from '../../../../assets/images/panico_2.png';
 import panico_3 from '../../../../assets/images/panico_3.png';
@@ -51,8 +50,8 @@ export class Name {
   }
 }
 
-const nameFactory: (CANVAS_SIZE: any) => Name = (CANVAS_SIZE) => {
-  return new Name(CANVAS_SIZE).loadImage();
+const nameFactory: (frameSize: any) => Name = (frameSize) => {
+  return new Name(frameSize).loadImage();
 }
 
 export default nameFactory;

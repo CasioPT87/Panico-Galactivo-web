@@ -7,25 +7,29 @@ import erniePic from '../../assets/images/ernie.png';
 import sergioPic from '../../assets/images/sergio.png';
 import styles from './Aliens.module.css';
 
-const ALIENS: Array<{ name: string, photo: string, description: string }> = [
+const ALIENS: Array<{ name: string, photo: string, description: string, role: string }> = [
   {
      name: 'MARKTHULHU',
      photo: markPic,
-     description: 'From the deepest of an unknown system. Be careful, bites. You have been warned'
+     description: 'From the deepest of an unknown system. Be careful, bites. You have been warned',
+     role: 'guitar plater'
   },
   {
      name: 'DANIERLGH',
      photo: daniPic,
-     description: 'Climbs the walls with no effort. Like a gecko... but from Mars'
+     description: 'Climbs the walls with no effort. Like a gecko... but from Mars',
+     role: 'bass player'
   },
   { 
     name: 'ERNIESTURION',
     photo: erniePic,
-    description: 'Plays drums faster than the speed of light. And keeps the tempo too'
+    description: 'Plays drums faster than the speed of light. And keeps the tempo too',
+    role: 'bass player'
   },
   { name: 'SERGIOTRON',
     photo: sergioPic,
-    description: 'Half a high-tech robot, half not such a high-tech one. His voice is out of hearing for much dog species'
+    description: 'Half a high-tech robot, half not such a high-tech one. His voice is out of hearing for much dog species',
+    role: 'singer'
   }
 ]
 

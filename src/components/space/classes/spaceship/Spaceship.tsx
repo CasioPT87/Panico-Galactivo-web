@@ -77,7 +77,6 @@ export class Spaceship extends PhaseClass {
   updatePosition(): void {
     if (phaseManager) {
       if (phaseManager.isPhase('initial')) {
-        console.log(this.hasPositioned())
         this.positioning();
         if (this.hasPositioned()) phaseManager.setPhase('approaching');
       } 
@@ -107,8 +106,8 @@ export class Spaceship extends PhaseClass {
   }
 }
 
-const spaceshipFactory: (CANVAS_SIZE: any) => Spaceship = (CANVAS_SIZE) => {
-  return new Spaceship(CANVAS_SIZE).loadImage();
+const spaceshipFactory: (frameSize: any) => Spaceship = (frameSize) => {
+  return new Spaceship(frameSize).loadImage();
 }
 
 export default spaceshipFactory;

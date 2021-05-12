@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Loader from "react-loader-spinner";
 import styles from './Video.module.css';
 
@@ -24,7 +24,7 @@ const Video = ({ src, dimensions }: { src: [string, string ], dimensions: { heig
       <h3>{src[0]}</h3>
       <div key={src[1]} className={!active ? styles.hidden : styles.video}>  
         <iframe
-
+          title={src[0]}
           src={src[1]}
           width={width} height={height}
           frameBorder="0"

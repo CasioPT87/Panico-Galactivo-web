@@ -53,8 +53,8 @@ export class Town {
   }
 }
 
-const townFactory: (CANVAS_SIZE: any) => Town = (CANVAS_SIZE) => {
-  return new Town(CANVAS_SIZE).loadImage();
+const townFactory: (frameSize: any) => Town = (frameSize) => {
+  return new Town(frameSize).loadImage();
 }
 
 export default townFactory;
