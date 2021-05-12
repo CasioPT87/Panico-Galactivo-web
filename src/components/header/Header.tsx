@@ -1,7 +1,7 @@
 import Typing from "../typing/Typing";
 import styles from "./Header.module.css";
 
-export default () => {
+const Header = () => {
   return (
     <header className={styles.container}>
       <h1 className={styles.title}>
@@ -10,3 +10,5 @@ export default () => {
     </header>
   );
 };
+
+export default Header;

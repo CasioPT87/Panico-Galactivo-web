@@ -1,6 +1,6 @@
 import styles from "./Alien.module.css";
 
-export default ({
+const Alien = ({
   alien,
 }: {
   alien: { name: string; photo: string; description: string; role: string };
@@ -17,3 +17,5 @@ export default ({
     </div>
   );
 };
+
+export default Alien;

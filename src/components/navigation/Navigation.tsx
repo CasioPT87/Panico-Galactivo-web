@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
 
-export default () => {
+const Navigation = () => {
   return (
     <div className={styles.container}>
       <NavLink to="/" activeClassName={styles.active} exact>
@@ -16,3 +16,5 @@ export default () => {
     </div>
   );
 };
+
+export default Navigation;

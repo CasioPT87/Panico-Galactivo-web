@@ -1,6 +1,6 @@
 import ReactTypingEffect from "react-typing-effect";
 
-export default ({ text }: { text: string }) => {
+const Typing = ({ text }: { text: string }) => {
   return (
     <ReactTypingEffect
       text={text}
@@ -16,3 +16,5 @@ export default ({ text }: { text: string }) => {
     />
   );
 };
+
+export default Typing;

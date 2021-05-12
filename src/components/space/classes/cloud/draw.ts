@@ -1,6 +1,6 @@
 import type { Clouds } from "./Cloud";
 
-export default function (ctx: any, clouds: Clouds) {
+function DrawCloud (ctx: any, clouds: Clouds) {
   clouds.forEach((cloud) => {
     cloud.updatePosition();
     ctx.save();
@@ -9,3 +9,5 @@ export default function (ctx: any, clouds: Clouds) {
     ctx.restore();
   });
 }
+
+export default DrawCloud;

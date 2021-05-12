@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Space from "./../../components/space/Space";
 import styles from "./Home.module.css";
 
-export default () => {
+const Home = () => {
   const elem = useRef<HTMLDivElement>(null!);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
@@ -18,3 +18,5 @@ export default () => {
     </div>
   );
 };
+
+export default Home;
