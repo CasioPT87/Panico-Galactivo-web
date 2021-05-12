@@ -3,7 +3,7 @@
   left: 0;
   height: calc(100vh - 100px - 40px);
   width: 100vw;
-  background-image: url('./../../assets/images/background-2.png');
+  background-image: url("./../../assets/images/background-2.png");
 }
 
 .container {
@@ -37,7 +37,7 @@
 }
 
 .forward {
- right: 0;
+  right: 0;
 }
 
 .position--0 {

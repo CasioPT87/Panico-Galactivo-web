@@ -1,2 +1,2 @@
 /// <reference types="react-scripts" />
-declare module 'react-typing-effect';
+declare module "react-typing-effect";

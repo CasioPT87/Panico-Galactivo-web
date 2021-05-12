@@ -1,6 +1,6 @@
-import { Town } from './Town';
+import { Town } from "./Town";
 
-export default function(ctx: any, town: Town | null) {
+export default function (ctx: any, town: Town | null) {
   if (town && !!town.image) {
     town.updatePosition();
     ctx.save();

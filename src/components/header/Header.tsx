@@ -1,5 +1,5 @@
-import Typing from '../typing/Typing';
-import styles from './Header.module.css';
+import Typing from "../typing/Typing";
+import styles from "./Header.module.css";
 
 export default () => {
   return (
@@ -8,5 +8,5 @@ export default () => {
         <Typing text={"panico galactico"} />
       </h1>
     </header>
-  )
-}
+  );
+};

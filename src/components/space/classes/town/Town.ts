@@ -1,8 +1,7 @@
-import { phaseManager } from './../../Space';
-import townImage from '../../../../assets/images/town.png';
+import { phaseManager } from "./../../Space";
+import townImage from "../../../../assets/images/town.png";
 
 export class Town {
-
   x: number;
   y: number;
   height: number;
@@ -23,8 +22,7 @@ export class Town {
 
   updatePosition(): void {
     if (phaseManager) {
-      if (!this.hasRaised() &&
-      phaseManager.isPhase('landing')) {
+      if (!this.hasRaised() && phaseManager.isPhase("landing")) {
         this.raise();
       }
     }
@@ -50,11 +48,11 @@ export class Town {
     };
     this.image.src = townImage;
     return this;
-  }
+  };
 }
 
 const townFactory: (frameSize: any) => Town = (frameSize) => {
   return new Town(frameSize).loadImage();
-}
+};
 
 export default townFactory;

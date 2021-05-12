@@ -1,8 +1,7 @@
-import { PhaseClass } from '../classes';
-import { clouds, phaseManager } from './../../Space';
-import cloudImage from '../../../../assets/images/cloud.png';
+import { PhaseClass } from "../classes";
+import { clouds, phaseManager } from "./../../Space";
+import cloudImage from "../../../../assets/images/cloud.png";
 export default class Cloud extends PhaseClass {
-
   id: number;
   speedRatio: number;
   speedY: number;
@@ -28,8 +27,8 @@ export default class Cloud extends PhaseClass {
     this.iterationsToDie = 3;
     this.width = Math.min(frameSize.width / 7, 100);
     this.height = this.width / 3;
-    
-    this.x = Math.random() * (frameSize.width);
+
+    this.x = Math.random() * frameSize.width;
     this.y = frameSize.height + this.height;
     this.active = false;
     this.image = null;
@@ -39,22 +38,22 @@ export default class Cloud extends PhaseClass {
 
   updatePosition() {
     if (!this.active) return;
-    
+
     this.x -= this.speedX;
     this.y -= this.speedY;
 
-    if (this.x < 0 || this.y < 0){
+    if (this.x < 0 || this.y < 0) {
       if (this.shouldDestroy()) {
         this.destroy();
       } else {
         this.resetPosition();
-      }   
+      }
     }
   }
 
   resetPosition() {
     this.iterations++;
-    this.x = Math.random() * (this.canvasSize.width);
+    this.x = Math.random() * this.canvasSize.width;
     this.y = this.canvasSize.height + this.height;
   }
 
@@ -66,7 +65,7 @@ export default class Cloud extends PhaseClass {
   }
 
   getDelay(maxMilSec: number): number {
-    return Math.random() * (maxMilSec);
+    return Math.random() * maxMilSec;
   }
 
   activate(): void {
@@ -78,7 +77,7 @@ export default class Cloud extends PhaseClass {
   }
 
   destroy() {
-    const index = clouds.findIndex(cloud => cloud.id === this.id);
+    const index = clouds.findIndex((cloud) => cloud.id === this.id);
     clouds.splice(index, 1);
     phaseManager.cloudDestroyed();
   }
@@ -86,11 +85,11 @@ export default class Cloud extends PhaseClass {
   loadImage = () => {
     this.image = new Image();
     this.image.onload = () => {
-      this.initialize()
+      this.initialize();
     };
     this.image.src = cloudImage;
     return this;
-  }
+  };
 
   static createAllClouds(numberOfClouds: number, frameSize: any): Clouds {
     phaseManager.numberOfClouds = numberOfClouds;
@@ -100,8 +99,13 @@ export default class Cloud extends PhaseClass {
 
 export type Clouds = Array<Cloud>;
 
-const cloudFactory: (qtty: number, frameSize: any) => Clouds = (qtty, frameSize) => {
-  return Array(qtty).fill(null).map((x, i) => {
-    return new Cloud(i, frameSize).loadImage();
-  });
+const cloudFactory: (qtty: number, frameSize: any) => Clouds = (
+  qtty,
+  frameSize
+) => {
+  return Array(qtty)
+    .fill(null)
+    .map((x, i) => {
+      return new Cloud(i, frameSize).loadImage();
+    });
 };

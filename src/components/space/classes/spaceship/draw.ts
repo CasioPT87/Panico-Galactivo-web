@@ -1,6 +1,6 @@
-import { Spaceship } from './Spaceship';
+import { Spaceship } from "./Spaceship";
 
-export default function(ctx: any, spaceship: Spaceship | null) {
+export default function (ctx: any, spaceship: Spaceship | null) {
   if (spaceship && !!spaceship.image) {
     spaceship.updatePosition();
     ctx.save();

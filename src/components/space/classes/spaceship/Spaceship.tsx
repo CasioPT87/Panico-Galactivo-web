@@ -1,17 +1,16 @@
-import { PhaseClass } from '../classes';
-import { phaseManager } from './../../Space';
-import spaceshipImage from '../../../../assets/images/spaceship.png';
+import { PhaseClass } from "../classes";
+import { phaseManager } from "./../../Space";
+import spaceshipImage from "../../../../assets/images/spaceship.png";
 
 export class Spaceship extends PhaseClass {
-
-  height:number;
-  width:number;
-  _x:number;
-  _y:number;
-  x:number;
-  y:number;
-  speedX:number;
-  speedY:number;
+  height: number;
+  width: number;
+  _x: number;
+  _y: number;
+  x: number;
+  y: number;
+  speedX: number;
+  speedY: number;
   active: boolean;
   image: HTMLImageElement | null;
   canvasSize: any;
@@ -20,14 +19,14 @@ export class Spaceship extends PhaseClass {
     super();
     this.width = Math.min(frameSize.width / 5, 150);
     this.height = this.width * 0.8;
-    this._x = - this.width;
-    this._y = - this.height;
+    this._x = -this.width;
+    this._y = -this.height;
     this.x = this._x;
     this.y = this._y;
     this.speedX = 0;
     this.speedY = 0;
     this.active = false;
-    this.image = null; 
+    this.image = null;
     this.canvasSize = frameSize;
   }
 
@@ -61,7 +60,7 @@ export class Spaceship extends PhaseClass {
 
   hasPositioned() {
     if (this.canvasSize.height <= 0) return false;
-    return this.y + (this.height / 2) >= this.canvasSize.height / 2;
+    return this.y + this.height / 2 >= this.canvasSize.height / 2;
   }
 
   hasLanded() {
@@ -76,22 +75,22 @@ export class Spaceship extends PhaseClass {
 
   updatePosition(): void {
     if (phaseManager) {
-      if (phaseManager.isPhase('initial')) {
+      if (phaseManager.isPhase("initial")) {
         this.positioning();
-        if (this.hasPositioned()) phaseManager.setPhase('approaching');
-      } 
-      if (phaseManager.isPhase('approaching')) this.vibrate();
-      if (phaseManager.isPhase('landing')) {
+        if (this.hasPositioned()) phaseManager.setPhase("approaching");
+      }
+      if (phaseManager.isPhase("approaching")) this.vibrate();
+      if (phaseManager.isPhase("landing")) {
         this.land();
         if (this.hasLanded()) {
-          phaseManager.setPhase('landed');
+          phaseManager.setPhase("landed");
         }
       }
     }
   }
 
   getNewSpeed(range: number = 4): void {
-    const min = -range / 2
+    const min = -range / 2;
     this.speedX = Math.random() * range + min;
     this.speedY = Math.random() * range + min;
   }
@@ -103,11 +102,11 @@ export class Spaceship extends PhaseClass {
     };
     this.image.src = spaceshipImage;
     return this;
-  }
+  };
 }
 
 const spaceshipFactory: (frameSize: any) => Spaceship = (frameSize) => {
   return new Spaceship(frameSize).loadImage();
-}
+};
 
 export default spaceshipFactory;

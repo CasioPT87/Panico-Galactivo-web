@@ -1,10 +1,10 @@
-import ReactTypingEffect from 'react-typing-effect';
+import ReactTypingEffect from "react-typing-effect";
 
 export default ({ text }: { text: string }) => {
   return (
     <ReactTypingEffect
       text={text}
-      cursor={'>'}
+      cursor={">"}
       cursorRenderer={(cursor: string): string => cursor}
       speed={10}
       eraseSpeed={0}
@@ -12,7 +12,7 @@ export default ({ text }: { text: string }) => {
       typingDelay={0}
       displayTextRenderer={(text: string): string => {
         return text;
-      }}        
+      }}
     />
   );
 };
