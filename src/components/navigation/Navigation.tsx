@@ -3,7 +3,7 @@ import styles from "./Navigation.module.css";
 
 const Navigation = () => {
   return (
-    <div className={styles.container}>
+    <nav className={styles.container}>
       <NavLink to="/" activeClassName={styles.active} exact>
         Home
       </NavLink>
@@ -13,7 +13,7 @@ const Navigation = () => {
       <NavLink to="/music" activeClassName={styles.active} exact>
         Listen
       </NavLink>
-    </div>
+    </nav>
   );
 };
 

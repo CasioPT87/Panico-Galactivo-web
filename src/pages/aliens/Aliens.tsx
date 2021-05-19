@@ -18,7 +18,7 @@ const ALIENS: Array<{
     photo: markPic,
     description:
       "From the deepest of an unknown system. Be careful, bites. You have been warned",
-    role: "guitar plater",
+    role: "guitar player",
   },
   {
     name: "DANIERLGH",
@@ -32,7 +32,7 @@ const ALIENS: Array<{
     photo: erniePic,
     description:
       "Plays drums faster than the speed of light. And keeps the tempo too",
-    role: "bass player",
+    role: "drum player",
   },
   {
     name: "SERGIOTRON-3000",
@@ -53,10 +53,10 @@ const Aliens = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div data-testid="members-container" className={styles.wrapper}>
       <div className={cx(styles.container, styles["position--" + position])}>
         {ALIENS.map((alien) => (
-          <Alien alien={alien} />
+          <Alien key={alien.role} alien={alien} />
         ))}
       </div>
       <div
