@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="app-container font-face-joystix">
+    <div data-testid='app-container' className="app-container font-face-joystix">
       <Router>
         <Header />
         <Navigation />

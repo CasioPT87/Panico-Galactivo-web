@@ -11,7 +11,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div ref={elem} className={styles.container}>
+    <div data-testid='home-container' ref={elem} className={styles.container}>
       <Space
         frameSize={{ height: dimensions.height, width: dimensions.width }}
       />
