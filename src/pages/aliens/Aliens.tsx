@@ -70,7 +70,7 @@ const Aliens = () => {
   if (!imagesLoaded) return (<div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>)
 
   return (
-    <div data-testid="members-container" className={cx(styles.wrapper, styles.background)} style={{ backgroundImage: imageLoader.images.background.src }}>
+    <div data-testid="members-container" className={cx(styles.wrapper, styles.background)} style={{ backgroundImage: `url(${imageLoader.images.background.src})` }}>
       <div className={cx(styles.container, styles["position--" + position])}>
         {ALIENS.map((alien) => (
           <Alien key={alien.role} alien={alien} photo={imageLoader.images[alien.photo]} />
