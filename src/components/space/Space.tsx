@@ -41,11 +41,11 @@ const Space = ({ frameSize }: any): JSX.Element => {
       }
       drawName(ctx, name);
       ctx.restore();
-      setTimeout(draw, 20);
+      setTimeout(draw, 10);
     };
 
     spaceship = spaceshipFactory(frameSize);
-    clouds = Cloud.createAllClouds(1, frameSize);
+    clouds = Cloud.createAllClouds(6, frameSize);
     stars = starsFactory(15, frameSize);
     town = townFactory(frameSize);
     name = nameFactory(frameSize);
