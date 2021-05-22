@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Loader from "react-loader-spinner";
+import cx from "classnames";
 import styles from "./Video.module.css";
 
 type Dimensions = {
@@ -39,7 +40,7 @@ const Video = ({
           allowFullScreen
         ></iframe>
       </div>
-      <div className={!active ? styles.spinnerContainer : styles.hidden}>
+      <div className={!active ? cx(styles.spinnerContainer, styles.video) : styles.hidden}>
         <Loader type="Puff" color="#00BFFF" height={100} width={100} />
       </div>
     </div>

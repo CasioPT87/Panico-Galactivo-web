@@ -51,6 +51,10 @@ const calculatePosition = (position: number): number => {
   return position;
 };
 
+const hideContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader) => {
+  return !imagesLoaded && !imageLoader?.images.background.complete;
+}
+
 let imageLoader: SimpleImageLoader;
 
 const Aliens = () => {
@@ -67,28 +71,35 @@ const Aliens = () => {
     ], () => setImagesLoaded(true)).loadImages();
   }, []);
 
-  if (!imagesLoaded) return (<div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>)
-
   return (
-    <div data-testid="members-container" className={cx(styles.wrapper, styles.background)} style={{ backgroundImage: `url(${imageLoader.images.background.src})` }}>
-      <div className={cx(styles.container, styles["position--" + position])}>
-        {ALIENS.map((alien) => (
-          <Alien key={alien.role} alien={alien} photo={imageLoader.images[alien.photo]} />
-        ))}
+    <>
+      {!imagesLoaded && <div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
+      <div data-testid="members-container" className={cx(styles.wrapper, styles.background, hideContent(imagesLoaded, imageLoader) ? styles.hidden : null)}>
+        {imagesLoaded &&
+          <div className={cx(styles.container, styles["position--" + position])}>
+            {ALIENS.map((alien) => (
+              <Alien key={alien.role} alien={alien} photo={imageLoader.images[alien.photo]} />
+            ))}
+          </div>
+        }
+        {imagesLoaded && (
+          <>
+            <div
+            className={cx(styles.arrow, styles.forward)}
+            onClick={() => setPosition(calculatePosition(position + 1))}
+            >
+              {">>>"}
+            </div>
+            <div
+            className={cx(styles.arrow, styles.backward)}
+            onClick={() => setPosition(calculatePosition(position - 1))}
+            >
+              {"<<<"}
+            </div>
+          </>
+        )}
       </div>
-      <div
-        className={cx(styles.arrow, styles.forward)}
-        onClick={() => setPosition(calculatePosition(position + 1))}
-      >
-        {">>>"}
-      </div>
-      <div
-        className={cx(styles.arrow, styles.backward)}
-        onClick={() => setPosition(calculatePosition(position - 1))}
-      >
-        {"<<<"}
-      </div>
-    </div>
+    </>
   );
 };
 
