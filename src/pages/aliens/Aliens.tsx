@@ -43,14 +43,14 @@ const ALIENS: Array<{
   },
 ];
 
+const calculatePosition = (position: number): number => {
+  if (position > 3) return 0;
+  if (position < 0) return 3;
+  return position;
+};
+
 const Aliens = () => {
   const [position, setPosition] = useState(0);
-
-  const calculatePosition = (position: number): number => {
-    if (position > 3) return 0;
-    if (position < 0) return 3;
-    return position;
-  };
 
   return (
     <div data-testid="members-container" className={styles.wrapper}>
