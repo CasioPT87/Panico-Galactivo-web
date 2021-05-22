@@ -13,6 +13,7 @@ export default class ImageManager {
   callback: () => any;
 
   constructor(classes: Array<ValidClass>, callback: () => any) {
+    console.log('contructor')
     this.classes = classes;
     this.numImages = this.classes.reduce((totalNumber, currentClass) => {
       const numImagesInClass = currentClass.imagesUrl.length;
@@ -23,6 +24,7 @@ export default class ImageManager {
   }
 
   loadImages() {
+    console.log(this.classes)
     this.classes.forEach(classPassed => {
       classPassed.imagesUrl.forEach(imageUrl => this.loadImage(imageUrl, classPassed));;
     })
@@ -43,6 +45,7 @@ export default class ImageManager {
   }
 
   shoudCallCallback() {
+    console.log(this.imagesLoaded === this.numImages)
     return this.imagesLoaded === this.numImages;
   }
 

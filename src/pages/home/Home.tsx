@@ -11,9 +11,9 @@ const Home = () => {
   const elem = useRef<HTMLDivElement>(null!);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const imageManager = new ImageManager([Cloud, Spaceship, Town, Name], () => setImagesLoaded(true)).loadImages();
 
   useLayoutEffect(() => {
+    new ImageManager([Cloud, Spaceship, Town, Name], () => setImagesLoaded(true)).loadImages();
     setDimensions(elem.current.getBoundingClientRect());
   }, []);
 

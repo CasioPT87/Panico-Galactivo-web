@@ -45,7 +45,7 @@ const Space = ({ frameSize }: any): JSX.Element => {
     };
 
     spaceship = spaceshipFactory(frameSize);
-    clouds = Cloud.createAllClouds(6, frameSize);
+    clouds = Cloud.createAllClouds(1, frameSize);
     stars = starsFactory(15, frameSize);
     town = townFactory(frameSize);
     name = nameFactory(frameSize);

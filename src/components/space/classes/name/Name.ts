@@ -14,9 +14,8 @@ export class Name {
   y: number;
   height: number;
   width: number;
-  imageCollection: Array<HTMLImageElement>;
-  image: HTMLImageElement | null;
   addEventListener: any;
+  imageIndex: number | null;
 
   constructor(frameSize: any) {
     const marginTop = frameSize.width * 0.05;
@@ -25,36 +24,31 @@ export class Name {
     this.y = marginTop;
     this.width = frameSize.width - 2 * marginSide;
     this.height = this.width / 8;
-    this.imageCollection = [];
-    this.image = null;
+    this.imageIndex = null;
     window.addEventListener("landed", () => this.show());
   }
 
-  loadImage = (): Name => {
-    IMAGE_ASSETS.forEach((image_asset) => {
-      const image = new Image();
-      image.onload = () => {
-        this.imageCollection.push(image);
-      };
-      image.src = image_asset;
-    });
-    return this;
-  };
-
-  show(index = 0) {
-    if (index >= this.imageCollection.length) {
-      index = 0;
+  show() {
+    if (this.imageIndex === null) return;
+    if (this.imageIndex >= Name.images.length) {
+      this.imageIndex = 0;
     }
-    this.image = this.imageCollection[index];
+
     setTimeout(() => {
-      index++;
-      this.show(index);
+      if (this.imageIndex === null) return;
+      this.imageIndex++;
+      this.show();
     }, 100);
+  }
+
+  get image(): HTMLImageElement | null {
+    if (this.imageIndex === null) return null;
+    return Name.images[this.imageIndex];
   }
 }
 
 const nameFactory: (frameSize: any) => Name = (frameSize) => {
-  return new Name(frameSize).loadImage();
+  return new Name(frameSize);
 };
 
 export default nameFactory;
