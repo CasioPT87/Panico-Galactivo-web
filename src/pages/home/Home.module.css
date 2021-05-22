@@ -2,3 +2,17 @@
   height: calc(100vh - 100px - 40px);
   width: 100%;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+}
+
+.loading p {
+  font-size: 2em;
+  padding: 0;
+  margin: 0;
+}

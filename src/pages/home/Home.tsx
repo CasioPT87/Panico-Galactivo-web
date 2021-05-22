@@ -5,6 +5,7 @@ import { Spaceship } from '../../components/space/classes/spaceship/Spaceship';
 import { Town } from '../../components/space/classes/town/Town';
 import { Name } from '../../components/space/classes/name/Name';
 import ImageManager from "../../assets/javascript/ImageManager";
+import cx from "classnames";
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
     setDimensions(elem.current.getBoundingClientRect());
   }, []);
 
-  if (!imagesLoaded) return (<div ref={elem} className={styles.container}>loading</div>)
+  if (!imagesLoaded) return (<div ref={elem} className={cx(styles.container, styles.loading)}><p>loading...</p></div>)
 
   return (
     <div data-testid='home-container' className={styles.container}>
