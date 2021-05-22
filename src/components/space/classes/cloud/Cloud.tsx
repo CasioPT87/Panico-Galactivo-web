@@ -34,9 +34,11 @@ export default class Cloud {
     this.active = false;
     this.delayTimeout = null;
     this.canvasSize = frameSize;
+    setTimeout(() => this.active = true, Cloud.getDelay(3000))
   }
 
-  updatePosition() {
+  updatePosition(): void {
+    if (!this.active) return;
     this.x -= this.speedX;
     this.y -= this.speedY;
 
@@ -55,7 +57,7 @@ export default class Cloud {
     this.y = this.canvasSize.height + this.height;
   }
 
-  getDelay(maxMilSec: number): number {
+  static getDelay(maxMilSec: number): number {
     return Math.random() * maxMilSec;
   }
 
