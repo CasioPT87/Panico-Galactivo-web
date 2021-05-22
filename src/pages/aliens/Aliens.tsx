@@ -51,7 +51,7 @@ const calculatePosition = (position: number): number => {
   return position;
 };
 
-let imageLoader: any;
+let imageLoader: SimpleImageLoader;
 
 const Aliens = () => {
   const [position, setPosition] = useState(0);

@@ -4,14 +4,21 @@ import { Town } from '../../components/space/classes/town/Town';
 import { Name } from '../../components/space/classes/name/Name';
 
 type ValidClass = typeof Cloud | typeof Spaceship | typeof Town | typeof Name;
+type SimpleImageData = {
+  name: string,
+  url: string
+}
+type SimpleLoadedImages = {
+  [index: string]: HTMLImageElement
+}
 export class SimpleImageLoader {
-  imagesData: any;
+  imagesData: Array<SimpleImageData>;
   numImages: number;
   imagesLoaded: number;
-  images: any;
+  images: SimpleLoadedImages;
   callback: () => any;
 
-  constructor(imagesData: any, callback: () => any) {
+  constructor(imagesData: Array<SimpleImageData>, callback: () => any) {
     this.imagesData = imagesData;
     this.numImages = imagesData.length;
     this.imagesLoaded = 0;
@@ -19,12 +26,12 @@ export class SimpleImageLoader {
     this.callback = callback;
   }
 
-  loadImages() {
-    this.imagesData.forEach((imageData: any) => this.loadImage(imageData));
+  loadImages(): this {
+    this.imagesData.forEach((imageData: SimpleImageData) => this.loadImage(imageData));
     return this;
   }
 
-  loadImage(imageData: any) {
+  loadImage(imageData: SimpleImageData) {
     const image = new Image();
     image.onload = () => {
       this.imageLoaded(imageData, image);
@@ -32,7 +39,7 @@ export class SimpleImageLoader {
     image.src = imageData.url;
   }
 
-  imageLoaded(imageData: any, image: HTMLImageElement) {
+  imageLoaded(imageData: SimpleImageData, image: HTMLImageElement) {
     this.imagesLoaded++;
     this.images = {
       ...this.images,
@@ -41,11 +48,11 @@ export class SimpleImageLoader {
     if (this.shoudCallCallback()) this.callCallback();
   }
 
-  shoudCallCallback() {
+  shoudCallCallback(): boolean {
     return this.imagesLoaded === this.numImages;
   }
 
-  callCallback() {
+  callCallback(): void {
     this.callback();
   }
 }
