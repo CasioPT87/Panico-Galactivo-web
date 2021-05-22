@@ -1,8 +1,11 @@
-import { PhaseClass } from "../classes";
 import { phaseManager } from "./../../Space";
 import spaceshipImage from "../../../../assets/images/spaceship.png";
 
-export class Spaceship extends PhaseClass {
+export class Spaceship {
+
+  static imagesUrl = [spaceshipImage];
+  static images = [] as Array<HTMLImageElement>;
+
   height: number;
   width: number;
   _x: number;
@@ -12,11 +15,9 @@ export class Spaceship extends PhaseClass {
   speedX: number;
   speedY: number;
   active: boolean;
-  image: HTMLImageElement | null;
   canvasSize: any;
 
   constructor(frameSize: any) {
-    super();
     this.width = Math.min(frameSize.width / 5, 150);
     this.height = this.width * 0.8;
     this._x = -this.width;
@@ -26,7 +27,6 @@ export class Spaceship extends PhaseClass {
     this.speedX = 0;
     this.speedY = 0;
     this.active = false;
-    this.image = null;
     this.canvasSize = frameSize;
   }
 
@@ -95,18 +95,13 @@ export class Spaceship extends PhaseClass {
     this.speedY = Math.random() * range + min;
   }
 
-  loadImage = (): Spaceship => {
-    this.image = new Image();
-    this.image.onload = () => {
-      //
-    };
-    this.image.src = spaceshipImage;
-    return this;
-  };
+  get image(): HTMLImageElement | void {
+    return Spaceship.images[0];
+  }
 }
 
 const spaceshipFactory: (frameSize: any) => Spaceship = (frameSize) => {
-  return new Spaceship(frameSize).loadImage();
+  return new Spaceship(frameSize);
 };
 
 export default spaceshipFactory;

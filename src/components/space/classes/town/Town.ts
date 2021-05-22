@@ -2,12 +2,15 @@ import { phaseManager } from "./../../Space";
 import townImage from "../../../../assets/images/town.png";
 
 export class Town {
+
+  static imagesUrl = [townImage];
+  static images = [] as Array<HTMLImageElement>;
+
   x: number;
   y: number;
   height: number;
   width: number;
   speedY: number;
-  image: HTMLImageElement | null;
   frameHeight: number;
 
   constructor(frameSize: any) {
@@ -16,7 +19,6 @@ export class Town {
     this.height = Math.min(frameSize.height, frameSize.width) * 0.5;
     this.width = Math.max(frameSize.height * 2, frameSize.width);
     this.speedY = 0;
-    this.image = null;
     this.frameHeight = frameSize.height;
   }
 
@@ -41,18 +43,13 @@ export class Town {
     this.speedY = -3;
   }
 
-  loadImage = (): Town => {
-    this.image = new Image();
-    this.image.onload = () => {
-      //
-    };
-    this.image.src = townImage;
-    return this;
-  };
+  get image(): HTMLImageElement | void {
+    return Town.images[0];
+  }
 }
 
 const townFactory: (frameSize: any) => Town = (frameSize) => {
-  return new Town(frameSize).loadImage();
+  return new Town(frameSize);
 };
 
 export default townFactory;

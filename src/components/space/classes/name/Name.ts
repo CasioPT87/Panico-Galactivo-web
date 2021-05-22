@@ -6,6 +6,10 @@ import panico_4 from "../../../../assets/images/panico_4.png";
 const IMAGE_ASSETS = [panico_1, panico_2, panico_3, panico_4];
 
 export class Name {
+
+  static imagesUrl = IMAGE_ASSETS;
+  static images = [] as Array<HTMLImageElement>;
+
   x: number;
   y: number;
   height: number;

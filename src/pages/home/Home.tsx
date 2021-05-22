@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import Space from "./../../components/space/Space";
 import Cloud from "./../../components/space/classes/cloud/Cloud";
+import { Spaceship } from '../../components/space/classes/spaceship/Spaceship';
+import { Town } from '../../components/space/classes/town/Town';
+import { Name } from '../../components/space/classes/name/Name';
 import ImageManager from "../../assets/javascript/ImageManager";
 import styles from "./Home.module.css";
 
@@ -8,7 +11,7 @@ const Home = () => {
   const elem = useRef<HTMLDivElement>(null!);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const imageManager = new ImageManager([Cloud], () => setImagesLoaded(true)).loadImages();
+  const imageManager = new ImageManager([Cloud, Spaceship, Town, Name], () => setImagesLoaded(true)).loadImages();
 
   useLayoutEffect(() => {
     setDimensions(elem.current.getBoundingClientRect());

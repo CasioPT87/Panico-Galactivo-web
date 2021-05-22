@@ -16,7 +16,6 @@ export default class Cloud {
   x: number;
   y: number;
   active: boolean;
-  image: HTMLImageElement | null;
   delayTimeout: ReturnType<typeof setTimeout> | null;
   canvasSize: any;
 
@@ -33,14 +32,11 @@ export default class Cloud {
     this.x = Math.random() * frameSize.width;
     this.y = frameSize.height + this.height;
     this.active = false;
-    this.image = null;
     this.delayTimeout = null;
     this.canvasSize = frameSize;
   }
 
   updatePosition() {
-    if (!this.active) return;
-
     this.x -= this.speedX;
     this.y -= this.speedY;
 
@@ -59,19 +55,8 @@ export default class Cloud {
     this.y = this.canvasSize.height + this.height;
   }
 
-  initialize() {
-    const delay = this.getDelay(3000);
-    this.delayTimeout = setTimeout(() => {
-      this.activate();
-    }, delay);
-  }
-
   getDelay(maxMilSec: number): number {
     return Math.random() * maxMilSec;
-  }
-
-  activate(): void {
-    this.active = true;
   }
 
   shouldDestroy() {
@@ -84,14 +69,9 @@ export default class Cloud {
     phaseManager.cloudDestroyed();
   }
 
-  loadImage = () => {
-    this.image = new Image();
-    this.image.onload = () => {
-      this.initialize();
-    };
-    this.image.src = cloudImage;
-    return this;
-  };
+  get image(): HTMLImageElement | void {
+    return Cloud.images[0];
+  }
 
   static createAllClouds(numberOfClouds: number, frameSize: any): Clouds {
     phaseManager.numberOfClouds = numberOfClouds;
@@ -108,6 +88,6 @@ const cloudFactory: (qtty: number, frameSize: any) => Clouds = (
   return Array(qtty)
     .fill(null)
     .map((x, i) => {
-      return new Cloud(i, frameSize).loadImage();
+      return new Cloud(i, frameSize);
     });
 };

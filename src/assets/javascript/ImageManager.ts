@@ -1,15 +1,18 @@
 import Cloud from '../../components/space/classes/cloud/Cloud';
+import { Spaceship } from '../../components/space/classes/spaceship/Spaceship';
+import { Town } from '../../components/space/classes/town/Town';
+import { Name } from '../../components/space/classes/name/Name';
 
-type ValidClass = typeof Cloud;
+type ValidClass = typeof Cloud | typeof Spaceship | typeof Town | typeof Name;
 
 export default class ImageManager {
 
-  classes: [ValidClass];
+  classes: Array<ValidClass>;
   numImages: number;
   imagesLoaded: number;
   callback: () => any;
 
-  constructor(classes: [ValidClass], callback: () => any) {
+  constructor(classes: Array<ValidClass>, callback: () => any) {
     this.classes = classes;
     this.numImages = this.classes.reduce((totalNumber, currentClass) => {
       const numImagesInClass = currentClass.imagesUrl.length;
