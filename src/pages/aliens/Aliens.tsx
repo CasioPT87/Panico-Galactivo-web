@@ -26,21 +26,21 @@ const ALIENS: Array<{
     name: "DANIERLGH",
     photo: 'daniPic',
     description:
-      "Climbs the walls with no effort. Like a gecko... but from Mars",
+      "Climbs walls with no effort. Like a gecko... but from Mars",
     role: "bass player",
   },
   {
     name: "ERNIESTURION",
     photo: 'erniePic',
     description:
-      "Plays drums faster than the speed of light. And keeps the tempo too",
+      "Plays drums faster than the speed of light. Poor human physics don't apply. Ah!, and keeps the tempo too",
     role: "drum player",
   },
   {
     name: "SERGIOTRON-3000",
     photo: 'sergioPic',
     description:
-      "From Planet-4. Half a high-tech robot, half not such a high-tech one. His voice is out of hearing range for many creature, including himself",
+      "From Planet-4. Half high-tech robot, half not such a high-tech one. His voice is out of hearing range for many creatures, including himself",
     role: "singer",
   },
 ];
