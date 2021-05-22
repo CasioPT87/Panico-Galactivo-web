@@ -20,7 +20,12 @@
   display: none;
 }
 
-.spinnerContainer {
+.loading {
   display: flex;
   justify-content: center;
+}
+
+.loading p {
+  color: red;
+  font-size: 2em;
 }

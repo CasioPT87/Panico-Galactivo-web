@@ -51,8 +51,8 @@ const calculatePosition = (position: number): number => {
   return position;
 };
 
-const hideContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader) => {
-  return !imagesLoaded && !imageLoader?.images.background.complete;
+const showContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader, imageName: string) => {
+  return imagesLoaded && imageLoader?.images[imageName].complete;
 }
 
 let imageLoader: SimpleImageLoader;
@@ -74,12 +74,13 @@ const Aliens = () => {
   return (
     <>
       {!imagesLoaded && <div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
-      <div data-testid="members-container" className={cx(styles.wrapper, styles.background, hideContent(imagesLoaded, imageLoader) ? styles.hidden : null)}>
+      <div data-testid="members-container" className={cx(styles.wrapper, styles.background, !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null)}>
         {imagesLoaded &&
           <div className={cx(styles.container, styles["position--" + position])}>
-            {ALIENS.map((alien) => (
-              <Alien key={alien.role} alien={alien} photo={imageLoader.images[alien.photo]} />
-            ))}
+            {ALIENS.map((alien) => {
+              if (!showContent(imagesLoaded, imageLoader, alien.photo)) return null;
+              return <Alien key={alien.role} alien={alien} photo={imageLoader.images[alien.photo]} />
+            })}
           </div>
         }
         {imagesLoaded && (
