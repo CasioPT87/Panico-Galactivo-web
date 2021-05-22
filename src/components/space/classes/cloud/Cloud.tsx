@@ -1,7 +1,10 @@
-import { PhaseClass } from "../classes";
 import { clouds, phaseManager } from "./../../Space";
 import cloudImage from "../../../../assets/images/cloud.png";
-export default class Cloud extends PhaseClass {
+export default class Cloud {
+
+  static imagesUrl = [cloudImage];
+  static images = [] as Array<HTMLImageElement>;
+
   id: number;
   speedRatio: number;
   speedY: number;
@@ -18,7 +21,6 @@ export default class Cloud extends PhaseClass {
   canvasSize: any;
 
   constructor(id: number, frameSize: any) {
-    super();
     this.id = id;
     this.speedRatio = 4;
     this.speedY = 5;
