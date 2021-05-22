@@ -44,7 +44,6 @@ class PhaseManager {
   }
 
   nextPhase(index: number): void {
-    console.log("next phase");
     this.state = STATES[index];
     if (index < STATES.length - 1) {
       this.action();

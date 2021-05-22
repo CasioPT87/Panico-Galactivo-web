@@ -25,7 +25,12 @@ export class Name {
     this.width = frameSize.width - 2 * marginSide;
     this.height = this.width / 8;
     this.imageIndex = null;
-    window.addEventListener("landed", () => this.show());
+    window.addEventListener("landed", () => this.initialize());
+  }
+
+  initialize() {
+    this.imageIndex = 0;
+    this.show();
   }
 
   show() {

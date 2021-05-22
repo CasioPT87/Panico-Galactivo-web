@@ -20,6 +20,8 @@ let stars: Stars = [];
 let town: Town | null = null;
 let name: Name | null = null;
 
+const REFRESH_ANIMATION_SPEED_MS = 7;
+
 const Space = ({ frameSize }: any): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
@@ -41,7 +43,7 @@ const Space = ({ frameSize }: any): JSX.Element => {
       }
       drawName(ctx, name);
       ctx.restore();
-      setTimeout(draw, 10);
+      setTimeout(draw, REFRESH_ANIMATION_SPEED_MS);
     };
 
     spaceship = spaceshipFactory(frameSize);
