@@ -4,6 +4,51 @@ import { Town } from '../../components/space/classes/town/Town';
 import { Name } from '../../components/space/classes/name/Name';
 
 type ValidClass = typeof Cloud | typeof Spaceship | typeof Town | typeof Name;
+export class SimpleImageLoader {
+  imagesData: any;
+  numImages: number;
+  imagesLoaded: number;
+  images: any;
+  callback: () => any;
+
+  constructor(imagesData: any, callback: () => any) {
+    this.imagesData = imagesData;
+    this.numImages = imagesData.length;
+    this.imagesLoaded = 0;
+    this.images = {};
+    this.callback = callback;
+  }
+
+  loadImages() {
+    this.imagesData.forEach((imageData: any) => this.loadImage(imageData));
+    return this;
+  }
+
+  loadImage(imageData: any) {
+    const image = new Image();
+    image.onload = () => {
+      this.imageLoaded(imageData, image);
+    }
+    image.src = imageData.url;
+  }
+
+  imageLoaded(imageData: any, image: HTMLImageElement) {
+    this.imagesLoaded++;
+    this.images = {
+      ...this.images,
+      [imageData.name]: image
+    }
+    if (this.shoudCallCallback()) this.callCallback();
+  }
+
+  shoudCallCallback() {
+    return this.imagesLoaded === this.numImages;
+  }
+
+  callCallback() {
+    this.callback();
+  }
+}
 
 export default class ImageManager {
 
