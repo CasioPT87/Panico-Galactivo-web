@@ -1,25 +1,27 @@
 
-import React, { useState, useEffect, FunctionComponent } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import Loading from "../loading/Loading";
-import { ImageData, Loader, LoaderType } from "../../assets/javascript/SharedTypes";
+import { Loader, LoaderType } from "../../assets/javascript/SharedTypes";
 import styles from "./Page.module.css";
 
-const showContent = (imagesLoaded: boolean, imageLoader: Loader, imageName: string) => {
+const showContent = (hasDomImages: boolean, imagesLoaded: boolean, imageLoader: Loader, imageName: string): boolean => {
+  if (!hasDomImages) return imagesLoaded
   return imagesLoaded && imageLoader?.images[imageName].complete;
 }
 
 let imageLoader: Loader;
 
 type Props = {
-  imageData: Array<ImageData>,
+  imageData: any, //Array<ImageData> | Array<DrawingImageClasses>,
   loader: LoaderType,
   extraStylesContainer?: string
-  children: JSX.Element
+  hasDomImages: boolean,
+  loadedCallback: any,
+  children: JSX.Element | false;
 }
 
-// FunctionComponent<Props>
-const Page = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: Props, ref): JSX.Element => {
+const Page = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, hasDomImages, loadedCallback, children }: Props, ref): JSX.Element => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
@@ -27,16 +29,20 @@ const Page = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extra
     imageLoader = new loader( imageData, () => setImagesLoaded(true)).loadImages();
   }, []);
 
+  useEffect(() => {
+    loadedCallback(imagesLoaded);
+  }, [imagesLoaded])
+
   return (
     <>
       <Loading ref={ref} show={!imagesLoaded} />
       <div data-testid="members-container"
       className={cx(
         styles.wrapper, styles.background,
-        !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null,
+        !showContent(hasDomImages, imagesLoaded, imageLoader, 'background') ? styles.hidden : null,
         extraStylesContainer
       )}>
-        {children}
+        {!!children && children}
       </div>
     </>
   )})

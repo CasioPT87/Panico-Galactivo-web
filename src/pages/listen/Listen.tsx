@@ -25,17 +25,18 @@ const imageData = [
 const Listen = () => {
   const elem = useRef<HTMLDivElement>(null!);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
+  const [loaded, setLoaded] = useState(false);
 
   useLayoutEffect(() => {
     setDimensions(elem.current.getBoundingClientRect());
   }, []);
 
   return (
-    <Page ref={elem} loader={SimpleImageLoader} imageData={imageData} extraStylesContainer={styles.parallax}>
+    <Page ref={elem} loader={SimpleImageLoader} imageData={imageData} extraStylesContainer={styles.parallax} hasDomImages={true} loadedCallback={setLoaded}>
       <>
-      {SRCs.map((src) => (
-        <Video key={src[0]} src={src} dimensions={dimensions} />
-      ))}
+        {SRCs.map((src) => (
+          <Video key={src[0]} src={src} dimensions={dimensions} />
+        ))}
       </>
     </Page>
   );

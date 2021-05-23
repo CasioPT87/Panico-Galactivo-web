@@ -62,6 +62,7 @@ export default class ImageManager {
   classes: Array<ValidClass>;
   numImages: number;
   imagesLoaded: number;
+  images: SimpleLoadedImages; // this is just to make Typescript happy
   callback: () => any;
 
   constructor(classes: Array<ValidClass>, callback: () => any) {
@@ -71,6 +72,8 @@ export default class ImageManager {
       return totalNumber + numImagesInClass;
     }, 0);
     this.imagesLoaded = 0;
+    this.images = {};
+
     this.callback = callback;
   }
 
@@ -78,6 +81,7 @@ export default class ImageManager {
     this.classes.forEach(classPassed => {
       classPassed.imagesUrl.forEach(imageUrl => this.loadImage(imageUrl, classPassed));;
     })
+    return this;
   }
 
   loadImage(imageUrl: string, classPassed: ValidClass) {
