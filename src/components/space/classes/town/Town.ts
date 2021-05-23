@@ -35,7 +35,6 @@ export class Town {
   }
 
   raise() {
-    console.log('raise')
     this.setLandingSpeed();
     this.y += this.speedY;
   }

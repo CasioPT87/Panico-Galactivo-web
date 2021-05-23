@@ -1,5 +1,3 @@
-import { update } from "react-spring";
-
 export class Star {
   x: number;
   y: number;
