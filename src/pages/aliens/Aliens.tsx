@@ -60,11 +60,13 @@ const Aliens = () => {
   const [position, setPosition] = useState(0);
 
   return (
-    <Page loader={SimpleImageLoader} imageData={imageData} extraStylesContainer={{}}>
+    <Page loader={SimpleImageLoader} imageData={imageData}>
+      <>
       <div className={cx(styles.container, styles["position--" + position])}>
         {ALIENS.map(alien =>  <Alien key={alien.role} alien={alien} photo={findImageDataByName(imageData, alien.photo)} /> )}
       </div>
       <Arrows position={position} setPosition={setPosition} />
+      </>
     </Page>
   );
 };

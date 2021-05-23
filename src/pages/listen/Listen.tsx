@@ -32,9 +32,11 @@ const Listen = () => {
 
   return (
     <Page ref={elem} loader={SimpleImageLoader} imageData={imageData} extraStylesContainer={styles.parallax}>
+      <>
       {SRCs.map((src) => (
         <Video key={src[0]} src={src} dimensions={dimensions} />
       ))}
+      </>
     </Page>
   );
 };

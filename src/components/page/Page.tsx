@@ -14,11 +14,12 @@ let imageLoader: Loader;
 type Props = {
   imageData: Array<ImageData>,
   loader: LoaderType,
-  extraStylesContainer: any
+  extraStylesContainer?: string
+  children: JSX.Element
 }
 
 // FunctionComponent<Props>
-const Page: any = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: any, ref): JSX.Element => {
+const Page = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: Props, ref): JSX.Element => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
