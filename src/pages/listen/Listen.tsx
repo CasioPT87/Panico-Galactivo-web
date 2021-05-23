@@ -1,9 +1,8 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import cx from "classnames";
 import Video from "./../../components/video/Video";
+import Page from "../../components/page/Page";
 import { SimpleImageLoader } from "../../assets/javascript/ImageManager";
 import background from '../../assets/images/background-1.png';
-import styles from "./Listen.module.css";
 
 const SRCs: Array<[string, string]> = [
   ["under my bed", "https://www.youtube.com/embed/hyebzZDkft4"],
@@ -18,33 +17,24 @@ const SRCs: Array<[string, string]> = [
   ["molotov", "https://www.youtube.com/embed/zheWV5K8Shg"],
 ];
 
-const showContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader, imageName: string) => {
-  return imagesLoaded && imageLoader?.images[imageName].complete;
-}
-
-let imageLoader: SimpleImageLoader;
+const imageData = [
+  { name: 'background', url: background }
+];
 
 const Listen = () => {
   const elem = useRef<HTMLDivElement>(null!);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
-  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useLayoutEffect(() => {
     setDimensions(elem.current.getBoundingClientRect());
-    imageLoader = new SimpleImageLoader([
-      { name: 'background', url: background },
-    ], () => setImagesLoaded(true)).loadImages();
   }, []);
 
   return (
-    <>
-      {!imagesLoaded && <div ref={elem} className={cx(styles.container, styles.loading)}><p>loading...</p></div>}
-      <div data-testid="listen-container" className={cx(styles.container, styles.parallax, !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null)}>
-        {SRCs.map((src) => (
-          <Video key={src[0]} src={src} dimensions={dimensions} />
-        ))}
-      </div>
-    </>
+    <Page loader={SimpleImageLoader} imageData={imageData}>
+      {SRCs.map((src) => (
+        <Video key={src[0]} src={src} dimensions={dimensions} />
+      ))}
+    </Page>
   );
 };
 

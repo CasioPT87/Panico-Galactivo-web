@@ -1,11 +1,3 @@
-.container {
-  height: calc(100vh - 100px - 40px);
-}
-
-.hidden{
-  display: none;
-}
-
 .parallax {
   overflow-x: hidden;
   overflow-y: auto;
@@ -15,18 +7,4 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  color: white;
-}
-
-.loading p {
-  font-size: 2em;
-  padding: 0;
-  margin: 0;
 }

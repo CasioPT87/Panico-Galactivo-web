@@ -13,10 +13,11 @@ let imageLoader: Loader;
 
 type Props = {
   imageData: Array<ImageData>,
-  loader: LoaderType
+  loader: LoaderType,
+  extraStylesContainer: any
 }
 
-const Page: FunctionComponent<Props> = ({ imageData, loader, children }) => {
+const Page: FunctionComponent<Props> = ({ imageData, loader, extraStylesContainer, children }) => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
@@ -27,7 +28,12 @@ const Page: FunctionComponent<Props> = ({ imageData, loader, children }) => {
   return (
     <>
       {!imagesLoaded && <div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
-      <div data-testid="members-container" className={cx(styles.wrapper, styles.background, !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null)}>
+      <div data-testid="members-container"
+      className={cx(
+        styles.wrapper, styles.background,
+        !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null,
+        extraStylesContainer
+      )}>
         {children}
       </div>
     </>
