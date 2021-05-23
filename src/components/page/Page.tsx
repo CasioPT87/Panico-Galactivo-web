@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, FunctionComponent } from "react";
 import cx from "classnames";
+import Loading from "../loading/Loading";
 import { ImageData, Loader, LoaderType } from "../../assets/javascript/SharedTypes";
 import styles from "./Page.module.css";
 
@@ -27,7 +28,7 @@ const Page: any = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, 
 
   return (
     <>
-      {!imagesLoaded && <div ref={ref} className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
+      <Loading ref={ref} show={!imagesLoaded} />
       <div data-testid="members-container"
       className={cx(
         styles.wrapper, styles.background,
