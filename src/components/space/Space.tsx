@@ -1,25 +1,18 @@
 import { useRef, useEffect } from "react";
 import phaseManager from "../../assets/javascript/PhaseManager";
-import spaceshipFactory, { Spaceship } from "./classes/spaceship/Spaceship";
-// import drawSpaceShip from "./classes/spaceship/draw";
-// import drawClouds from "./classes/cloud/draw";
+import { Spaceship } from "./classes/spaceship/Spaceship";
 import Cloud from "./classes/cloud/Cloud";
 import starsFactory from "./classes/star/Star";
 import drawStars from "./classes/star/draw";
-import townFactory, { Town } from "./classes/town/Town";
-// import drawTown from "./classes/town/draw";
-import nameFactory, { Name } from "./classes/name/Name";
-// import drawName from "./classes/name/draw";
-import { drawEntities } from "../../assets/javascript/Utils";
-import type { Clouds } from "./classes/cloud/Cloud";
+import { Town } from "./classes/town/Town";
+import { Name } from "./classes/name/Name";
+import { drawEntities, instancesFactory } from "../../assets/javascript/Utils";
 import type { Stars } from "./classes/star/Star";
+import { DrawEntity } from "../../assets/javascript/SharedTypes";
 import styles from "./Space.module.css";
 
-let spaceship: Spaceship | null = null;
-let clouds: Clouds = [];
+let drawingInstances: Array<DrawEntity> = [];
 let stars: Stars = [];
-let town: Town | null = null;
-let name: Name | null = null;
 
 const REFRESH_ANIMATION_SPEED_MS = 7;
 
@@ -27,7 +20,6 @@ const Space = ({ frameSize }: any): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   useEffect(() => {
-    console.log('hola que tal')
     const setCanvasSize = () => {
       canvasRef.current.height = frameSize.height;
       canvasRef.current.width = frameSize.width;
@@ -37,17 +29,22 @@ const Space = ({ frameSize }: any): JSX.Element => {
       if (!ctx) return;
       ctx.clearRect(0, 0, frameSize.width, frameSize.height);
       ctx.save();
-      drawEntities(ctx, [town, spaceship, ...clouds, name]);
+      drawEntities(ctx, drawingInstances);
       drawStars(ctx, stars);
       ctx.restore();
       setTimeout(draw, REFRESH_ANIMATION_SPEED_MS);
     };
 
-    spaceship = spaceshipFactory(frameSize);
-    clouds = Cloud.createAllClouds(6, frameSize);
+    drawingInstances = instancesFactory(
+    [
+      { number: 1, macroClass: Spaceship },
+      { number: 6, macroClass: Cloud },
+      { number: 1, macroClass: Town },
+      { number: 1, macroClass: Name }
+    ], 
+      frameSize
+    );
     stars = starsFactory(15, frameSize);
-    town = townFactory(frameSize);
-    name = nameFactory(frameSize);
     phaseManager.action();
     setCanvasSize();
     draw();
@@ -69,5 +66,5 @@ const Space = ({ frameSize }: any): JSX.Element => {
   );
 };
 
-export { phaseManager, clouds };
+export { phaseManager };
 export default Space;

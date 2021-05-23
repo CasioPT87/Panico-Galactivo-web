@@ -13,8 +13,9 @@ export class Town {
   speedY: number;
   frameHeight: number;
   updates: boolean;
+  active: boolean;
 
-  constructor(frameSize: any) {
+  constructor(id: number, frameSize: any) {
     this.x = 0;
     this.y = frameSize.height;
     this.height = Math.min(frameSize.height, frameSize.width) * 0.5;
@@ -22,11 +23,13 @@ export class Town {
     this.speedY = 0;
     this.frameHeight = frameSize.height;
     this.updates = true;
+    this.active = false;
   }
 
   update(): void {
     if (phaseManager) {
       if (!this.hasRaised() && phaseManager.isPhase("landing")) {
+        this.active = true;
         this.raise();
       }
     }
@@ -49,9 +52,3 @@ export class Town {
     return Town.images[0];
   }
 }
-
-const townFactory: (frameSize: any) => Town = (frameSize) => {
-  return new Town(frameSize);
-};
-
-export default townFactory;

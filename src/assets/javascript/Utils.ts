@@ -1,4 +1,4 @@
-import { ImageData, DrawEntity } from "./SharedTypes";
+import { ImageData, DrawEntity, DrawEntityType } from "./SharedTypes";
 
 export function findImageDataByName(imagesData: Array<ImageData>, name: string): string | undefined {
   const data = imagesData.find(data => data.name === name);
@@ -7,9 +7,10 @@ export function findImageDataByName(imagesData: Array<ImageData>, name: string):
 }
 
 function draw(ctx: any, entity: DrawEntity): void {
-  if (entity === null || !entity.image) return;
+  if (entity === null || !entity.image || !entity.active) return;
   if (entity.updates) entity.update();
   ctx.save();
+  if (!entity.image) debugger
   ctx.translate(entity.x, entity.y);
   ctx.drawImage(entity.image, 0, 0, entity.width, entity.height);
   ctx.restore();
@@ -20,4 +21,24 @@ export function drawEntities(ctx: any, entities: Array<DrawEntity>) {
     if(entity === null) return; 
     draw(ctx, entity);
   })
+}
+
+type FactoryParams = Array<{
+  number: number,
+  macroClass: DrawEntityType,
+  callback?: () => void
+}>
+
+export function instancesFactory(entitiesData: FactoryParams, frameSize: any): Array<DrawEntity> {
+  let instances: Array<DrawEntity> = [];
+  entitiesData.forEach((entityData) => {
+    const { number } = entityData;
+    if (number < 1) return; 
+    Array(number).fill(null).forEach((x, i) => {
+      const instance: DrawEntity = new entityData.macroClass(i, frameSize);
+      instances.push(instance);
+    })
+    if (entityData.callback) entityData.callback();
+  });
+  return instances;
 }

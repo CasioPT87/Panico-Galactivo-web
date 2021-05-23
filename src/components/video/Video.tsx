@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Loader from "react-loader-spinner";
 import cx from "classnames";
 import styles from "./Video.module.css";
 

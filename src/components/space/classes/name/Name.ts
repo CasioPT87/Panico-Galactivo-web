@@ -17,8 +17,9 @@ export class Name {
   addEventListener: any;
   imageIndex: number | null;
   updates: boolean;
+  active: boolean;
 
-  constructor(frameSize: any) {
+  constructor(id: number, frameSize: any) {
     const marginTop = frameSize.width * 0.05;
     const marginSide = frameSize.width * 0.1;
     this.x = marginSide;
@@ -27,11 +28,13 @@ export class Name {
     this.height = this.width / 8;
     this.imageIndex = null;
     this.updates = false;
+    this.active = false;
     window.addEventListener("landed", () => this.initialize());
   }
 
   initialize() {
     this.imageIndex = 0;
+    this.active = true;
     this.show();
   }
 
@@ -55,9 +58,3 @@ export class Name {
 
   update() {} // just to make typescript happy
 }
-
-const nameFactory: (frameSize: any) => Name = (frameSize) => {
-  return new Name(frameSize);
-};
-
-export default nameFactory;

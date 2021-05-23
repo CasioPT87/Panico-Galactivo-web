@@ -18,7 +18,7 @@ export class Spaceship {
   canvasSize: any;
   updates: boolean;
 
-  constructor(frameSize: any) {
+  constructor(id: number, frameSize: any) {
     this.width = Math.min(frameSize.width / 5, 150);
     this.height = this.width * 0.8;
     this._x = -this.width;
@@ -27,7 +27,7 @@ export class Spaceship {
     this.y = this._y;
     this.speedX = 0;
     this.speedY = 0;
-    this.active = false;
+    this.active = true;
     this.canvasSize = frameSize;
     this.updates = true;
   }
@@ -101,9 +101,3 @@ export class Spaceship {
     return Spaceship.images[0];
   }
 }
-
-const spaceshipFactory: (frameSize: any) => Spaceship = (frameSize) => {
-  return new Spaceship(frameSize);
-};
-
-export default spaceshipFactory;

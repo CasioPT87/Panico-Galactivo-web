@@ -13,6 +13,7 @@ export type ImageData = {
 }
 
 export type DrawEntity = Cloud | Spaceship | Town | Name | null;
+export type DrawEntityType = typeof Cloud | typeof Spaceship | typeof Town | typeof Name;
 
 export type Loader = SimpleImageLoader;
 export type LoaderType = typeof SimpleImageLoader;

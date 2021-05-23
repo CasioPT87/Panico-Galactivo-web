@@ -1,4 +1,4 @@
-import { clouds, phaseManager } from "./../../Space";
+import { phaseManager } from "./../../Space";
 import cloudImage from "../../../../assets/images/cloud.png";
 export default class Cloud {
 
@@ -68,30 +68,12 @@ export default class Cloud {
   }
 
   destroy() {
-    const index = clouds.findIndex((cloud) => cloud.id === this.id);
-    clouds.splice(index, 1);
-    phaseManager.cloudDestroyed();
+    this.active = false;
   }
 
   get image(): HTMLImageElement | void {
     return Cloud.images[0];
   }
-
-  static createAllClouds(numberOfClouds: number, frameSize: any): Clouds {
-    phaseManager.numberOfClouds = numberOfClouds;
-    return cloudFactory(numberOfClouds, frameSize);
-  }
 }
 
 export type Clouds = Array<Cloud>;
-
-const cloudFactory: (qtty: number, frameSize: any) => Clouds = (
-  qtty,
-  frameSize
-) => {
-  return Array(qtty)
-    .fill(null)
-    .map((x, i) => {
-      return new Cloud(i, frameSize);
-    });
-};
