@@ -12,7 +12,7 @@ export type ImageData = {
   url: string
 }
 
-export type DrawEntity = Cloud | Spaceship | Town | Name | Star;
+export type DrawEntity = Cloud | Spaceship | Town | Name | null;
 
 export type Loader = SimpleImageLoader;
 export type LoaderType = typeof SimpleImageLoader;

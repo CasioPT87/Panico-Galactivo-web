@@ -12,6 +12,7 @@ export class Town {
   width: number;
   speedY: number;
   frameHeight: number;
+  updates: boolean;
 
   constructor(frameSize: any) {
     this.x = 0;
@@ -20,6 +21,7 @@ export class Town {
     this.width = Math.max(frameSize.height * 2, frameSize.width);
     this.speedY = 0;
     this.frameHeight = frameSize.height;
+    this.updates = true;
   }
 
   update(): void {

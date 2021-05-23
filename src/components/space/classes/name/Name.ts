@@ -16,6 +16,7 @@ export class Name {
   width: number;
   addEventListener: any;
   imageIndex: number | null;
+  updates: boolean;
 
   constructor(frameSize: any) {
     const marginTop = frameSize.width * 0.05;
@@ -25,6 +26,7 @@ export class Name {
     this.width = frameSize.width - 2 * marginSide;
     this.height = this.width / 8;
     this.imageIndex = null;
+    this.updates = false;
     window.addEventListener("landed", () => this.initialize());
   }
 
@@ -50,6 +52,8 @@ export class Name {
     if (this.imageIndex === null) return null;
     return Name.images[this.imageIndex];
   }
+
+  update() {} // just to make typescript happy
 }
 
 const nameFactory: (frameSize: any) => Name = (frameSize) => {

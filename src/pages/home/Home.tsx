@@ -22,9 +22,11 @@ const Home = () => {
     <>
       <Loading ref={elem} show={!imagesLoaded} />
       <div data-testid='home-container' className={styles.container}>
-        <Space
-          frameSize={{ height: dimensions.height, width: dimensions.width }}
-        />
+        {imagesLoaded &&
+          <Space
+            frameSize={{ height: dimensions.height, width: dimensions.width }}
+          />
+        }
       </div>
     </>
   );

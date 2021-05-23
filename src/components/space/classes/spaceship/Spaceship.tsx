@@ -16,6 +16,7 @@ export class Spaceship {
   speedY: number;
   active: boolean;
   canvasSize: any;
+  updates: boolean;
 
   constructor(frameSize: any) {
     this.width = Math.min(frameSize.width / 5, 150);
@@ -28,6 +29,7 @@ export class Spaceship {
     this.speedY = 0;
     this.active = false;
     this.canvasSize = frameSize;
+    this.updates = true;
   }
 
   positioning() {

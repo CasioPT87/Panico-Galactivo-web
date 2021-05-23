@@ -18,6 +18,7 @@ export default class Cloud {
   active: boolean;
   delayTimeout: ReturnType<typeof setTimeout> | null;
   canvasSize: any;
+  updates: boolean;
 
   constructor(id: number, frameSize: any) {
     this.id = id;
@@ -34,6 +35,7 @@ export default class Cloud {
     this.active = false;
     this.delayTimeout = null;
     this.canvasSize = frameSize;
+    this.updates = true;
     setTimeout(() => this.active = true, Cloud.getDelay(3000))
   }
 

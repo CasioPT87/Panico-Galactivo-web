@@ -1,9 +1,11 @@
+import { update } from "react-spring";
+
 export class Star {
   x: number;
   y: number;
   height: number;
   width: number;
-
+  
   constructor(frameSize: any) {
     this.x = Math.random() * frameSize.width;
     this.y = Math.random() * frameSize.height;

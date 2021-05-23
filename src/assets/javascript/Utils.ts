@@ -6,20 +6,18 @@ export function findImageDataByName(imagesData: Array<ImageData>, name: string):
   return undefined;
 }
 
-export function draw(ctx: any, entity: DrawEntity, hasImage: boolean = true,  updates: boolean = true): void {
-  if (!hasImage) {
-    drawContext(ctx, entity);
-  } else if (!!entity.image) {
-    if (entity) entity.update();
-    drawContext(ctx, entity);
-  }
-}
-
-const drawContext = (ctx: any, entity: DrawEntity ): void => {
-  ctx.updatePosition();
+function draw(ctx: any, entity: DrawEntity): void {
+  if (entity === null || !entity.image) return;
+  if (entity.updates) entity.update();
   ctx.save();
   ctx.translate(entity.x, entity.y);
   ctx.drawImage(entity.image, 0, 0, entity.width, entity.height);
   ctx.restore();
 }
 
+export function drawEntities(ctx: any, entities: Array<DrawEntity>) {
+  entities.forEach(entity => {
+    if(entity === null) return; 
+    draw(ctx, entity);
+  })
+}
