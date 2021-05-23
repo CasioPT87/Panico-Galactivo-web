@@ -17,7 +17,7 @@ type Props = {
 }
 
 // FunctionComponent<Props>
-const Page: any = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: any, ref) => {
+const Page: any = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: any, ref): JSX.Element => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
