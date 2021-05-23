@@ -1,6 +1,7 @@
 import { useState } from "react";
 import cx from "classnames";
 import Alien from "../../components/alien/Alien";
+import Arrows from "../../components/arrows/Arrows";
 import markPic from "../../assets/images/mark.png";
 import daniPic from "../../assets/images/dani.png";
 import erniePic from "../../assets/images/ernie.png";
@@ -47,16 +48,6 @@ const ALIENS: Array<{
   },
 ];
 
-const calculatePosition = (position: number): number => {
-  if (position > 3) return 0;
-  if (position < 0) return 3;
-  return position;
-};
-
-// const showContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader, imageName: string) => {
-//   return imagesLoaded && imageLoader?.images[imageName].complete;
-// }
-
 const imageData = [
   { name: 'background', url: background },
   { name: 'markPic', url: markPic },
@@ -67,27 +58,13 @@ const imageData = [
 
 const Aliens = () => {
   const [position, setPosition] = useState(0);
-  // const [imagesLoaded, setImagesLoaded] = useState(false);
 
   return (
     <Page loader={SimpleImageLoader} imageData={imageData}>
           <div className={cx(styles.container, styles["position--" + position])}>
-            {ALIENS.map((alien) => {
-              return <Alien key={alien.role} alien={alien} photo={findImageDataByName(imageData, alien.photo)} />
-            })}
+            {ALIENS.map(alien =>  <Alien key={alien.role} alien={alien} photo={findImageDataByName(imageData, alien.photo)} /> )}
           </div>
-            <div
-            className={cx(styles.arrow, styles.forward)}
-            onClick={() => setPosition(calculatePosition(position + 1))}
-            >
-              {">>>"}
-            </div>
-            <div
-            className={cx(styles.arrow, styles.backward)}
-            onClick={() => setPosition(calculatePosition(position - 1))}
-            >
-              {"<<<"}
-            </div>
+          <Arrows position={position} setPosition={setPosition} />
     </Page>
   );
 };
