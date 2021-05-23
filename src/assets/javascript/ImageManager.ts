@@ -24,7 +24,6 @@ export class SimpleImageLoader {
   }
 
   onImageLoaded(imageUrl: string): undefined {
-    console.log(imageUrl, this.urlsLoaded)
     if (!this.urlsLoaded.includes(imageUrl)) {
       this.imagesLoaded++;
       this.urlsLoaded.push(imageUrl);
