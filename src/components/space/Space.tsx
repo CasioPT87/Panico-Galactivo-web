@@ -15,6 +15,7 @@ let drawingInstances: Array<DrawEntity> = [];
 let stars: Stars = [];
 
 const REFRESH_ANIMATION_SPEED_MS = 7;
+const NUMBER_OF_CLOUDS = 6;
 
 const Space = ({ frameSize }: any): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
@@ -29,21 +30,24 @@ const Space = ({ frameSize }: any): JSX.Element => {
       if (!ctx) return;
       ctx.clearRect(0, 0, frameSize.width, frameSize.height);
       ctx.save();
-      drawEntities(ctx, drawingInstances);
+
       drawStars(ctx, stars);
+      drawEntities(ctx, drawingInstances);
+      
       ctx.restore();
       setTimeout(draw, REFRESH_ANIMATION_SPEED_MS);
     };
 
     drawingInstances = instancesFactory(
     [
-      { number: 1, macroClass: Spaceship },
-      { number: 6, macroClass: Cloud },
       { number: 1, macroClass: Town },
+      { number: 1, macroClass: Spaceship },
+      { number: NUMBER_OF_CLOUDS, macroClass: Cloud, callback: () => phaseManager.numberOfClouds = NUMBER_OF_CLOUDS },
       { number: 1, macroClass: Name }
     ], 
       frameSize
     );
+
     stars = starsFactory(15, frameSize);
     phaseManager.action();
     setCanvasSize();

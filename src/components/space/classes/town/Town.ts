@@ -23,19 +23,19 @@ export class Town {
     this.speedY = 0;
     this.frameHeight = frameSize.height;
     this.updates = true;
-    this.active = false;
+    this.active = true;
   }
 
   update(): void {
     if (phaseManager) {
       if (!this.hasRaised() && phaseManager.isPhase("landing")) {
-        this.active = true;
         this.raise();
       }
     }
   }
 
   raise() {
+    console.log('raise')
     this.setLandingSpeed();
     this.y += this.speedY;
   }

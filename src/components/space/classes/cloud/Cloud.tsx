@@ -69,6 +69,7 @@ export default class Cloud {
 
   destroy() {
     this.active = false;
+    phaseManager.cloudDestroyed();
   }
 
   get image(): HTMLImageElement | void {
