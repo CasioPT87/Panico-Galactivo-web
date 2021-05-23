@@ -3,6 +3,7 @@ import Video from "./../../components/video/Video";
 import Page from "../../components/page/Page";
 import { SimpleImageLoader } from "../../assets/javascript/ImageManager";
 import background from '../../assets/images/background-1.png';
+import styles from './Listen.module.css';
 
 const SRCs: Array<[string, string]> = [
   ["under my bed", "https://www.youtube.com/embed/hyebzZDkft4"],
@@ -30,7 +31,7 @@ const Listen = () => {
   }, []);
 
   return (
-    <Page loader={SimpleImageLoader} imageData={imageData}>
+    <Page ref={elem} loader={SimpleImageLoader} imageData={imageData} extraStylesContainer={styles.parallax}>
       {SRCs.map((src) => (
         <Video key={src[0]} src={src} dimensions={dimensions} />
       ))}

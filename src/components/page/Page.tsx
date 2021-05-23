@@ -1,7 +1,6 @@
 
-import { useState, useEffect, FunctionComponent } from "react";
+import React, { useState, useEffect, FunctionComponent } from "react";
 import cx from "classnames";
-import ImageManager, { SimpleImageLoader } from "../../assets/javascript/ImageManager";
 import { ImageData, Loader, LoaderType } from "../../assets/javascript/SharedTypes";
 import styles from "./Page.module.css";
 
@@ -17,7 +16,8 @@ type Props = {
   extraStylesContainer: any
 }
 
-const Page: FunctionComponent<Props> = ({ imageData, loader, extraStylesContainer, children }) => {
+// FunctionComponent<Props>
+const Page: any = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: any, ref) => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
@@ -27,7 +27,7 @@ const Page: FunctionComponent<Props> = ({ imageData, loader, extraStylesContaine
 
   return (
     <>
-      {!imagesLoaded && <div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
+      {!imagesLoaded && <div ref={ref} className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
       <div data-testid="members-container"
       className={cx(
         styles.wrapper, styles.background,
@@ -37,6 +37,6 @@ const Page: FunctionComponent<Props> = ({ imageData, loader, extraStylesContaine
         {children}
       </div>
     </>
-  )}
+  )})
 
 export default Page;
