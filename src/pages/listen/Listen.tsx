@@ -18,7 +18,7 @@ const SRCs: Array<[string, string]> = [
   ["molotov", "https://www.youtube.com/embed/zheWV5K8Shg"],
 ];
 
-const imageData = [
+const imagesData = [
   { name: 'background', url: background }
 ];
 
@@ -31,11 +31,11 @@ const Listen = () => {
   }, []);
 
   return (
-    <Page ref={elem} loader={SimpleImageLoader} imageData={imageData} extraStylesContainer={styles.parallax}>
+    <Page ref={elem} loader={SimpleImageLoader} imagesData={imagesData} extraStylesContainer={styles.parallax}>
       <>
-      {SRCs.map((src) => (
-        <Video key={src[0]} src={src} dimensions={dimensions} />
-      ))}
+        {SRCs.map((src) => (
+          <Video key={src[0]} src={src} dimensions={dimensions} />
+        ))}
       </>
     </Page>
   );

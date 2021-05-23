@@ -5,37 +5,48 @@ import Loading from "../loading/Loading";
 import { ImageData, Loader, LoaderType } from "../../assets/javascript/SharedTypes";
 import styles from "./Page.module.css";
 
-const showContent = (imagesLoaded: boolean, imageLoader: Loader, imageName: string) => {
-  return imagesLoaded && imageLoader?.images[imageName].complete;
-}
-
-let imageLoader: Loader;
-
 type Props = {
-  imageData: Array<ImageData>,
+  imagesData: any,
   loader: LoaderType,
   extraStylesContainer?: string
   children: JSX.Element
 }
 
-// FunctionComponent<Props>
-const Page = React.forwardRef<HTMLDivElement, Props>(({ imageData, loader, extraStylesContainer, children }: Props, ref): JSX.Element => {
+let imageLoader: Loader;
 
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+const HiddenImages = (imagesData: any, loader:LoaderType, callback: any) => {
 
   useEffect(() => {
-    imageLoader = new loader( imageData, () => setImagesLoaded(true)).loadImages();
+    imageLoader = new loader( imagesData, () => callback(true));
   }, []);
+
+  if (!imageLoader) return null;
+
+  return (
+    <>
+      {imagesData.map((imageData: any) => {
+        return <img key={imageData.url} className={styles.hidden} onLoad={() => imageLoader.onImageLoaded(imageData.url)} src={imageData.url}/>
+      })}
+    </>
+  )
+}
+
+// FunctionComponent<Props>
+const Page = React.forwardRef<HTMLDivElement, Props>(({ imagesData, loader, extraStylesContainer, children }: Props, ref): JSX.Element => {
+
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   return (
     <>
       <Loading ref={ref} show={!imagesLoaded} />
+      {HiddenImages(imagesData, loader, setImagesLoaded)}
       <div data-testid="members-container"
-      className={cx(
-        styles.wrapper, styles.background,
-        !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null,
-        extraStylesContainer
-      )}>
+        className={cx(
+          styles.wrapper, styles.background,
+          !imagesLoaded ? styles.hidden : null,
+          extraStylesContainer
+        )}
+      >
         {children}
       </div>
     </>

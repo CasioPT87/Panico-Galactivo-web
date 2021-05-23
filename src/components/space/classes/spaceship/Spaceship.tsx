@@ -73,7 +73,7 @@ export class Spaceship {
     this.speedY = 1;
   }
 
-  updatePosition(): void {
+  update(): void {
     if (phaseManager) {
       if (phaseManager.isPhase("initial")) {
         this.positioning();

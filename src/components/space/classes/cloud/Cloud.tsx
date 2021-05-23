@@ -37,7 +37,7 @@ export default class Cloud {
     setTimeout(() => this.active = true, Cloud.getDelay(3000))
   }
 
-  updatePosition(): void {
+  update(): void {
     if (!this.active) return;
     this.x -= this.speedX;
     this.y -= this.speedY;

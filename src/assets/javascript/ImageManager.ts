@@ -15,37 +15,24 @@ export class SimpleImageLoader {
   imagesData: Array<SimpleImageData>;
   numImages: number;
   imagesLoaded: number;
-  images: SimpleLoadedImages;
+  urlsLoaded: Array<string>;
   callback: () => any;
 
   constructor(imagesData: Array<SimpleImageData>, callback: () => any) {
     this.imagesData = imagesData;
     this.numImages = imagesData.length;
     this.imagesLoaded = 0;
-    this.images = {};
+    this.urlsLoaded = [];
     this.callback = callback;
   }
 
-  loadImages(): this {
-    this.imagesData.forEach((imageData: SimpleImageData) => this.loadImage(imageData));
-    return this;
-  }
-
-  loadImage(imageData: SimpleImageData) {
-    const image = new Image();
-    image.onload = () => {
-      this.imageLoaded(imageData, image);
+  onImageLoaded(imageUrl: string): undefined {
+    if (!this.urlsLoaded.includes(imageUrl)) {
+      this.imagesLoaded++;
+      this.urlsLoaded.push(imageUrl);
+      if (this.shoudCallCallback()) this.callCallback();
     }
-    image.src = imageData.url;
-  }
-
-  imageLoaded(imageData: SimpleImageData, image: HTMLImageElement) {
-    this.imagesLoaded++;
-    this.images = {
-      ...this.images,
-      [imageData.name]: image
-    }
-    if (this.shoudCallCallback()) this.callCallback();
+    return;
   }
 
   shoudCallCallback(): boolean {

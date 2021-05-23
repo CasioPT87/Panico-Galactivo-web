@@ -48,7 +48,7 @@ const ALIENS: Array<{
   },
 ];
 
-const imageData = [
+const imagesData = [
   { name: 'background', url: background },
   { name: 'markPic', url: markPic },
   { name: 'daniPic', url: daniPic },
@@ -60,10 +60,10 @@ const Aliens = () => {
   const [position, setPosition] = useState(0);
 
   return (
-    <Page loader={SimpleImageLoader} imageData={imageData}>
+    <Page loader={SimpleImageLoader} imagesData={imagesData}>
       <>
       <div className={cx(styles.container, styles["position--" + position])}>
-        {ALIENS.map(alien =>  <Alien key={alien.role} alien={alien} photo={findImageDataByName(imageData, alien.photo)} /> )}
+        {ALIENS.map(alien =>  <Alien key={alien.role} alien={alien} photo={findImageDataByName(imagesData, alien.photo)} /> )}
       </div>
       <Arrows position={position} setPosition={setPosition} />
       </>

@@ -22,7 +22,7 @@ export class Town {
     this.frameHeight = frameSize.height;
   }
 
-  updatePosition(): void {
+  update(): void {
     if (phaseManager) {
       if (!this.hasRaised() && phaseManager.isPhase("landing")) {
         this.raise();
