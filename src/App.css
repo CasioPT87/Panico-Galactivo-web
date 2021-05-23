@@ -1,11 +1,16 @@
-.app-container {
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+@font-face {
+  font-family: "joystix-monospace";
+  src: url("./assets/fonts/joystix-monospace.ttf");
 }
 
 .font-face-joystix {
   font-family: "joystix-monospace";
+}
+
+.app-container {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
 .activeLink {
