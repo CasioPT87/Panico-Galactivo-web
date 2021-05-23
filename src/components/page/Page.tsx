@@ -1,17 +1,22 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import cx from "classnames";
 import ImageManager, { SimpleImageLoader } from "../../assets/javascript/ImageManager";
-import { ImageData, Loader } from "../../assets/javascript/SharedTypes";
+import { ImageData, Loader, LoaderType } from "../../assets/javascript/SharedTypes";
 import styles from "./Page.module.css";
 
-const showContent = (imagesLoaded: boolean, imageLoader: any, imageName: string) => {
+const showContent = (imagesLoaded: boolean, imageLoader: Loader, imageName: string) => {
   return imagesLoaded && imageLoader?.images[imageName].complete;
 }
 
 let imageLoader: Loader;
 
-const Page = ({ imageData, loader, children } : { imageData: Array<ImageData>, loader: any, children: any }) => {
+type Props = {
+  imageData: Array<ImageData>,
+  loader: LoaderType
+}
+
+const Page: FunctionComponent<Props> = ({ imageData, loader, children }) => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
 

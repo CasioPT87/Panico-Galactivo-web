@@ -5,4 +5,5 @@ export type ImageData = {
   url: string
 }
 
-export type Loader = typeof ImageManager | typeof SimpleImageLoader;
+export type Loader = SimpleImageLoader;
+export type LoaderType = typeof SimpleImageLoader;
