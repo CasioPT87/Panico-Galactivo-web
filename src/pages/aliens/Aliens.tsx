@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import cx from "classnames";
 import Alien from "../../components/alien/Alien";
 import markPic from "../../assets/images/mark.png";
@@ -7,6 +7,8 @@ import erniePic from "../../assets/images/ernie.png";
 import sergioPic from "../../assets/images/sergio.png";
 import background from '../../assets/images/background-2.png';
 import { SimpleImageLoader } from "../../assets/javascript/ImageManager";
+import { findImageDataByName } from "../../assets/javascript/Utils";
+import Page from '../../components/page/Page';
 import styles from "./Aliens.module.css";
 
 const ALIENS: Array<{
@@ -51,40 +53,29 @@ const calculatePosition = (position: number): number => {
   return position;
 };
 
-const showContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader, imageName: string) => {
-  return imagesLoaded && imageLoader?.images[imageName].complete;
-}
+// const showContent = (imagesLoaded: boolean, imageLoader: SimpleImageLoader, imageName: string) => {
+//   return imagesLoaded && imageLoader?.images[imageName].complete;
+// }
 
-let imageLoader: SimpleImageLoader;
+const imageData = [
+  { name: 'background', url: background },
+  { name: 'markPic', url: markPic },
+  { name: 'daniPic', url: daniPic },
+  { name: 'erniePic', url: erniePic },
+  { name: 'sergioPic', url: sergioPic }
+];
 
 const Aliens = () => {
   const [position, setPosition] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  useEffect(() => {
-    imageLoader = new SimpleImageLoader([
-      { name: 'background', url: background },
-      { name: 'markPic', url: markPic },
-      { name: 'daniPic', url: daniPic },
-      { name: 'erniePic', url: erniePic },
-      { name: 'sergioPic', url: sergioPic }
-    ], () => setImagesLoaded(true)).loadImages();
-  }, []);
+  // const [imagesLoaded, setImagesLoaded] = useState(false);
 
   return (
-    <>
-      {!imagesLoaded && <div className={cx(styles.wrapper, styles.loading)}><p>loading...</p></div>}
-      <div data-testid="members-container" className={cx(styles.wrapper, styles.background, !showContent(imagesLoaded, imageLoader, 'background') ? styles.hidden : null)}>
-        {imagesLoaded &&
+    <Page loader={SimpleImageLoader} imageData={imageData}>
           <div className={cx(styles.container, styles["position--" + position])}>
             {ALIENS.map((alien) => {
-              if (!showContent(imagesLoaded, imageLoader, alien.photo)) return null;
-              return <Alien key={alien.role} alien={alien} photo={imageLoader.images[alien.photo]} />
+              return <Alien key={alien.role} alien={alien} photo={findImageDataByName(imageData, alien.photo)} />
             })}
           </div>
-        }
-        {imagesLoaded && (
-          <>
             <div
             className={cx(styles.arrow, styles.forward)}
             onClick={() => setPosition(calculatePosition(position + 1))}
@@ -97,10 +88,7 @@ const Aliens = () => {
             >
               {"<<<"}
             </div>
-          </>
-        )}
-      </div>
-    </>
+    </Page>
   );
 };
 

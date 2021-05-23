@@ -5,13 +5,13 @@ const Alien = ({
   photo
 }: {
   alien: { name: string; photo: string; description: string; role: string },
-  photo: any
+  photo: string | undefined
 }) => {
   return (
     <div className={styles.container}>
       <img
         className={styles.image}
-        src={photo.src}
+        src={photo}
         alt={`${alien.role} avatar`}
       />
       <h3 className={styles.name}>{alien.name}</h3>
