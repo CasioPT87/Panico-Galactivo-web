@@ -1,4 +1,5 @@
 import { ImageData, DrawEntity, DrawEntityType } from "./SharedTypes";
+import { FrameSize } from "./SharedTypes";
 
 export function findImageDataByName(imagesData: Array<ImageData>, name: string): string | undefined {
   const data = imagesData.find(data => data.name === name);
@@ -6,7 +7,7 @@ export function findImageDataByName(imagesData: Array<ImageData>, name: string):
   return undefined;
 }
 
-function draw(ctx: any, entity: DrawEntity): void {
+function draw(ctx: CanvasRenderingContext2D, entity: DrawEntity): void {
   if (entity === null || !entity.image || !entity.active) return;
   if (entity.updates) entity.update();
   ctx.save();
@@ -16,7 +17,7 @@ function draw(ctx: any, entity: DrawEntity): void {
   ctx.restore();
 }
 
-export function drawEntities(ctx: any, entities: Array<DrawEntity>) {
+export function drawEntities(ctx: CanvasRenderingContext2D, entities: Array<DrawEntity>) {
   entities.forEach(entity => {
     if(entity === null) return; 
     draw(ctx, entity);
@@ -29,7 +30,7 @@ type FactoryParams = Array<{
   callback?: () => void
 }>
 
-export function instancesFactory(entitiesData: FactoryParams, frameSize: any): Array<DrawEntity> {
+export function instancesFactory(entitiesData: FactoryParams, frameSize: FrameSize): Array<DrawEntity> {
   let instances: Array<DrawEntity> = [];
   entitiesData.forEach((entityData) => {
     const { number } = entityData;

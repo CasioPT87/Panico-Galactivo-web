@@ -1,5 +1,6 @@
 import { phaseManager } from "./../../Space";
 import cloudImage from "../../../../assets/images/cloud.png";
+import { FrameSize } from "../../../../assets/javascript/SharedTypes";
 export default class Cloud {
 
   static imagesUrl = [cloudImage];
@@ -17,10 +18,10 @@ export default class Cloud {
   y: number;
   active: boolean;
   delayTimeout: ReturnType<typeof setTimeout> | null;
-  canvasSize: any;
+  canvasSize: FrameSize;
   updates: boolean;
 
-  constructor(id: number, frameSize: any) {
+  constructor(id: number, frameSize: FrameSize) {
     this.id = id;
     this.speedRatio = 4;
     this.speedY = 5;

@@ -2,6 +2,7 @@ import panico_1 from "../../../../assets/images/panico_1.png";
 import panico_2 from "../../../../assets/images/panico_2.png";
 import panico_3 from "../../../../assets/images/panico_3.png";
 import panico_4 from "../../../../assets/images/panico_4.png";
+import { FrameSize } from "../../../../assets/javascript/SharedTypes";
 
 const IMAGE_ASSETS = [panico_1, panico_2, panico_3, panico_4];
 
@@ -14,12 +15,11 @@ export class Name {
   y: number;
   height: number;
   width: number;
-  addEventListener: any;
   imageIndex: number | null;
   updates: boolean;
   active: boolean;
 
-  constructor(id: number, frameSize: any) {
+  constructor(id: number, frameSize: FrameSize) {
     const marginTop = frameSize.width * 0.05;
     const marginSide = frameSize.width * 0.1;
     this.x = marginSide;

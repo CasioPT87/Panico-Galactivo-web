@@ -1,10 +1,12 @@
+import { FrameSize } from "../../../../assets/javascript/SharedTypes";
+
 export class Star {
   x: number;
   y: number;
   height: number;
   width: number;
   
-  constructor(frameSize: any) {
+  constructor(frameSize: FrameSize) {
     this.x = Math.random() * frameSize.width;
     this.y = Math.random() * frameSize.height;
     this.height = 5;
@@ -12,7 +14,7 @@ export class Star {
   }
 }
 
-const starFactory: (qtty: number, frameSize: any) => Stars = (
+const starFactory: (qtty: number, frameSize: FrameSize) => Stars = (
   qtty,
   frameSize
 ) => {

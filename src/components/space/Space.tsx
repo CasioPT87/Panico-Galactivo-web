@@ -9,6 +9,7 @@ import { Name } from "./classes/name/Name";
 import { drawEntities, instancesFactory } from "../../assets/javascript/Utils";
 import type { Stars } from "./classes/star/Star";
 import { DrawEntity } from "../../assets/javascript/SharedTypes";
+import { FrameSize } from "../../assets/javascript/SharedTypes";
 import styles from "./Space.module.css";
 
 let drawingInstances: Array<DrawEntity> = [];
@@ -17,7 +18,7 @@ let stars: Stars = [];
 const REFRESH_ANIMATION_SPEED_MS = 7;
 const NUMBER_OF_CLOUDS = 6;
 
-const Space = ({ frameSize }: any): JSX.Element => {
+const Space = ({ frameSize }: { frameSize: FrameSize }): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   useEffect(() => {

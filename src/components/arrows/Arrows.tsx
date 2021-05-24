@@ -8,7 +8,7 @@ const calculatePosition = (position: number): number => {
   return position;
 };
 
-const Arrows = ({ position, setPosition }: { position: number, setPosition: any }) => {
+const Arrows = ({ position, setPosition }: { position: number, setPosition: (calculatePosition: number) => void }) => {
   return (
     <>
       <div

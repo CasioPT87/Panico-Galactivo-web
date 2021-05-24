@@ -1,5 +1,6 @@
 import { phaseManager } from "./../../Space";
 import townImage from "../../../../assets/images/town.png";
+import { FrameSize } from "../../../../assets/javascript/SharedTypes";
 
 export class Town {
 
@@ -15,7 +16,7 @@ export class Town {
   updates: boolean;
   active: boolean;
 
-  constructor(id: number, frameSize: any) {
+  constructor(id: number, frameSize: FrameSize) {
     this.x = 0;
     this.y = frameSize.height;
     this.height = Math.min(frameSize.height, frameSize.width) * 0.5;
