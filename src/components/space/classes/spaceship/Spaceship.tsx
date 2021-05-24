@@ -1,5 +1,6 @@
 import { phaseManager } from "./../../Space";
 import spaceshipImage from "../../../../assets/images/spaceship.png";
+import { FrameSize } from "../../../../assets/javascript/SharedTypes";
 
 export class Spaceship {
 
@@ -15,10 +16,10 @@ export class Spaceship {
   speedX: number;
   speedY: number;
   active: boolean;
-  canvasSize: any;
+  canvasSize: FrameSize;
   updates: boolean;
 
-  constructor(id: number, frameSize: any) {
+  constructor(id: number, frameSize: FrameSize) {
     this.width = Math.min(frameSize.width / 5, 150);
     this.height = this.width * 0.8;
     this._x = -this.width;
