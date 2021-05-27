@@ -22,21 +22,21 @@ const ALIENS: Array<{
     name: "MARKTHULHU",
     photo: 'markPic',
     description:
-      "From the deepest of an unknown system. Be careful, bites. You have been warned",
+      "From the deepest of an unknown system, you know which one I'm talking about. Be careful, bites. You have been warned",
     role: "guitar player",
   },
   {
     name: "DANIERLGH",
     photo: 'daniPic',
     description:
-      "Climbs walls with no effort. Like a gecko... but from Mars",
+      "The Gecko, from planet Thrianna. Climbs the walls with no effort. Very nice with your sister. Keep an eye on your wallet.",
     role: "bass player",
   },
   {
     name: "ERNIESTURION",
     photo: 'erniePic',
     description:
-      "Plays drums faster than the speed of light. Poor human physics don't apply. Ah!, and keeps the tempo too",
+      "The Monk from Plated TholedÖ, plays drums faster than the speed of light. Poor human physics don't apply. Ah! and keeps the tempo too",
     role: "drum player",
   },
   {
