@@ -19,28 +19,28 @@ const ALIENS: Array<{
   role: string;
 }> = [
   {
-    name: "MARKTHULHU",
+    name: "MARKTHULHU - GRRRUITAR",
     photo: 'markPic',
     description:
       "From the deepest of an unknown system, you know which one I'm talking about. Be careful, bites. You have been warned",
     role: "guitar player",
   },
   {
-    name: "DANIERLGH",
+    name: "DANIERLGH - BASS (ISH)",
     photo: 'daniPic',
     description:
       "The Gecko, from planet Thrianna. Climbs the walls with no effort. Very nice with your sister. Keep an eye on your wallet.",
     role: "bass player",
   },
   {
-    name: "ERNIESTURION",
+    name: "ERNIESTURION - DRUMS",
     photo: 'erniePic',
     description:
       "The Monk from Plated TholedÖ, plays drums faster than the speed of light. Poor human physics don't apply. Ah! and keeps the tempo too",
     role: "drum player",
   },
   {
-    name: "SERGIOTRON-3000",
+    name: "SERGIOTRON-3000 - SHOUTS",
     photo: 'sergioPic',
     description:
       "From Planet-4. Half high-tech robot, half not such a high-tech one. His voice is out of hearing range for many creatures, including himself",
