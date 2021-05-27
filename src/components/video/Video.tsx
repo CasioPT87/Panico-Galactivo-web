@@ -40,7 +40,7 @@ const Video = ({
         ></iframe>
       </div>
       <div className={!active ? cx(styles.loading) : styles.hidden}>
-        <p>loading video...</p>
+        <p>loading video</p>
       </div>
     </div>
   );
