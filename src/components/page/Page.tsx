@@ -21,13 +21,13 @@ const HiddenImages = (imagesData: Array<ImageData>, loader:LoaderType, callback:
   useEffect(() => {
     imageLoader = new loader( imagesData, () => setImagesCached(true));
     setLoaderReady(true);
-  }, []);
+  }, [imagesData, loader]);
 
   useEffect(() => {
     if (imagesCached) {
-      callback(true);
+      callback(true); 
     }
-  }, [imagesCached]);
+  }, [imagesCached, callback]);
 
   if (!loaderReady) return null;
   return (
