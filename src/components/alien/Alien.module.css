@@ -4,13 +4,14 @@
   width: 100vw;
   justify-content: flex-start;
   align-items: center;
+  overflow: auto;
 }
 
 .image {
   width: auto;
-  height: 60%;
+  height: 50%;
   background-color: transparent;
-  margin: 80px 0;
+  margin: 5% 0;
   border: 5px dashed black;
 }
 
@@ -18,7 +19,7 @@
   .image {
     width: auto;
     height: 40%;
-    margin: 40px 0;
+    margin: 5% 0;
   }
 }
 
