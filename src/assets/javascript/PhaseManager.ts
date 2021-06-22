@@ -21,11 +21,15 @@ class PhaseManager {
   state: Phase;
   cloudsDestroyed: number;
   numberOfClouds: number | null;
+  actionTimeout: null | ReturnType<typeof setTimeout>;
+  nextPhaseTimeout: null | ReturnType<typeof setTimeout>;
 
   constructor() {
     this.state = STATES[0];
     this.cloudsDestroyed = 0;
     this.numberOfClouds = null;
+    this.actionTimeout = null;
+    this.nextPhaseTimeout = null;
   }
 
   reset() {
@@ -37,7 +41,7 @@ class PhaseManager {
   action(): void {
     const { delay, index } = this.state;
     if (!delay) return;
-    setTimeout(() => {
+    this.actionTimeout = setTimeout(() => {
       const nextPhaseIndex = index + 1;
       this.nextPhase(nextPhaseIndex);
     }, delay);
@@ -58,7 +62,7 @@ class PhaseManager {
     const phase = STATES.find((state) => state.phase === phaseName);
     if (!phase) return;
     if (delay !== null) {
-      setTimeout(() => {
+      this.nextPhaseTimeout = setTimeout(() => {
         this.state = phase;
       }, delay);
     } else {
@@ -73,6 +77,11 @@ class PhaseManager {
     if (this.cloudsDestroyed >= this.numberOfClouds) {
       this.setPhase("landing", 1000);
     }
+  }
+
+  cleanTimeout(): void {
+    if (this.actionTimeout) clearTimeout(this.actionTimeout);
+    if (this.nextPhaseTimeout) clearTimeout(this.nextPhaseTimeout);
   }
 }
 

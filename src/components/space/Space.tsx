@@ -53,6 +53,10 @@ const Space = ({ frameSize }: { frameSize: FrameSize }): JSX.Element => {
     phaseManager.action();
     setCanvasSize();
     draw();
+
+    return function cleanTimeouts() {
+      phaseManager.cleanTimeout();
+    }
     
   }, [frameSize]);
 
